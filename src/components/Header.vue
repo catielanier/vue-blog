@@ -1,19 +1,23 @@
 <template>
   <header>
     <div class="grid-container">
-      <div class="logo">
-        <img
-          src="../assets/ltian.png"
-          alt="l天"
-        >
-      </div>
+      <router-link to="/">
+        <div class="logo">
+          <img
+            src="../assets/ltian.png"
+            alt="l天"
+          >
+        </div>
+      </router-link>
       <div>
         <h1>博客 | Blog</h1>
         <p>Corey Lanier</p>
       </div>
-      <div>
-        <router-link to="/login">Login</router-link>
-        <router-link to="/sign-up">Sign Up</router-link>
+      <div class="nav-buttons">
+        <router-link to="/login">
+          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login</router-link>
+        <router-link to="/sign-up">
+          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up</router-link>
       </div>
     </div>
   </header>
@@ -30,7 +34,7 @@ header {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1.3fr 6fr 1.5fr;
+  grid-template-columns: 1.3fr 6fr 1.7fr;
   grid-gap: 25px;
   align-items: center;
 }
@@ -45,7 +49,7 @@ h1 {
   background: #b3cde0;
 }
 
-a {
+.nav-buttons a {
   display: inline-block;
   padding: 10px 15px;
   background: #b3cde0;
