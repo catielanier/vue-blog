@@ -30,7 +30,7 @@ header {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1.5fr 6fr 1.5fr;
+  grid-template-columns: 1.3fr 6fr 1.5fr;
   grid-gap: 25px;
   align-items: center;
 }
