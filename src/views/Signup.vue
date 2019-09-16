@@ -48,10 +48,9 @@
             v-model="verifyPassword"
           />
         </label>
-        <input
-          type="submit"
-          value="Complete Sign-up"
-        />
+        <button type="submit">
+          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign-up
+        </button>
       </fieldset>
     </form>
   </section>

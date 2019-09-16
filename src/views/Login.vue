@@ -30,10 +30,9 @@
             v-model="password"
           />
         </label>
-        <input
-          type="submit"
-          value="Login"
-        />
+        <button type="submit">
+          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
+        </button>
       </fieldset>
     </form>
   </section>
