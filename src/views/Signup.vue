@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "signup",
   data() {
@@ -64,6 +65,32 @@ export default {
       success: false,
       error: null
     };
+  },
+  methods: {
+    doSignup: async function() {
+      this.loading = true;
+      const { username, email, password, verifyPassword } = this.$data;
+      if (password === verifyPassword) {
+        this.error = "Your passwords do not match.";
+        this.loading = false;
+        return;
+      }
+      try {
+        const res = await axios.post("/api/users/signup", {
+          data: {
+            username,
+            email,
+            password
+          }
+        });
+        const { token } = res.data.data;
+        this.loading = false;
+        this.success = true;
+      } catch (e) {
+        this.error = e;
+        this.loading = false;
+      }
+    }
   }
 };
 </script>
