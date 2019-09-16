@@ -12,7 +12,10 @@ export default {
       username: "",
       email: "",
       password: "",
-      verifyPassword: ""
+      verifyPassword: "",
+      loading: false,
+      success: false,
+      error: ""
     };
   }
 };

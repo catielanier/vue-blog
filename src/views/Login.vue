@@ -6,6 +6,15 @@
 
 <script>
 export default {
-  name: "login"
+  name: "login",
+  data() {
+    return {
+      email: "",
+      password: "",
+      loading: false,
+      success: false,
+      error: ""
+    };
+  }
 };
 </script>
