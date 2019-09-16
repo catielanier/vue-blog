@@ -6,6 +6,12 @@
       v-bind:disabled="this.loading"
     >
       <fieldset v-bind:aria-busy="this.loading">
+        <p
+          v-if="this.error !== null"
+          class="error"
+        >
+          <span>Error:</span> {{this.error}}
+        </p>
         <label for="username">
           Username:
           <input
@@ -44,7 +50,7 @@
         </label>
         <input
           type="submit"
-          value="Sign-up"
+          value="Complete Sign-up"
         />
       </fieldset>
     </form>
@@ -70,7 +76,7 @@ export default {
     doSignup: async function() {
       this.loading = true;
       const { username, email, password, verifyPassword } = this.$data;
-      if (password === verifyPassword) {
+      if (password !== verifyPassword) {
         this.error = "Your passwords do not match.";
         this.loading = false;
         return;
