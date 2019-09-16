@@ -13,8 +13,9 @@ export default {
       password: "",
       loading: false,
       success: false,
-      error: ""
+      error: null
     };
-  }
+  },
+  methods: {}
 };
 </script>
