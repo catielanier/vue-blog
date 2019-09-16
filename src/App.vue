@@ -4,13 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
+@import "./assets/css/setup.css";
+@import "./assets/css/fonts.css";
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -27,5 +29,9 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+h1 {
+  font-family: "Bebas Neue";
 }
 </style>
