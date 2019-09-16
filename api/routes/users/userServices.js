@@ -3,6 +3,8 @@ const { model: User } = require("./userModel");
 exports.createUser = async userData => {
   try {
     const user = new User(userData);
+    user.joinDate = Date.now();
+    user.admin = false;
     return await user.save();
   } catch (e) {
     throw e;
