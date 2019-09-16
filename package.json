@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "client": "npm run serve",
+    "client": "vue-cli-service serve",
     "server": "nodemon api/server.js",
     "all": "nodemon api/server.js && npm run serve"
   },

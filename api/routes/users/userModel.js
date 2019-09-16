@@ -10,6 +10,19 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+  username: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  admin: {
+    type: Boolean,
+    required: true
+  },
+  joinDate: {
+    type: Date,
+    required: true
   }
 });
 
