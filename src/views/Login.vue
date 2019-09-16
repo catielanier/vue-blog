@@ -40,6 +40,7 @@
 
 <script>
 import axios from "axios";
+import { setToken } from "../services/tokenService";
 export default {
   name: "login",
   data() {
@@ -63,6 +64,7 @@ export default {
           }
         });
         const { token } = res.data.data;
+        setToken(token);
         this.loading = false;
         this.success = true;
       } catch (e) {
