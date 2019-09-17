@@ -5,6 +5,7 @@ exports.createUser = async userData => {
     const user = new User(userData);
     user.joinDate = Date.now();
     user.admin = false;
+    user.banned = false;
     return await user.save();
   } catch (e) {
     throw e;

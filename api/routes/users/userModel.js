@@ -23,6 +23,10 @@ const userSchema = new Schema({
   joinDate: {
     type: Date,
     required: true
+  },
+  banned: {
+    type: Boolean,
+    required: true
   }
 });
 
