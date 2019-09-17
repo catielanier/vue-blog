@@ -15,9 +15,11 @@
       </div>
       <div class="nav-buttons">
         <router-link to="/login">
-          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login</router-link>
+          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
+        </router-link>
         <router-link to="/sign-up">
-          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up</router-link>
+          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
+        </router-link>
       </div>
     </div>
   </header>

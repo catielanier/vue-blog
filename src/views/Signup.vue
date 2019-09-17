@@ -58,7 +58,7 @@
 
 <script>
 import axios from "axios";
-import setToken from "../services/tokenService";
+import { setToken } from "../services/tokenService";
 export default {
   name: "signup",
   data() {

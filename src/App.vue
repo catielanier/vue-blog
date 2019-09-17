@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <main>
+      <router-view />
+    </main>
   </div>
 </template>
 
@@ -13,19 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  color: #0b0f13;
 }
 
 h1 {
@@ -33,9 +23,19 @@ h1 {
   font-size: 2.5rem;
 }
 
+@keyframes loading {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
 fieldset {
   border: 0;
   max-width: 480px;
+  padding: 0;
   width: 100%;
   margin: 0 auto;
   text-align: left;
@@ -56,6 +56,11 @@ fieldset::before {
     #325c7b 85%,
     #011f4b 100%
   );
+}
+
+fieldset[aria-busy="true"]::before {
+  background-size: 50% auto;
+  animation: loading 0.5s linear infinite;
 }
 
 input {
