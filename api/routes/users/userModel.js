@@ -16,17 +16,21 @@ const userSchema = new Schema({
     unique: true,
     required: true
   },
-  admin: {
-    type: Boolean,
-    required: true
+  role: {
+    type: String,
+    required: true,
+    default: "User",
+    enum: ["Admin", "Author", "User"]
   },
   joinDate: {
     type: Date,
-    required: true
+    required: true,
+    default: Date.now()
   },
   banned: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   }
 });
 
