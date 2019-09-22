@@ -62,8 +62,7 @@ import { setToken } from "../services/tokenService";
 export default {
   name: "signup",
   props: {
-    catchUser: Function,
-    user: String
+    catchUser: Function
   },
   data() {
     return {
@@ -98,6 +97,7 @@ export default {
         await this.$props.catchUser();
         this.loading = false;
         this.success = true;
+        this.$router.push("/");
       } catch (e) {
         this.error = e;
         this.loading = false;

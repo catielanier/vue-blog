@@ -5,10 +5,7 @@
       :signOut="signOut"
     />
     <main>
-      <router-view
-        :catchUser="catchUser"
-        :user="this.user"
-      />
+      <router-view :catchUser="catchUser" />
     </main>
   </div>
 </template>
