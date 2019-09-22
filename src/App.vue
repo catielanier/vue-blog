@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Header />
+    <Header
+      v-bind:user="this.user"
+      v-bind:signOut="signOut"
+    />
     <main>
       <router-view />
     </main>
@@ -92,9 +95,25 @@ button[type="submit"]:hover {
 
 <script>
 import Header from "@/components/Header.vue";
+import { getToken, removeToken } from "./services/tokenService";
 export default {
   components: {
     Header
+  },
+  data() {
+    return {
+      user: null
+    };
+  },
+  mounted() {
+    const user = getToken();
+    this.user = user;
+  },
+  methods: {
+    signOut: function() {
+      removeToken();
+      this.user = null;
+    }
   }
 };
 </script>

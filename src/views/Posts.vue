@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <img
-      alt="l天"
-      src="../assets/ltian.png"
-    >
+    <h2>Posts</h2>
   </div>
 </template>
 

@@ -14,16 +14,37 @@
         <p>Corey Lanier</p>
       </div>
       <div class="nav-buttons">
-        <router-link to="/login">
+        <router-link
+          to="/login"
+          v-if="!user"
+        >
           <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
         </router-link>
-        <router-link to="/sign-up">
+        <router-link
+          to="/sign-up"
+          v-if="!user"
+        >
           <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
         </router-link>
+        <button
+          v-if="user"
+          @click.prevent="signOut"
+        >
+          Logout
+        </button>
       </div>
     </div>
   </header>
 </template>
+
+<script>
+export default {
+  props: {
+    user: String,
+    signOut: Function
+  }
+};
+</script>
 
 <style scoped>
 header {
@@ -51,7 +72,8 @@ h1 {
   background: #b3cde0;
 }
 
-.nav-buttons a {
+.nav-buttons a,
+.nav-buttons button {
   display: inline-block;
   padding: 10px 15px;
   background: #b3cde0;
@@ -61,7 +83,8 @@ h1 {
   transition: all 0.3s ease-in-out;
 }
 
-a:hover {
+a:hover,
+button:hover {
   background: #011f4b;
   color: #b3cde0;
 }
