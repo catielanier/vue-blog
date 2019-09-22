@@ -61,6 +61,10 @@ import axios from "axios";
 import { setToken } from "../services/tokenService";
 export default {
   name: "signup",
+  props: {
+    catchUser: Function,
+    user: String
+  },
   data() {
     return {
       username: "",
@@ -90,7 +94,8 @@ export default {
           }
         });
         const { token } = res.data.data;
-        setToken(token);
+        await setToken(token);
+        await this.$props.catchUser();
         this.loading = false;
         this.success = true;
       } catch (e) {

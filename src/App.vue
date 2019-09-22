@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <Header
-      v-bind:user="this.user"
-      v-bind:signOut="signOut"
+      :user="this.user"
+      :signOut="signOut"
     />
     <main>
-      <router-view />
+      <router-view
+        :catchUser="catchUser"
+        :user="this.user"
+      />
     </main>
   </div>
 </template>
@@ -113,6 +116,10 @@ export default {
     signOut: function() {
       removeToken();
       this.user = null;
+    },
+    catchUser: function() {
+      const user = getToken();
+      this.user = user;
     }
   }
 };

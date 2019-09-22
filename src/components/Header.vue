@@ -30,7 +30,7 @@
           v-if="user"
           @click.prevent="signOut"
         >
-          Logout
+          <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
         </button>
       </div>
     </div>
