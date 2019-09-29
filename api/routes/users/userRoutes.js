@@ -21,12 +21,25 @@ router.route("/login").post(async (req, res, next) => {
       const token = await tokenService.issueToken(user);
       res.status(200).json({
         data: {
-          token
+          token,
+          id: user._id
         }
       });
     } else {
       next();
     }
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.route("/:id").get(async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const user = await userService.getUserById(id);
+    res.status(200).json({
+      data: user
+    });
   } catch (e) {
     next(e);
   }

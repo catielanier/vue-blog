@@ -95,7 +95,7 @@ button[type="submit"]:hover {
 
 <script>
 import Header from "@/components/Header.vue";
-import { getToken, removeToken } from "./services/tokenService";
+import { removeToken } from "./services/tokenService";
 export default {
   components: {
     Header
@@ -106,17 +106,17 @@ export default {
     };
   },
   mounted() {
-    const user = getToken();
+    const user = localStorage.getItem("vueBlogId");
     this.user = user;
   },
   methods: {
     signOut: function() {
       removeToken();
+      localStorage.removeItem("vueBlogId");
       this.user = null;
     },
-    catchUser: function() {
-      const user = getToken();
-      this.user = user;
+    catchUser: function(id) {
+      this.user = id;
     }
   }
 };

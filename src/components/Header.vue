@@ -26,6 +26,12 @@
         >
           <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
         </router-link>
+        <router-link
+          v-if="user"
+          to="/profile"
+        >
+          <font-awesome-icon :icon="['fas', 'user']" /> Profile
+        </router-link>
         <button
           v-if="user"
           @click.prevent="signOut"
@@ -42,6 +48,9 @@ export default {
   props: {
     user: String,
     signOut: Function
+  },
+  methods: {
+    checkPermission: function() {}
   }
 };
 </script>

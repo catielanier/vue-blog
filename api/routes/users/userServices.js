@@ -22,3 +22,14 @@ exports.isUser = async ({ email, password }) => {
     throw e;
   }
 };
+
+exports.getUserById = async id => {
+  try {
+    const user = await User.findById(id);
+    if (user) {
+      return user;
+    }
+  } catch (e) {
+    throw e;
+  }
+};

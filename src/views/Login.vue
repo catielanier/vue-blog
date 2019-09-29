@@ -66,9 +66,10 @@ export default {
             password
           }
         });
-        const { token } = res.data.data;
+        const { token, id } = res.data.data;
         await setToken(token);
-        await this.$props.catchUser();
+        await this.$props.catchUser(id);
+        localStorage.setItem("vueBlogId", id);
         this.loading = false;
         this.success = true;
         this.$router.push("/");
