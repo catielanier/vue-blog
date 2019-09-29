@@ -5,7 +5,9 @@
   "scripts": {
     "client": "vue-cli-service serve",
     "server": "nodemon api/server.js",
-    "all": "concurrently --kill-others \"nodemon api/server.js\" \"vue-cli-service serve\""
+    "all": "concurrently --kill-others \"nodemon api/server.js\" \"vue-cli-service serve\"",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
