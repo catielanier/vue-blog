@@ -5,13 +5,14 @@ import {
   faSignInAlt,
   faUserPlus,
   faSignOutAlt,
-  faUser
+  faUser,
+  faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-library.add(faSignInAlt, faUserPlus, faSignOutAlt, faUser);
+library.add(faSignInAlt, faUserPlus, faSignOutAlt, faUser, faPlus);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

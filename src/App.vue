@@ -3,6 +3,7 @@
     <Header
       :user="this.user"
       :signOut="signOut"
+      :role="this.role"
     />
     <main>
       <router-view :catchUser="catchUser" />
@@ -94,6 +95,7 @@ button[type="submit"]:hover {
 </style>
 
 <script>
+import axios from "axios";
 import Header from "@/components/Header.vue";
 import { removeToken } from "./services/tokenService";
 export default {
@@ -102,21 +104,37 @@ export default {
   },
   data() {
     return {
-      user: null
+      user: null,
+      role: null
     };
   },
-  mounted() {
+  beforeMount() {
     const user = localStorage.getItem("vueBlogId");
     this.user = user;
+  },
+  mounted() {
+    this.checkPermission();
   },
   methods: {
     signOut: function() {
       removeToken();
       localStorage.removeItem("vueBlogId");
       this.user = null;
+      this.role = null;
     },
     catchUser: function(id) {
       this.user = id;
+      this.checkPermission();
+    },
+    checkPermission: async function() {
+      const { user } = this.$data;
+      if (!user) {
+        this.role = null;
+      } else {
+        const userData = await axios.get(`/api/users/${user}`);
+        const { role } = userData.data.data;
+        this.role = role;
+      }
     }
   }
 };

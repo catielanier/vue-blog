@@ -21,6 +21,12 @@
           <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
         </router-link>
         <router-link
+          to="/new-post"
+          v-if="role === 'Author' || role === 'Admin'"
+        >
+          <font-awesome-icon :icon="['fas', 'plus']" /> New Post
+        </router-link>
+        <router-link
           to="/sign-up"
           v-if="!user"
         >
@@ -47,10 +53,8 @@
 export default {
   props: {
     user: String,
-    signOut: Function
-  },
-  methods: {
-    checkPermission: function() {}
+    signOut: Function,
+    role: String
   }
 };
 </script>
@@ -66,7 +70,7 @@ header {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1.3fr 6fr 1.7fr;
+  grid-template-columns: 1.3fr 5fr 2.6fr;
   grid-gap: 25px;
   align-items: center;
 }
@@ -79,6 +83,11 @@ h1 {
 .logo {
   padding: 15px;
   background: #b3cde0;
+}
+
+.nav-buttons {
+  text-align: right;
+  margin-right: 15px;
 }
 
 .nav-buttons a,
@@ -98,7 +107,7 @@ button:hover {
   color: #b3cde0;
 }
 
-a:first-of-type {
+a {
   margin-right: 10px;
 }
 
