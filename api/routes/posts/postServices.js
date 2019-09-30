@@ -1,23 +1,21 @@
 const tokenService = require("../../utils/tokenService");
-exports.authorCheck = async (req, res, next) => {};
+const { model: Post } = require("./postModel");
 
-exports.loginCheck = async (req, res, next) => {
-  const authHeader = req.body.headers["Authorization"];
-
-  if (!authHeader) {
+exports.loginCheck = async token => {
+  if (!token) {
     next(new Error("invalid request"));
   } else {
     try {
-      const [prefix, token] = authHeader.split(" ");
       const decoded = await tokenService.verifyToken(token);
       if (decoded) {
-        req.token = decoded;
-        next();
+        return true;
       } else {
-        next(new status(401).send("You are not logged in."));
+        console.error(`Not logged in`);
       }
     } catch (e) {
       console.error(e);
     }
   }
 };
+
+exports.createPost = async post => {};
