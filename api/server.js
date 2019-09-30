@@ -10,10 +10,12 @@ const { URL, PORT } = require("./utils/constants");
 const middleWare = require("./middleware");
 const { applyMiddleware } = require("./utils");
 const { router: userRouter } = require("./routes/users/userRoutes");
+const { router: postRouter } = require("./routes/posts/postRoutes");
 
 applyMiddleware(middleWare, router);
 
 router.use("/api/users", userRouter);
+router.use("/api/posts", postRouter);
 
 const server = http.createServer(router);
 
