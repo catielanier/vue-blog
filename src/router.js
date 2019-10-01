@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Posts from "./views/Posts.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
+import NewPost from "./views/NewPost.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/",
       name: "posts",
       component: Posts
+    },
+    {
+      path: "/new-post",
+      name: "new-post",
+      component: NewPost
     }
   ]
 });

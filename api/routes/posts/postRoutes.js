@@ -3,7 +3,7 @@ const router = express.Router();
 const postServices = require("./postServices");
 const userServices = require("../users/userServices");
 
-router.route("/new").post(async (req, res, next) => {
+router.route("/new").post(async (req, res) => {
   const { token, user: id, post } = req.body;
   const loggedIn = await postServices.loginCheck(token);
   if (loggedIn) {
@@ -11,7 +11,10 @@ router.route("/new").post(async (req, res, next) => {
     const hasPermission =
       (await user.role) === "Admin" || user.role === "Author";
     if (hasPermission) {
-      console.log("Yes");
+      const newPost = await postServices.createPost(post);
+      res.status(201).json({
+        data: [newPost]
+      });
     } else {
       res
         .status(401)
