@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import "vue-datetime/dist/vue-datetime.css";
 export default {
   name: "new-post",
@@ -53,7 +54,29 @@ export default {
     };
   },
   methods: {
-    postBlog: function() {}
+    postBlog: async function() {
+      const { title, body, postDate } = this.$data;
+      const { user } = this.$props;
+      this.loading = true;
+
+      const post = {
+        title,
+        body,
+        postDate,
+        user
+      };
+
+      const res = await axios({
+        method: "POST",
+        url: "/api/posts/new",
+        data: {
+          user,
+          post
+        }
+      });
+      console.log(res);
+      this.loading = false;
+    }
   }
 };
 </script>
