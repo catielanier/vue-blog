@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const { model: User } = require("../users/userModel");
-const { schema: Comment } = require("../comments/commentModel");
+const { model: Comment } = require("../comments/commentModel");
 
 const postSchema = new Schema({
   title: {
@@ -16,14 +16,18 @@ const postSchema = new Schema({
   },
   postDate: {
     type: Date,
-    required: true,
     default: Date.now()
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: User
   },
-  comments: [Comment]
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: Comment
+    }
+  ]
 });
 
 exports.model = mongoose.model("Post", postSchema);

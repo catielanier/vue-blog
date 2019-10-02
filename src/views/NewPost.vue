@@ -56,10 +56,11 @@ export default {
   },
   methods: {
     postBlog: async function() {
-      const { title, body, postDate } = this.$data;
+      const { title, body } = this.$data;
       const { user } = this.$props;
       const token = await getToken();
-
+      const postDate = this.$data.postDate || Date.now();
+      
       this.loading = true;
 
       const post = {
