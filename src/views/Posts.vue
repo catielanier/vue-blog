@@ -5,7 +5,19 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "posts"
+  name: "posts",
+  data() {
+    return {
+      posts: []
+    };
+  },
+  async mounted() {
+    await axios.get("/api/posts").then(res => {
+      const posts = res.data.data;
+      this.posts = posts;
+    });
+  }
 };
 </script>
