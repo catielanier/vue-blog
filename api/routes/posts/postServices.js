@@ -40,3 +40,14 @@ exports.getAllPosts = async () => {
     throw e;
   }
 };
+
+exports.getPostsById = async id => {
+  try {
+    const post = await Post.findById(id);
+    if (post) {
+      return post;
+    }
+  } catch (e) {
+    throw e;
+  }
+};

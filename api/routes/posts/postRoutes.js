@@ -36,4 +36,16 @@ router.route("/").get(async (req, res) => {
   }
 });
 
+router.route("/:id").get(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await postServices.getPostsById(id);
+    res.status(200).json({
+      data: post
+    });
+  } catch (e) {
+    res.status(400).statusMessage(e);
+  }
+});
+
 exports.router = router;
