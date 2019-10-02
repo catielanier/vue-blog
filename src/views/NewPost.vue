@@ -37,6 +37,7 @@
 
 <script>
 import axios from "axios";
+import { getToken } from "../services/tokenService";
 import "vue-datetime/dist/vue-datetime.css";
 export default {
   name: "new-post",
@@ -57,6 +58,8 @@ export default {
     postBlog: async function() {
       const { title, body, postDate } = this.$data;
       const { user } = this.$props;
+      const token = await getToken();
+
       this.loading = true;
 
       const post = {
@@ -71,11 +74,15 @@ export default {
         url: "/api/posts/new",
         data: {
           user,
-          post
+          post,
+          token
         }
       });
       console.log(res);
       this.loading = false;
+      if (res) {
+        this.success = true;
+      }
     }
   }
 };
