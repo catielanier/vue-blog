@@ -17,7 +17,12 @@ import store from "./store";
 
 library.add(faSignInAlt, faUserPlus, faSignOutAlt, faUser, faPlus, faCog);
 
-Vue.use(wysiwyg, {});
+Vue.use(wysiwyg, {
+  image: {
+    uploadURL: "/api/image",
+    dropzoneOptions: {}
+  }
+});
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

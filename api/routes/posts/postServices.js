@@ -1,6 +1,5 @@
 const tokenService = require("../../utils/tokenService");
 const { model: Post } = require("./postModel");
-const { model: Comment } = require("../comments/commentModel");
 
 exports.loginCheck = async token => {
   if (!token) {
@@ -31,10 +30,12 @@ exports.createPost = async newPost => {
   }
 };
 
-exports.createComment = async newComment => {
+exports.getAllPosts = async () => {
   try {
-    const comment = new Comment(newComment);
-    return await comment.save();
+    const posts = await Post.find({});
+    if (posts) {
+      return posts;
+    }
   } catch (e) {
     throw e;
   }

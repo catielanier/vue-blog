@@ -25,4 +25,15 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
+router.route("/").get(async (req, res) => {
+  try {
+    const posts = await postServices.getAllPosts();
+    res.status(200).json({
+      data: posts
+    });
+  } catch (e) {
+    res.status(400).statusMessage(e);
+  }
+});
+
 exports.router = router;
