@@ -9,11 +9,14 @@ import {
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { Datetime } from "vue-datetime";
+import wysiwyg from "vue-wysiwyg";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
 library.add(faSignInAlt, faUserPlus, faSignOutAlt, faUser, faPlus);
+
+Vue.use(wysiwyg, {}); // config is optional. more below
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 

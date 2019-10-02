@@ -19,6 +19,11 @@
             type="datetime"
           />
         </div>
+        <wysiwyg
+          v-model="body"
+          placeholder="Type your post here."
+        />
+        <button type="submit">Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -36,13 +41,16 @@ export default {
       loading: false,
       title: "",
       body: "",
-      postDate: null
+      postDate: null,
+      error: null,
+      success: false
     };
   }
 };
 </script>
 
 <style>
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
 form.new-post-form,
 .new-post-form fieldset {
   width: 100%;
@@ -53,5 +61,13 @@ form.new-post-form,
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+}
+.editr {
+  margin-bottom: 20px;
+  border: 1px solid #011f4b;
+}
+
+.editr:focus-within {
+  border-color: #b3cde0;
 }
 </style>
