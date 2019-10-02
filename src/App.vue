@@ -6,7 +6,10 @@
       :role="this.role"
     />
     <main>
-      <router-view :catchUser="catchUser" />
+      <router-view
+        :catchUser="catchUser"
+        :user="this.user"
+      />
     </main>
   </div>
 </template>

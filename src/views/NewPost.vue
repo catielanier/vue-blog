@@ -1,8 +1,14 @@
 <template>
   <section class="new-post">
     <h1>New Post</h1>
-    <form class="new-post-form">
-      <fieldset>
+    <form
+      class="new-post-form"
+      @submit.prevent="postBlog"
+      :disabled="this.loading"
+    >
+      <fieldset :aria-busy="this.loading">
+        <p v-if="success">Successfully posted.</p>
+        <p v-if="error"><span>Error:</span> {{this.error}}</p>
         <div class="input-container">
           <div>
             <input
@@ -45,6 +51,9 @@ export default {
       error: null,
       success: false
     };
+  },
+  methods: {
+    postBlog: function() {}
   }
 };
 </script>
