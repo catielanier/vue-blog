@@ -38,6 +38,12 @@
         >
           <font-awesome-icon :icon="['fas', 'user']" /> Profile
         </router-link>
+        <router-link
+          v-if="role === 'Admin'"
+          to="/settings"
+        >
+          <font-awesome-icon :icon="['fas', 'cog']" /> Settings
+        </router-link>
         <button
           v-if="user"
           @click.prevent="signOut"
@@ -70,7 +76,7 @@ header {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1.3fr 5fr 2.6fr;
+  grid-template-columns: 1.3fr 4fr 3.5fr;
   grid-gap: 25px;
   align-items: center;
 }

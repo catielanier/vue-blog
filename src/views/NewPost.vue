@@ -109,4 +109,7 @@ form.new-post-form,
 .editr:focus-within {
   border-color: #b3cde0;
 }
+.new-post-form button {
+  margin-bottom: 40px;
+}
 </style>
