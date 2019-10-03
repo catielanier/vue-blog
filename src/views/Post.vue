@@ -13,14 +13,25 @@
     <div class="comments-quantity">
       {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>
     </div>
+    <Comments
+      :user="user"
+      :comments="post.comments"
+    />
   </section>
 </template>
 
 <script>
 import axios from "axios";
+import Comments from "../components/Comments.vue";
 import dateFormatter from "../services/dateFormatter";
 export default {
   name: "post",
+  components: {
+    Comments
+  },
+  props: {
+    user: String
+  },
   data() {
     return {
       post: null
