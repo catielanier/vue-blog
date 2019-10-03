@@ -9,9 +9,12 @@ router.route("/new").post(async (req, res) => {
   const loggedIn = await postServices.loginCheck(token);
 
   if (loggedIn) {
-    const user = await userServices.getUserById(id);
-    const banned = await user.banned;
+    const commentUser = await userServices.getUserById(user);
+    const banned = await commentUser.banned;
     if (!banned) {
+      const newComment = await commentServices.createComment(comment);
+      if (newComment) {
+      }
     } else {
       res
         .status(401)
