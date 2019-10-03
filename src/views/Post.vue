@@ -16,6 +16,7 @@
     <Comments
       :user="user"
       :comments="post.comments"
+      :postId="this.id"
     />
   </section>
 </template>
@@ -34,7 +35,8 @@ export default {
   },
   data() {
     return {
-      post: null
+      post: null,
+      id: null
     };
   },
   async mounted() {
@@ -43,6 +45,7 @@ export default {
       const post = res.data.data[0];
       post.postDate = dateFormatter(post.postDate);
       this.post = post;
+      this.id = id;
     });
   }
 };

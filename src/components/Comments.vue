@@ -34,10 +34,12 @@
 </template>
 
 <script>
+import { getToken } from "../services/tokenService";
 export default {
   props: {
     user: String,
-    comments: Array
+    comments: Array,
+    postId: String
   },
   data() {
     return {
@@ -48,8 +50,10 @@ export default {
     };
   },
   methods: {
-    postComment: function() {
-      console.log("posting comment");
+    postComment: async function() {
+      const { body } = this.$data;
+      const { postId, user } = this.$props;
+      const token = await getToken();
     }
   }
 };
@@ -60,5 +64,6 @@ export default {
 
 .new-comment form {
   width: 40%;
+  margin-bottom: 40px;
 }
 </style>
