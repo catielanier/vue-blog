@@ -7,14 +7,16 @@
       :key="post._id"
     >
       <div class="title">
-        <router-link :to="{
-          name: 'post',
-          params: {
-            id: post._id
-          }
-        }">
-          <h2>{{post.title}}</h2>
-        </router-link>
+        <h1>
+          <router-link :to="{
+            name: 'post',
+            params: {
+              id: post._id
+            }
+          }">
+            {{post.title}}
+          </router-link>
+        </h1>
 
       </div>
       <div class="date">
@@ -52,3 +54,40 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.posts {
+  text-align: left;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bebas Neue";
+}
+h1 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+h1 a {
+  text-decoration: none;
+  color: #03396c;
+  transition: 0.3s all ease-in-out;
+  border: 0 #b3cde0;
+}
+h1 a:hover {
+  border-bottom: 3px solid #b3cde0;
+}
+.date {
+  font-size: 0.7rem;
+  margin-bottom: 20px;
+}
+.body {
+  margin-bottom: 20px;
+}
+</style>
