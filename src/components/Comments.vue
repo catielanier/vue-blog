@@ -54,6 +54,11 @@ export default {
       const { body } = this.$data;
       const { postId, user } = this.$props;
       const token = await getToken();
+      const comment = {
+        user,
+        body,
+        commentDate: Date.now()
+      };
     }
   }
 };

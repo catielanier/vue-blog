@@ -79,7 +79,6 @@ export default {
           token
         }
       });
-      console.log(res);
       this.loading = false;
       if (res) {
         this.success = true;
