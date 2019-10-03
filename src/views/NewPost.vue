@@ -8,7 +8,7 @@
     >
       <fieldset :aria-busy="this.loading">
         <p v-if="success">Successfully posted.</p>
-        <p v-if="error"><span>Error:</span> {{this.error}}</p>
+        <p v-if="error"><span>Error:</span> {{error}}</p>
         <div class="input-container">
           <div>
             <input
@@ -60,7 +60,7 @@ export default {
       const { user } = this.$props;
       const token = await getToken();
       const postDate = this.$data.postDate || Date.now();
-      
+
       this.loading = true;
 
       const post = {
