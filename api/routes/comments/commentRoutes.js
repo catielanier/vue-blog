@@ -17,7 +17,7 @@ router.route("/new").post(async (req, res) => {
         const commentId = newComment._id;
         const relationship = await commentServices.linkCommentToPost(
           commentId,
-          Postid
+          postId
         );
         if (relationship) {
           res.status(201).json({
