@@ -14,6 +14,24 @@ router.route("/new").post(async (req, res) => {
     if (!banned) {
       const newComment = await commentServices.createComment(comment);
       if (newComment) {
+        const commentId = newComment._id;
+        const relationship = await commentServices.linkCommentToPost(
+          commentId,
+          Postid
+        );
+        if (relationship) {
+          res.status(201).json({
+            data: newComment
+          });
+        } else {
+          res
+            .status(401)
+            .statusMessage(
+              "Relationship not made between comment and blog post."
+            );
+        }
+      } else {
+        res.status(401).statusMessage("Comment not created.");
       }
     } else {
       res
