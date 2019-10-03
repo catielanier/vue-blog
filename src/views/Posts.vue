@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <section class="posts">
     <p v-if="posts.length === 0">Sorry, but this blog is barren.</p>
     <div
       class="blog-post"
@@ -28,11 +28,12 @@
         {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 import axios from "axios";
+import dateFormatter from "../services/dateFormatter";
 export default {
   name: "posts",
   data() {
@@ -44,75 +45,7 @@ export default {
     await axios.get("/api/posts").then(res => {
       const posts = res.data.data;
       posts.forEach(post => {
-        const date = new Date(post.postDate);
-        const month = date.getMonth();
-        const months = [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ];
-        const days = [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ];
-        const day = date.getDay();
-        const utcDate = date.getUTCDate();
-        const year = date.getFullYear();
-        const hour = date.getHours();
-        const minute = date.getMinutes();
-
-        if (hour >= 12) {
-          const timeFormat = "PM";
-          if (hour > 12) {
-            const formattedHour = hour - 12;
-            if (minute < 10) {
-              const formattedMinute = `0${minute}`;
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${formattedHour}:${formattedMinute} ${timeFormat}`;
-            } else {
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${formattedHour}:${minute} ${timeFormat}`;
-            }
-          } else if (hour === 12) {
-            if (minute < 10) {
-              const formattedMinute = `0${minute}`;
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${hour}:${formattedMinute} ${timeFormat}`;
-            } else {
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${hour}:${minute} ${timeFormat}`;
-            }
-          }
-        } else {
-          const timeFormat = "AM";
-          if (hour === 0) {
-            const formattedHour = hour + 12;
-            if (minute < 10) {
-              const formattedMinute = `0${minute}`;
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${formattedHour}:${formattedMinute} ${timeFormat}`;
-            } else {
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${formattedHour}:${minute} ${timeFormat}`;
-            }
-          }
-          if (hour > 0) {
-            if (minute < 10) {
-              const formattedMinute = `0${minute}`;
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${hour}:${formattedMinute} ${timeFormat}`;
-            } else {
-              post.postDate = `${days[day]}, ${months[month]} ${utcDate}, ${year}, ${hour}:${minute} ${timeFormat}`;
-            }
-          }
-        }
+        post.postDate = dateFormatter(post.postDate);
       });
       this.posts = posts;
     });
