@@ -71,7 +71,7 @@ h6 {
   font-family: "Bebas Neue";
 }
 h1 {
-  margin-bottom: 0;
+  margin-bottom: 5px;
   padding-bottom: 0;
 }
 h1 a {
