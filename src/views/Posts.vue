@@ -4,13 +4,13 @@
     <div
       class="blog-post"
       v-for="post in posts"
-      :key="post.id"
+      :key="post._id"
     >
       <div class="title">
         <router-link :to="{
           name: 'post',
           params: {
-            ...post.id
+            id: post._id
           }
         }">
           <h2>{{post.title}}</h2>
