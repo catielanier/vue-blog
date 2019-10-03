@@ -7,7 +7,15 @@
       :key="post.id"
     >
       <div class="title">
-        <h2>{{post.title}}</h2>
+        <router-link :to="{
+          name: 'post',
+          params: {
+            ...post.id
+          }
+        }">
+          <h2>{{post.title}}</h2>
+        </router-link>
+
       </div>
       <div class="date">
         {{post.postDate}}

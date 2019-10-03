@@ -4,6 +4,7 @@ import Posts from "./views/Posts.vue";
 import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import NewPost from "./views/NewPost.vue";
+import Post from "./views/Post.vue";
 
 Vue.use(Router);
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/new-post",
       name: "new-post",
       component: NewPost
+    },
+    {
+      path: "/post/:id",
+      name: "post",
+      component: Post
     }
   ]
 });
