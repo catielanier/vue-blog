@@ -1,6 +1,18 @@
 <template>
   <section class="post">
-    <h2>Post</h2>
+    <div class="title">
+      <h2>{{post.title}}</h2>
+    </div>
+    <div class="date">
+      {{post.postDate}}
+    </div>
+    <div
+      class="body"
+      v-html="post.body"
+    />
+    <div class="comments-quantity">
+      {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>
+    </div>
   </section>
 </template>
 
