@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { getToken } from "../services/tokenService";
 export default {
   props: {
@@ -51,6 +52,7 @@ export default {
   },
   methods: {
     postComment: async function() {
+      this.loading = true;
       const { body } = this.$data;
       const { postId, user } = this.$props;
       const token = await getToken();
@@ -59,6 +61,19 @@ export default {
         body,
         commentDate: Date.now()
       };
+      const res = await axios({
+        method: "POST",
+        url: '/api/comments/new',
+        data: {
+          user,
+          comment,
+          token
+        }
+      });
+      if (res) {
+        this.success = true;
+        this.loading = false;
+      }
     }
   }
 };

@@ -42,3 +42,5 @@ router.route("/new").post(async (req, res) => {
     res.status(401).statusMessage("You are not logged in.");
   }
 });
+
+exports.router = router;
