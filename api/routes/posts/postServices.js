@@ -32,7 +32,9 @@ exports.createPost = async newPost => {
 
 exports.getAllPosts = async () => {
   try {
-    const posts = await Post.find({}).populate("user", "username _id");
+    const posts = await Post.find({})
+      .populate("user", "username _id")
+      .populate("comments");
     if (posts) {
       return posts;
     }
@@ -44,8 +46,9 @@ exports.getAllPosts = async () => {
 exports.getPostsById = async id => {
   try {
     const post = await Post.findById(id)
-      .populate("user", "username _id")
-      .populate("comments");
+      .populate("comments")
+      .populate("user", "username _id");
+    console.log(post);
     if (post) {
       return post;
     }
