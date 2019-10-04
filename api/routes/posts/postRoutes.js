@@ -25,7 +25,7 @@ router.route("/new").post(async (req, res) => {
   }
 });
 
-router.route("/").get(async (req, res) => {
+router.route("/").get(async (_, res) => {
   try {
     const posts = await postServices.getAllPosts();
     res.status(200).json({

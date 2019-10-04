@@ -4,7 +4,7 @@
       <h1>{{post.title}}</h1>
     </div>
     <div class="date">
-      {{post.postDate}}
+      {{post.postDate}} by {{post.user.username}}
     </div>
     <div
       class="body"

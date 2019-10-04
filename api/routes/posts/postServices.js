@@ -32,7 +32,7 @@ exports.createPost = async newPost => {
 
 exports.getAllPosts = async () => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find({}).populate("user", "username _id");
     if (posts) {
       return posts;
     }
@@ -43,7 +43,9 @@ exports.getAllPosts = async () => {
 
 exports.getPostsById = async id => {
   try {
-    const post = await Post.findById(id);
+    const post = await Post.findById(id)
+      .populate("user", "username _id")
+      .populate("comments");
     if (post) {
       return post;
     }
