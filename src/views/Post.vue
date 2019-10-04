@@ -46,6 +46,9 @@ export default {
       const post = res.data.data[0];
       post.postDate = dateFormatter(post.postDate);
       this.post = post;
+      post.comments.forEach(comment => {
+        comment.commentDate = dateFormatter(comment.commentDate);
+      });
     });
   }
 };

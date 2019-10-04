@@ -9,7 +9,13 @@
         v-for="comment in comments"
         :key="comment._id"
       >
-        <p>Comments</p>
+        <div class="date">
+          {{comment.commentDate}} by {{comment.user.username}}
+        </div>
+        <div
+          class="body"
+          v-html="comment.body"
+        />
       </div>
     </div>
     <div
