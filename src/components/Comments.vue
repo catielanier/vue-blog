@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import { getToken } from "../services/tokenService";
 export default {
   props: {
@@ -63,11 +63,12 @@ export default {
       };
       const res = await axios({
         method: "POST",
-        url: '/api/comments/new',
+        url: "/api/comments/new",
         data: {
           user,
           comment,
-          token
+          token,
+          postId
         }
       });
       if (res) {

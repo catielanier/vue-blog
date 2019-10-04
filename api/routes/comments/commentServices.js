@@ -13,8 +13,14 @@ exports.createComment = async newComment => {
 exports.linkCommentToPost = async (commentId, postId) => {
   try {
     return await Post.findByIdAndUpdate(
-      { postId },
-      { $push: { comments: commentId } }
+      { _id: postId },
+      {
+        $push: {
+          comments: {
+            _id: commentId
+          }
+        }
+      }
     );
   } catch (e) {
     throw e;
