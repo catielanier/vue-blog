@@ -86,8 +86,29 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+
+.comment-wrapper {
+  max-width: 1240px;
+  width: 95%;
+  margin: 30px auto;
+}
+
+.comment {
+  border-top: 1px dashed #b3cde0;
+  border-bottom: 1px dashed #b3cde0;
+  padding: 0 0 20px;
+}
+
+.comment .date {
+  font-size: 0.7rem;
+  margin-bottom: 20px;
+}
+
+.comment .body {
+  margin-left: 20px;
+}
 
 .new-comment form {
   width: 40%;

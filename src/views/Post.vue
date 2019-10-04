@@ -11,7 +11,7 @@
       v-html="post.body"
     />
     <div class="comments-quantity">
-      {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>
+      {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>:
     </div>
     <Comments
       :user="user"
@@ -88,5 +88,9 @@ h1 a:hover {
 }
 .body {
   margin-bottom: 20px;
+}
+.comments-quantity {
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 </style>
