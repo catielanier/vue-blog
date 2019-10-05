@@ -49,9 +49,24 @@ router.route("/:id").get(async (req, res) => {
 });
 
 router.route("/:id").delete(async (req, res) => {
+  const { token, user } = req.body;
+  const { id: postId } = req.params;
   // Check if logged in
+  const loggedIn = await postServices.loginCheck(token);
+  if (!loggedIn) {
+    res.status(401).statusMessage("You are not logged in.");
+  }
   // Grab post
+  const post = await postServices.getPostsById(postId);
+  const deletingUser = await userServices.getUserById(user);
   // Check to see if post is owned by user, or if user is Admin.
+  if (deletingUser !== "Admin") {
+    if (post.user !== user) {
+      res
+        .status(401)
+        .statusMessage("You do not have permission to delete this post.");
+    }
+  }
   // Run through comments and delete them.
   // Delete post.
 });

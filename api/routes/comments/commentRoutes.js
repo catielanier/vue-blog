@@ -44,7 +44,8 @@ router.route("/new").post(async (req, res) => {
 });
 
 router.route("/:id").delete(async (req, res) => {
-  const { token, user, postId, commentId } = req.body;
+  const { token, user, postId } = req.body;
+  const { id: commentId } = req.params;
   // Check to see if logged in.
   const loggedIn = await postServices.loginCheck(token);
   if (!loggedIn) {
@@ -53,10 +54,12 @@ router.route("/:id").delete(async (req, res) => {
   // Check to see if admin, or owner of comment.
   const deletingUser = await userServices.getUserById(user);
   const commentToDelete = await commentServices.getCommentById(commentId);
-  if (deletingUser.role !== "Admin" || commentToDelete.user !== user) {
-    res
-      .status(401)
-      .statusMessage("You do not have permission to delete this comment.");
+  if (deletingUser.role !== "Admin") {
+    if (commentToDelete.user !== user) {
+      res
+        .status(401)
+        .statusMessage("You do not have permission to delete this comment.");
+    }
   }
   // Remove comment relation from post.
   // Delete comment.
