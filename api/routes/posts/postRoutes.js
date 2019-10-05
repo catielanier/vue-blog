@@ -48,4 +48,12 @@ router.route("/:id").get(async (req, res) => {
   }
 });
 
+router.route("/:id").delete(async (req, res) => {
+  // Check if logged in
+  // Grab post
+  // Check to see if post is owned by user, or if user is Admin.
+  // Run through comments and delete them.
+  // Delete post.
+});
+
 exports.router = router;

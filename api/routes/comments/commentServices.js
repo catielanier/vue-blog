@@ -26,3 +26,23 @@ exports.linkCommentToPost = async (commentId, postId) => {
     throw e;
   }
 };
+
+exports.getCommentById = async commentId => {
+  try {
+    return await Comment.findById({ _id: commentId });
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.deleteComment = async (commentId, postId) => {
+  try {
+    await Post.findByIdAndUpdate(
+      { _id: postId },
+      { $pull: { comments: { _id: commentId } } }
+    );
+    return await Comment.findByIdAndDelete({ _id: commentId });
+  } catch (e) {
+    throw e;
+  }
+};

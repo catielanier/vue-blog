@@ -10,7 +10,7 @@
         :key="comment._id"
       >
         <div class="date">
-          {{comment.commentDate}} by {{comment.user.username}}
+          {{comment.commentDate}} by {{comment.user.username}}:
         </div>
         <div
           class="body"
@@ -104,6 +104,7 @@ export default {
 .comment .date {
   font-size: 0.7rem;
   margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .comment .body {
