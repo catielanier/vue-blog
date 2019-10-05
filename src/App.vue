@@ -9,6 +9,7 @@
       <router-view
         :catchUser="catchUser"
         :user="this.user"
+        :role="this.role"
       />
     </main>
   </div>

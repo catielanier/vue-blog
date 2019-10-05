@@ -16,6 +16,17 @@
           class="body"
           v-html="comment.body"
         />
+        <div
+          class="delete"
+          v-if="role === 'Admin' || comment.user._id === user"
+        >
+          <button>
+            <font-awesome-icon :icon="['fas', 'edit']" />
+          </button>
+          <button>
+            <font-awesome-icon :icon="['fas', 'trash']" />
+          </button>
+        </div>
       </div>
     </div>
     <div
@@ -99,6 +110,25 @@ export default {
   border-top: 1px dashed #b3cde0;
   border-bottom: 1px dashed #b3cde0;
   padding: 0 0 20px;
+  position: relative;
+}
+
+.comment > .delete {
+  position: absolute;
+  top: 3px;
+  right: 0;
+}
+
+.comment > .delete button {
+  font-size: 0.85rem;
+  color: #b3cde0;
+  background: #325c7b;
+  border: 0;
+  padding: 5px 8px;
+}
+
+.comment > .delete button:first-of-type {
+  margin-right: 5px;
 }
 
 .comment .date {

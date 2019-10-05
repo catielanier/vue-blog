@@ -10,6 +10,17 @@
       class="body"
       v-html="post.body"
     />
+    <div
+      class="delete"
+      v-if="user === post.user._id || role === 'Admin'"
+    >
+      <button>
+        <font-awesome-icon :icon="['fas', 'edit']" />
+      </button>
+      <button>
+        <font-awesome-icon :icon="['fas', 'trash']" />
+      </button>
+    </div>
     <div class="comments-quantity">
       {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>:
     </div>
@@ -17,6 +28,7 @@
       :user="user"
       :comments="post.comments"
       :postId="id"
+      :role="role"
     />
   </section>
 </template>
@@ -32,7 +44,8 @@ export default {
   },
   props: {
     user: String,
-    id: String
+    id: String,
+    role: String
   },
   data() {
     return {
@@ -60,6 +73,7 @@ export default {
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
 }
 h1,
 h2,
@@ -92,5 +106,22 @@ h1 a:hover {
 .comments-quantity {
   font-size: 0.85rem;
   font-weight: bold;
+}
+.post > .delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.post > .delete button {
+  font-size: 0.85rem;
+  color: #b3cde0;
+  background: #325c7b;
+  border: 0;
+  padding: 5px 8px;
+}
+
+.post > .delete button:first-of-type {
+  margin-right: 5px;
 }
 </style>

@@ -7,7 +7,9 @@ import {
   faSignOutAlt,
   faUser,
   faPlus,
-  faCog
+  faCog,
+  faTrash,
+  faEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { Datetime } from "vue-datetime";
 import wysiwyg from "vue-wysiwyg";
@@ -15,7 +17,16 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-library.add(faSignInAlt, faUserPlus, faSignOutAlt, faUser, faPlus, faCog);
+library.add(
+  faSignInAlt,
+  faUserPlus,
+  faSignOutAlt,
+  faUser,
+  faPlus,
+  faCog,
+  faTrash,
+  faEdit
+);
 
 Vue.use(wysiwyg, {
   image: {
