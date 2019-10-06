@@ -46,6 +46,9 @@ export default {
   async mounted() {
     await axios.get("/api/posts").then(res => {
       const posts = res.data.data;
+      posts.sort(function(x, y) {
+        return y.postDate.localeCompare(x.postDate);
+      });
       posts.forEach(post => {
         post.postDate = dateFormatter(post.postDate);
       });
