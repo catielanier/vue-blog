@@ -23,7 +23,7 @@
           <button>
             <font-awesome-icon :icon="['fas', 'edit']" />
           </button>
-          <button @click.prevent="deleteComment">
+          <button @click.prevent="deleteComment(comment._id)">
             <font-awesome-icon :icon="['fas', 'trash']" />
           </button>
         </div>
@@ -57,7 +57,8 @@ export default {
   props: {
     user: String,
     comments: Array,
-    postId: String
+    postId: String,
+    removeCommentFromBlog: Function
   },
   data() {
     return {
@@ -93,8 +94,26 @@ export default {
         this.loading = false;
       }
     },
-    deleteComment: async function() {
-      console.log("deleting comment");
+    deleteComment: async function(commentId) {
+      this.loading = true;
+      const { user, postId } = this.$props;
+      const token = await getToken();
+      const res = await axios({
+        method: "DELETE",
+        url: `/api/comments/${commentId}`,
+        data: {
+          user,
+          postId,
+          token
+        }
+      });
+      if (res) {
+        const index = this.$props.comments.findIndex(
+          comment => comment._id === commentId
+        );
+        await removeCommentFromBlog(index);
+        this.loading = false;
+      }
     }
   }
 };

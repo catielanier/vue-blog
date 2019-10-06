@@ -29,6 +29,7 @@
       :comments="post.comments"
       :postId="id"
       :role="role"
+      :removeCommentFromBlog="removeCommentFromBlog"
     />
   </section>
 </template>
@@ -67,6 +68,9 @@ export default {
   methods: {
     deletePost: async function() {
       console.log("Deleting post.");
+    },
+    removeCommentFromBlog: function(index) {
+      this.post.comments.splice(index, 1);
     }
   }
 };
