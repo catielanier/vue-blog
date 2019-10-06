@@ -50,19 +50,18 @@ export default {
   },
   data() {
     return {
-      post: {},
-      postId: ""
+      post: {}
     };
   },
   async mounted() {
-    const id = location.href.replace(/(.+\w\/)(.+)/, "");
+    const { id } = this.$props;
     await axios.get(`/api/posts/${id}`).then(res => {
-      const post = res.data.data[0];
+      const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
-      this.post = post;
       post.comments.forEach(comment => {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
+      this.post = post;
     });
   },
   methods: {

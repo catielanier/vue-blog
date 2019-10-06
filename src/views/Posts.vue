@@ -10,6 +10,9 @@
         <h1>
           <router-link :to="{
             name: 'post',
+            props: {
+              id: post._id
+            },
             params: {
               id: post._id
             }
