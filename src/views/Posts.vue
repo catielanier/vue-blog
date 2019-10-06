@@ -1,6 +1,7 @@
 <template>
   <section class="posts">
-    <p v-if="posts.length === 0">Sorry, but this blog is barren.</p>
+    <p v-if="posts.length === 0 && !this.loading">Sorry, but this blog is barren.</p>
+    <p v-if="this.loading">Loading, please wait.</p>
     <div
       class="blog-post"
       v-for="post in posts"
@@ -43,10 +44,12 @@ export default {
   name: "posts",
   data() {
     return {
-      posts: []
+      posts: [],
+      loading: false
     };
   },
   async mounted() {
+    this.loading = true;
     await axios.get("/api/posts").then(res => {
       const posts = res.data.data;
       posts.sort(function(x, y) {
@@ -56,6 +59,7 @@ export default {
         post.postDate = dateFormatter(post.postDate);
       });
       this.posts = posts;
+      this.loading = false;
     });
   }
 };

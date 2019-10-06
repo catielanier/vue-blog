@@ -39,6 +39,7 @@
         @submit.prevent="postComment"
       >
         <fieldset :aria-busy="this.loading">
+          <p v-if="this.success">Comment posted.</p>
           <wysiwyg
             v-model="body"
             placeholder="Type your comment here."
