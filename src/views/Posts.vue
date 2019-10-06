@@ -90,4 +90,8 @@ h1 a:hover {
 .body {
   margin-bottom: 20px;
 }
+.comments-quantity {
+  font-size: 0.85rem;
+  font-weight: bold;
+}
 </style>

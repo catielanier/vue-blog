@@ -23,7 +23,7 @@
           <button>
             <font-awesome-icon :icon="['fas', 'edit']" />
           </button>
-          <button>
+          <button @click.prevent="deleteComment">
             <font-awesome-icon :icon="['fas', 'trash']" />
           </button>
         </div>
@@ -92,6 +92,9 @@ export default {
         this.success = true;
         this.loading = false;
       }
+    },
+    deleteComment: async function() {
+      console.log("deleting comment");
     }
   }
 };

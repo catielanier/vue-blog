@@ -17,7 +17,7 @@
       <button>
         <font-awesome-icon :icon="['fas', 'edit']" />
       </button>
-      <button>
+      <button @click.prevent="deletePost">
         <font-awesome-icon :icon="['fas', 'trash']" />
       </button>
     </div>
@@ -63,6 +63,11 @@ export default {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
     });
+  },
+  methods: {
+    deletePost: async function() {
+      console.log("Deleting post.");
+    }
   }
 };
 </script>
