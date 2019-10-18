@@ -30,6 +30,7 @@ function dateFormatter(postDate) {
   const hour = date.getHours();
   const minute = date.getMinutes();
 
+  // This would be a great oportunity to break things down into nice small reusable functions!
   if (hour >= 12) {
     const timeFormat = "PM";
     if (hour > 12) {
