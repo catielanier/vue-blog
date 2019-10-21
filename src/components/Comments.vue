@@ -9,7 +9,10 @@
         v-for="comment in comments"
         :key="comment._id"
       >
-        <div class="date">
+        <div
+          class="date"
+          v-if="!this.edit"
+        >
           {{comment.commentDate}} by {{comment.user.username}}:
         </div>
         <div
@@ -17,11 +20,20 @@
           v-html="comment.body"
           v-if="!this.edit && this.commentId !== comment._id"
         />
+        <wysiwig
+          v-model="editBody"
+          v-if="this.edit && this.commentId === comment._id"
+        />
+        <button v-if="this.edit && this.commentId === comment._id">Edit Note</button>
+        <button
+          v-if="this.edit && this.commentId === comment._id"
+          @click.prevent="cancelEdit"
+        >Cancel</button>
         <div
           class="delete"
           v-if="!this.edit && role === 'Admin' || comment.user._id === user"
         >
-          <button>
+          <button @click.prevent="openEditor(comment._id, comment.body)">
             <font-awesome-icon :icon="['fas', 'edit']" />
           </button>
           <button @click.prevent="deleteComment(comment._id)">
@@ -102,6 +114,11 @@ export default {
         this.loading = false;
       }
     },
+    editComment: async function(id, body) {
+      this.commentId = id;
+      this.edit = true;
+      this.editBody = body;
+    },
     deleteComment: async function(commentId) {
       this.loading = true;
       const { user, postId } = this.$props;
@@ -122,6 +139,10 @@ export default {
         await removeCommentFromBlog(index);
         this.loading = false;
       }
+    },
+    cancelEdit: async function() {
+      (this.edit = false), (this.editBody = "");
+      this.commentId = "";
     }
   }
 };
