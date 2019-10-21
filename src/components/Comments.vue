@@ -15,10 +15,11 @@
         <div
           class="body"
           v-html="comment.body"
+          v-if="!edit && this.commentId !== comment._id"
         />
         <div
           class="delete"
-          v-if="role === 'Admin' || comment.user._id === user"
+          v-if="!edit && role === 'Admin' || comment.user._id === user"
         >
           <button>
             <font-awesome-icon :icon="['fas', 'edit']" />
@@ -67,7 +68,10 @@ export default {
       body: "",
       loading: false,
       success: false,
-      error: null
+      error: null,
+      edit: false,
+      commentId: "",
+      editBody: ""
     };
   },
   methods: {
