@@ -47,12 +47,17 @@ exports.deleteComment = async (commentId, postId) => {
   }
 };
 
-exports.editComment = async (id, body) {
+exports.editComment = async (id, body) => {
   try {
-    return await Comment.findByIdAndUpdate({_id: id}, {$set: {
-      body
-    }})
-  } catch(e) {
+    return await Comment.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          body
+        }
+      }
+    );
+  } catch (e) {
     throw e;
   }
-}
+};
