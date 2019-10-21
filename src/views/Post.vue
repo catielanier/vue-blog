@@ -38,6 +38,7 @@
       :role="role"
       :removeCommentFromBlog="removeCommentFromBlog"
       :addCommentToBlog="addCommentToBlog"
+      :changeCommentOnPost="changeCommentOnPost"
     />
   </section>
 </template>
@@ -84,6 +85,12 @@ export default {
     },
     addCommentToBlog: function(comment) {
       this.post.comments.push(comment);
+    },
+    changeCommentOnPost: function(id, comment) {
+      const index = this.$data.post.comments.findIndex(
+        comment => comment._id === id
+      );
+      this.post.comments[index] = comment;
     }
   }
 };

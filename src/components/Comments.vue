@@ -24,7 +24,10 @@
           v-model="editBody"
           v-if="this.edit && this.commentId === comment._id"
         />
-        <button v-if="this.edit && this.commentId === comment._id">Edit Note</button>
+        <button
+          v-if="this.edit && this.commentId === comment._id"
+          @click.prevent="editComment"
+        >Edit Note</button>
         <button
           v-if="this.edit && this.commentId === comment._id"
           @click.prevent="cancelEdit"
@@ -73,7 +76,8 @@ export default {
     comments: Array,
     postId: String,
     removeCommentFromBlog: Function,
-    addCommentToBlog: Function
+    addCommentToBlog: Function,
+    changeCommentOnPost: Function
   },
   data() {
     return {
@@ -141,8 +145,28 @@ export default {
       }
     },
     cancelEdit: async function() {
-      (this.edit = false), (this.editBody = "");
+      this.edit = false;
+      this.editBody = "";
       this.commentId = "";
+    },
+    editComment: async function() {
+      const { commentId: id, commentBody: body } = this.$data;
+      const { user } = this.$props;
+      const token = await getToken();
+      const res = await axios({
+        method: "PUT",
+        url: `/api/comment/${id}`,
+        data: {
+          user,
+          body,
+          token
+        }
+      });
+      const comment = res.data.data;
+      await changeCommentOnPost(id, comment);
+      this.edit = false;
+      this.commentId = "";
+      this.editBody = "";
     }
   }
 };
