@@ -46,3 +46,13 @@ exports.deleteComment = async (commentId, postId) => {
     throw e;
   }
 };
+
+exports.editComment = async (id, body) {
+  try {
+    return await Comment.findByIdAndUpdate({_id: id}, {$set: {
+      body
+    }})
+  } catch(e) {
+    throw e;
+  }
+}

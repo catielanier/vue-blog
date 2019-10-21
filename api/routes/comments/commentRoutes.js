@@ -71,4 +71,19 @@ router.route("/:id").delete(async (req, res) => {
   }
 });
 
+router.route("/:id").put(async (req, res) => {
+  const { id } = req.params;
+  const { user: userId, token, body } = req.body;
+  const loggedIn = await postServices.loginCheck(token);
+  if (!loggedIn) {
+    res.status(401).statusMessage("You are not logged in.");
+  }
+  const editedComment = await commentServices.editComment(id, body);
+  if (editedComment) {
+    res.status(201).json({
+      data: editedComment
+    });
+  }
+});
+
 exports.router = router;
