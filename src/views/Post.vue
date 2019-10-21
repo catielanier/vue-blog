@@ -30,6 +30,7 @@
       :postId="id"
       :role="role"
       :removeCommentFromBlog="removeCommentFromBlog"
+      :addCommentToBlog="addCommentToBlog"
     />
   </section>
 </template>
@@ -70,6 +71,9 @@ export default {
     },
     removeCommentFromBlog: function(index) {
       this.post.comments.splice(index, 1);
+    },
+    addCommentToBlog: function(comment) {
+      this.post.comments.push(comment);
     }
   }
 };

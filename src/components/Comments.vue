@@ -59,7 +59,8 @@ export default {
     user: String,
     comments: Array,
     postId: String,
-    removeCommentFromBlog: Function
+    removeCommentFromBlog: Function,
+    addCommentToBlog: Function
   },
   data() {
     return {
@@ -91,6 +92,8 @@ export default {
         }
       });
       if (res) {
+        const newComment = res.data.data;
+        await addCommentToBlog(newComment);
         this.success = true;
         this.loading = false;
       }
