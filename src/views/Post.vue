@@ -1,18 +1,25 @@
 <template>
   <section class="post">
-    <div class="title">
+    <div
+      class="title"
+      v-if="!this.edit"
+    >
       <h1>{{post.title}}</h1>
     </div>
-    <div class="date">
+    <div
+      class="date"
+      v-if="!this.edit"
+    >
       {{post.postDate}} by {{post.user.username}}:
     </div>
     <div
       class="body"
       v-html="post.body"
+      v-if="!this.edit"
     />
     <div
       class="delete"
-      v-if="user === post.user._id || role === 'Admin'"
+      v-if="!this.edit && user === post.user._id || role === 'Admin'"
     >
       <button>
         <font-awesome-icon :icon="['fas', 'edit']" />
@@ -51,7 +58,10 @@ export default {
   },
   data() {
     return {
-      post: {}
+      post: {},
+      edit: false,
+      title: "",
+      body: ""
     };
   },
   async mounted() {

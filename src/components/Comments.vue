@@ -15,11 +15,11 @@
         <div
           class="body"
           v-html="comment.body"
-          v-if="!edit && this.commentId !== comment._id"
+          v-if="!this.edit && this.commentId !== comment._id"
         />
         <div
           class="delete"
-          v-if="!edit && role === 'Admin' || comment.user._id === user"
+          v-if="!this.edit && role === 'Admin' || comment.user._id === user"
         >
           <button>
             <font-awesome-icon :icon="['fas', 'edit']" />
