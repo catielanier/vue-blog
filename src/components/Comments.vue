@@ -11,30 +11,30 @@
       >
         <div
           class="date"
-          v-if="!this.edit"
+          v-if="!edit"
         >
           {{comment.commentDate}} by {{comment.user.username}}:
         </div>
         <div
           class="body"
           v-html="comment.body"
-          v-if="!this.edit && this.commentId !== comment._id"
+          v-if="!edit && commentId !== comment._id"
         />
         <wysiwig
           v-model="editBody"
-          v-if="this.edit && this.commentId === comment._id"
+          v-if="edit && commentId === comment._id"
         />
         <button
-          v-if="this.edit && this.commentId === comment._id"
+          v-if="edit && commentId === comment._id"
           @click.prevent="editComment"
         >Edit Note</button>
         <button
-          v-if="this.edit && this.commentId === comment._id"
+          v-if="edit && commentId === comment._id"
           @click.prevent="cancelEdit"
         >Cancel</button>
         <div
           class="delete"
-          v-if="!this.edit && role === 'Admin' || comment.user._id === user"
+          v-if="!edit && role === 'Admin' || comment.user._id === user"
         >
           <button @click.prevent="openEditor(comment._id, comment.body)">
             <font-awesome-icon :icon="['fas', 'edit']" />
@@ -77,7 +77,8 @@ export default {
     postId: String,
     removeCommentFromBlog: Function,
     addCommentToBlog: Function,
-    changeCommentOnPost: Function
+    changeCommentOnPost: Function,
+    role: String
   },
   data() {
     return {
