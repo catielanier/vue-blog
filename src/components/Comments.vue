@@ -157,12 +157,13 @@ export default {
       this.commentId = "";
     },
     editComment: async function() {
-      const { commentId: id, commentBody: body } = this.$data;
+      const { commentId: id, editBody: body } = this.$data;
       const { user } = this.$props;
       const token = await getToken();
+      console.log(body);
       const res = await axios({
         method: "PUT",
-        url: `/api/comment/${id}`,
+        url: `/api/comments/${id}`,
         data: {
           user,
           body,

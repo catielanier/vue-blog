@@ -80,9 +80,10 @@ router.route("/:id").put(async (req, res) => {
     res.status(401).statusMessage("You are not logged in.");
   }
   const editedComment = await commentServices.editComment(id, body);
+  const commentToUpdate = await commentServices.getCommentById(id);
   if (editedComment) {
     res.status(201).json({
-      data: editedComment
+      data: commentToUpdate
     });
   }
 });
