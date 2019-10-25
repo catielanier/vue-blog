@@ -29,7 +29,10 @@ exports.linkCommentToPost = async (commentId, postId) => {
 
 exports.getCommentById = async commentId => {
   try {
-    return await Comment.findById({ _id: commentId });
+    return await Comment.findById({ _id: commentId }).populate({
+      path: "user",
+      select: "username _id"
+    });
   } catch (e) {
     throw e;
   }

@@ -84,6 +84,7 @@ export default {
       this.post.comments.splice(index, 1);
     },
     addCommentToBlog: function(comment) {
+      comment.commentDate = dateFormatter(comment.commentDate);
       this.post.comments.push(comment);
     },
     changeCommentOnPost: function(id, comment) {

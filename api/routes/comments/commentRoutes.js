@@ -19,9 +19,10 @@ router.route("/new").post(async (req, res) => {
           commentId,
           postId
         );
+        const addedComment = await commentServices.getCommentById(commentId);
         if (relationship) {
           res.status(201).json({
-            data: newComment
+            data: addedComment
           });
         } else {
           res
