@@ -64,3 +64,13 @@ exports.editComment = async (id, body) => {
     throw e;
   }
 };
+
+exports.deleteAllComments = async comments => {
+  try {
+    return await Comment.deleteMany({
+      _id: comments
+    });
+  } catch (e) {
+    throw e;
+  }
+};

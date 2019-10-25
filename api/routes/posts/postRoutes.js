@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const postServices = require("./postServices");
 const userServices = require("../users/userServices");
+const commentServices = require("../comments/commentServices");
 
 router.route("/new").post(async (req, res) => {
   const { token, user: id, post } = req.body;
@@ -68,7 +69,15 @@ router.route("/:id").delete(async (req, res) => {
     }
   }
   // Run through comments and delete them.
+  const comments = [];
+  for (let i = 0; i < post.comments.length; i++) {
+    comments.push(post.comments[i]._id);
+  }
+  const deletedComments = await commentServices.deleteAllComments(comments);
   // Delete post.
+  if (deletedComments) {
+    const deletedPost = await postServices.deletePost(postId);
+  }
 });
 
 router.route("/:id").put(async (req, res) => {

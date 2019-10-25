@@ -77,3 +77,13 @@ exports.editPost = async (id, title, body) => {
     throw e;
   }
 };
+
+exports.deletePost = async id => {
+  try {
+    return await Post.findByIdAndDelete({
+      _id: id
+    });
+  } catch (e) {
+    throw e;
+  }
+};
