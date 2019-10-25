@@ -1,10 +1,12 @@
 <template>
   <section class="post">
-    <div
-      class="title"
-      v-if="!this.edit"
-    >
-      <h1>{{post.title}}</h1>
+    <div class="title">
+      <h1 v-if="!this.edit">{{post.title}}</h1>
+      <input
+        type="text"
+        v-model="title"
+        v-if="this.edit"
+      >
     </div>
     <div
       class="date"
@@ -18,13 +20,25 @@
       v-if="!this.edit"
     />
     <div
-      class="delete"
-      v-if="!this.edit && user === post.user._id || role === 'Admin'"
+      class="body"
+      v-if="this.edit"
     >
-      <button>
+      <wysiwyg v-model="body" />
+    </div>
+    <div
+      class="delete"
+      v-if="user === post.user._id || role === 'Admin'"
+    >
+      <button
+        v-if="!this.edit"
+        @click.prevent="showEditor(post.title, post.body)"
+      >
         <font-awesome-icon :icon="['fas', 'edit']" />
       </button>
-      <button @click.prevent="deletePost">
+      <button
+        v-if="!this.edit"
+        @click.prevent="deletePost"
+      >
         <font-awesome-icon :icon="['fas', 'trash']" />
       </button>
     </div>
@@ -92,6 +106,11 @@ export default {
         comment => comment._id === id
       );
       this.post.comments[index] = comment;
+    },
+    showEditor: function(title, body) {
+      this.edit = true;
+      this.title = title;
+      this.body = body;
     }
   }
 };
