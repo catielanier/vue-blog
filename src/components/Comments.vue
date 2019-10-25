@@ -20,18 +20,23 @@
           v-html="comment.body"
           v-if="!edit && commentId !== comment._id"
         />
-        <wysiwig
-          v-model="editBody"
+        <form
+          @submit.prevent="editComment"
           v-if="edit && commentId === comment._id"
-        />
-        <button
-          v-if="edit && commentId === comment._id"
-          @click.prevent="editComment"
-        >Edit Note</button>
-        <button
-          v-if="edit && commentId === comment._id"
-          @click.prevent="cancelEdit"
-        >Cancel</button>
+        >
+          <wysiwyg
+            v-model="editBody"
+            name="edit"
+          />
+          <button
+            v-if="edit && commentId === comment._id"
+            @click.prevent="editComment"
+          >Edit Comment</button>
+          <button
+            v-if="edit && commentId === comment._id"
+            @click.prevent="cancelEdit"
+          >Cancel</button>
+        </form>
         <div
           class="delete"
           v-if="!edit && role === 'Admin' || comment.user._id === user"
@@ -59,6 +64,7 @@
           <wysiwyg
             v-model="body"
             placeholder="Type your comment here."
+            name="new-comment"
           />
           <button type="submit">Post Comment</button>
         </fieldset>
@@ -114,12 +120,12 @@ export default {
       });
       if (res) {
         const newComment = res.data.data;
-        await addCommentToBlog(newComment);
+        await this.$props.addCommentToBlog(newComment);
         this.success = true;
         this.loading = false;
       }
     },
-    editComment: async function(id, body) {
+    openEditor: async function(id, body) {
       this.commentId = id;
       this.edit = true;
       this.editBody = body;
@@ -141,7 +147,7 @@ export default {
         const index = this.$props.comments.findIndex(
           comment => comment._id === commentId
         );
-        await removeCommentFromBlog(index);
+        await this.$props.removeCommentFromBlog(index);
         this.loading = false;
       }
     },
@@ -164,7 +170,7 @@ export default {
         }
       });
       const comment = res.data.data;
-      await changeCommentOnPost(id, comment);
+      await this.$props.changeCommentOnPost(id, comment);
       this.edit = false;
       this.commentId = "";
       this.editBody = "";
