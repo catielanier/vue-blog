@@ -61,3 +61,19 @@ exports.getPostsById = async id => {
     throw e;
   }
 };
+
+exports.editPost = async (id, title, body) => {
+  try {
+    return await Post.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          title,
+          body
+        }
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
+};

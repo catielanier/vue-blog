@@ -1,30 +1,41 @@
 <template>
   <section class="post">
-    <div class="title">
-      <h1 v-if="!this.edit">{{post.title}}</h1>
-      <input
-        type="text"
-        v-model="title"
+    <form
+      id="edit"
+      @submit.prevent="editPost"
+    >
+      <div class="title">
+        <h1 v-if="!this.edit">{{post.title}}</h1>
+        <input
+          type="text"
+          v-model="title"
+          v-if="this.edit"
+        >
+      </div>
+      <div
+        class="date"
+        v-if="!this.edit"
+      >
+        {{post.postDate}} by {{post.user.username}}:
+      </div>
+      <div
+        class="body"
+        v-html="post.body"
+        v-if="!this.edit"
+      />
+      <div
+        class="body"
         v-if="this.edit"
       >
-    </div>
-    <div
-      class="date"
-      v-if="!this.edit"
-    >
-      {{post.postDate}} by {{post.user.username}}:
-    </div>
-    <div
-      class="body"
-      v-html="post.body"
-      v-if="!this.edit"
-    />
-    <div
-      class="body"
-      v-if="this.edit"
-    >
-      <wysiwyg v-model="body" />
-    </div>
+        <wysiwyg v-model="body" />
+        <button type="submit">
+          Edit Post
+        </button>
+        <button @click.prevent="cancelEdit">
+          Cancel
+        </button>
+      </div>
+    </form>
     <div
       class="delete"
       v-if="user === post.user._id || role === 'Admin'"
@@ -61,6 +72,7 @@
 import axios from "axios";
 import Comments from "../components/Comments.vue";
 import dateFormatter from "../services/dateFormatter";
+import { getToken } from "../services/tokenService";
 export default {
   name: "post",
   components: {
@@ -76,7 +88,8 @@ export default {
       post: {},
       edit: false,
       title: "",
-      body: ""
+      body: "",
+      deleted: false
     };
   },
   async mounted() {
@@ -111,6 +124,32 @@ export default {
       this.edit = true;
       this.title = title;
       this.body = body;
+    },
+    cancelEdit: function() {
+      this.edit = false;
+      this.title = "";
+      this.body = "";
+    },
+    editPost: async function() {
+      const { title, body } = this.$data;
+      const { user, id } = this.$props;
+      const token = await getToken();
+      const res = await axios({
+        method: "POST",
+        url: `/api/posts/${id}`,
+        data: {
+          user,
+          title,
+          body,
+          token
+        }
+      });
+      const { title: newTitle, body: newBody } = this.data.data;
+      this.post.title = newTitle;
+      this.post.body = newBody;
+      this.edit = false;
+      this.title = "";
+      this.body = "";
     }
   }
 };
