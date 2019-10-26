@@ -213,4 +213,26 @@ h1 a:hover {
 .post > .delete button:first-of-type {
   margin-right: 5px;
 }
+
+#edit button[type="submit"] {
+  width: auto;
+  padding: 10px 15px;
+  margin-right: 10px;
+}
+
+#edit button:last-of-type {
+  background: #fff;
+  border: 1px solid #011f4b;
+  padding: 10px 15px;
+  color: #011f4b;
+  transition: all 0.3s ease-in-out;
+}
+
+#edit button:last-of-type:hover {
+  background: #b3cde0;
+}
+
+#edit {
+  margin-top: 35px;
+}
 </style>
