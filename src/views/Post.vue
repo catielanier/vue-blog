@@ -156,6 +156,7 @@ export default {
 </script>
 
 <style scoped>
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
 .post {
   text-align: left;
   max-width: 1240px;

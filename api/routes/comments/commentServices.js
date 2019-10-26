@@ -68,7 +68,7 @@ exports.editComment = async (id, body) => {
 exports.deleteAllComments = async comments => {
   try {
     return await Comment.deleteMany({
-      _id: comments
+      _id: { $in: comments }
     });
   } catch (e) {
     throw e;

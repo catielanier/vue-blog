@@ -23,11 +23,9 @@
         <form
           @submit.prevent="editComment"
           v-if="edit && commentId === comment._id"
+          id="edit"
         >
-          <wysiwyg
-            v-model="editBody"
-            name="edit"
-          />
+          <wysiwyg v-model="editBody" />
           <button
             v-if="edit && commentId === comment._id"
             @click.prevent="editComment"
@@ -227,5 +225,35 @@ export default {
 .new-comment form {
   width: 40%;
   margin-bottom: 40px;
+}
+
+#edit button:first-of-type {
+  background: #011f4b;
+  border: 1px solid #011f4b;
+  padding: 10px 15px;
+  color: #b3cde0;
+  margin-right: 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+#edit {
+  margin-top: 20px;
+}
+
+#edit button:first-of-type:hover {
+  background: #fff;
+  color: #011f4b;
+}
+
+#edit button:last-of-type {
+  background: #fff;
+  border: 1px solid #011f4b;
+  padding: 10px 15px;
+  color: #011f4b;
+  transition: all 0.3s ease-in-out;
+}
+
+#edit button:last-of-type:hover {
+  background: #b3cde0;
 }
 </style>
