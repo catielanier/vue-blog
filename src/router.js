@@ -5,6 +5,7 @@ import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import NewPost from "./views/NewPost.vue";
 import Post from "./views/Post.vue";
+import EditUsers from "./views/EditUsers.vue";
 
 Vue.use(Router);
 
@@ -37,6 +38,11 @@ export default new Router({
       name: "post",
       component: Post,
       props: true
+    },
+    {
+      path: "/users",
+      name: "edit-users",
+      component: EditUsers
     }
   ]
 });

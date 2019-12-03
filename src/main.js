@@ -9,7 +9,8 @@ import {
   faPlus,
   faCog,
   faTrash,
-  faEdit
+  faEdit,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { Datetime } from "vue-datetime";
 import wysiwyg from "vue-wysiwyg";
@@ -25,7 +26,8 @@ library.add(
   faPlus,
   faCog,
   faTrash,
-  faEdit
+  faEdit,
+  faUsers
 );
 
 Vue.use(wysiwyg, {
