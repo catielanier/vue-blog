@@ -33,3 +33,11 @@ exports.getUserById = async id => {
     throw e;
   }
 };
+
+exports.getAllUsers = async () => {
+  try {
+    return await User.find({});
+  } catch (e) {
+    throw e;
+  }
+};

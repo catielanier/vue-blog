@@ -45,4 +45,15 @@ router.route("/:id").get(async (req, res, next) => {
   }
 });
 
+router.route("/").get(async (_, res) => {
+  try {
+    const users = await userService.getAllUsers();
+    res.status(200).json({
+      data: users
+    });
+  } catch (e) {
+    res.status(400).statusMessage(e);
+  }
+});
+
 exports.router = router;

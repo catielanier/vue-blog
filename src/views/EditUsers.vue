@@ -10,7 +10,15 @@ export default {
   name: "edit-users",
   props: {
     user: String
-  }
+  },
+  data() {
+    return {
+      users: [],
+      id: null,
+      userRole: null
+    };
+  },
+  beforeMount() {}
 };
 </script>
 

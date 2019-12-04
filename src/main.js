@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Datetime } from "vue-datetime";
 import wysiwyg from "vue-wysiwyg";
+import vSelect from "vue-select";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -40,6 +41,8 @@ Vue.use(wysiwyg, {
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.component("datetime", Datetime);
+
+Vue.component("vue-select", vSelect);
 
 Vue.config.productionTip = false;
 
