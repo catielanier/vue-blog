@@ -76,4 +76,26 @@ router.route("/").get(async (_, res) => {
   }
 });
 
+router.route("/:id/profile").put(async (req, res) => {
+  const { email, username, oldPassword, newPassword, token } = req.body;
+  const { id } = req.params;
+  try {
+    const loggedIn = await postService.loginCheck(token);
+    if (loggedIn) {
+      if (oldPassword) {
+        const match = await userService.verifyOldPassword(id, oldPassword);
+        if (match) {
+          await userService.updatePassword(id, newPassword);
+        }
+      }
+      const user = await userService.updateProfile(id, email, username);
+      res.status(201).json({
+        data: user
+      });
+    }
+  } catch (e) {
+    res.status(401).statusMessage(e);
+  }
+});
+
 exports.router = router;

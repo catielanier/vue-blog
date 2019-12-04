@@ -111,8 +111,7 @@ export default {
           this.error = "Your passwords do not match.";
         } else {
           await axios
-            .put("/api/users/profile", {
-              user,
+            .put(`/api/users/${user}/profile`, {
               email,
               username,
               oldPassword,
@@ -130,7 +129,7 @@ export default {
         }
       } else {
         await axios
-          .put("/api/users/profile", { user, email, username, token })
+          .put(`/api/users/${user}/profile`, { email, username, token })
           .then(() => {
             this.loading = false;
             this.success = true;

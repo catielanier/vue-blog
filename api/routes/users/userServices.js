@@ -1,3 +1,4 @@
+const bcrypt = require("bcryptjs");
 const { model: User } = require("./userModel");
 
 exports.createUser = async userData => {
@@ -16,6 +17,20 @@ exports.isUser = async ({ email, password }) => {
       const match = await user.comparePassword(password);
       if (match) {
         return user;
+      }
+    }
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.verifyOldPassword = async (_id, password) => {
+  try {
+    const user = await User.find({ _id });
+    if (user) {
+      const match = await user.comparePassword(password);
+      if (match) {
+        return match;
       }
     }
   } catch (e) {
@@ -45,6 +60,23 @@ exports.getAllUsers = async () => {
 exports.updateUser = async (_id, role, banned) => {
   try {
     return await User.findByIdAndUpdate({ _id }, { $set: { role, banned } });
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.updatePassword = async (_id, unhash) => {
+  try {
+    const password = await bcrypt.hash(unhash, 10);
+    return await User.findByIdAndUpdate({ _id }, { $set: { password } });
+  } catch (e) {
+    throw e;
+  }
+};
+
+exports.updateProfile = async (_id, email, username) => {
+  try {
+    return await User.findByIdAndUpdate({ _id }, { $set: { email, username } });
   } catch (e) {
     throw e;
   }
