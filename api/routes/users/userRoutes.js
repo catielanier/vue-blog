@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userService = require("./userServices");
+const postService = require("../posts/postServices");
 const tokenService = require("../../utils/tokenService");
 
 router.route("/signup").post(async (req, res, next) => {
@@ -42,6 +43,25 @@ router.route("/:id").get(async (req, res, next) => {
     });
   } catch (e) {
     next(e);
+  }
+});
+
+router.route("/:id").put(async (req, res) => {
+  const { id } = req.params;
+  const { role, banned, user: adminId, token } = req.body;
+  try {
+    const loggedIn = await postService.loginCheck(token);
+    if (loggedIn) {
+      const user = await userService.getUserById(adminId);
+      if (user.role === "Admin") {
+        const updatedUser = await userService.updateUser(id, role, banned);
+        res.status(201).json({
+          data: updatedUser
+        });
+      }
+    }
+  } catch (e) {
+    res.status(401).statusMessage(e);
   }
 });
 

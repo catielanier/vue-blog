@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import { getToken } from "../services/tokenService";
 export default {
   name: "edit-users",
   props: {
@@ -45,8 +46,9 @@ export default {
     editUser: async function() {
       const { _id: id, role, banned } = this.$data.id;
       const { user } = this.$props;
+      const token = await getToken();
       await axios
-        .put(`/api/users/${id}`, { data: { role, banned, user } })
+        .put(`/api/users/${id}`, { data: { role, banned, user, token } })
         .then(() => {
           this.success = true;
         })

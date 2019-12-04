@@ -41,3 +41,11 @@ exports.getAllUsers = async () => {
     throw e;
   }
 };
+
+exports.updateUser = async (_id, role, banned) => {
+  try {
+    return await User.findByIdAndUpdate({ _id }, { $set: { role, banned } });
+  } catch (e) {
+    throw e;
+  }
+};
