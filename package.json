@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "luxon": "^1.19.3",
     "mongoose": "^5.7.1",
+    "path": "^0.12.7",
     "vue": "^2.6.10",
     "vue-datetime": "^1.0.0-beta.10",
     "vue-router": "^3.0.3",

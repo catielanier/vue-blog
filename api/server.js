@@ -1,9 +1,7 @@
 "use strict";
 
 // Imports and defs
-const mongoose = require("mongoose");
 const express = require("express");
-const http = require("http");
 const router = express();
 
 // Middleware
@@ -22,17 +20,11 @@ router.use("/api/users", userRouter);
 router.use("/api/posts", postRouter);
 router.use("/api/comments", commentRouter);
 
-// Setup server
-const server = http.createServer(router);
+router.use((err, req, res, next) => {
+  if (err.name === "UnauthorizedError") {
+    const errors = [{ message: "unauthorized" }];
+    res.status(401).json({ errors });
+  }
+});
 
-// Connect to MongoDB
-mongoose
-  .connect(URL, { useNewUrlParser: true })
-  .then(() => {
-    server.listen(PORT, () => {
-      console.log(`server running on port ${PORT}`);
-    });
-  })
-  .catch(err => {
-    console.log(err);
-  });
+module.exports = router;
