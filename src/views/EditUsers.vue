@@ -1,6 +1,7 @@
 <template>
   <section class="user-settings">
     <h1>User Settings</h1>
+    <vue-select label="username" :options="users" v-model="id"></vue-select>
   </section>
 </template>
 
@@ -18,7 +19,12 @@ export default {
       userRole: null
     };
   },
-  beforeMount() {}
+  async beforeMount() {
+    await axios.get("/api/users").then(res => {
+      const users = res.data.data;
+      this.users = users;
+    });
+  }
 };
 </script>
 
