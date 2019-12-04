@@ -30,7 +30,9 @@ export default {
   data() {
     return {
       users: [],
-      id: null
+      id: null,
+      success: false,
+      error: null
     };
   },
   async beforeMount() {
@@ -38,6 +40,20 @@ export default {
       const users = res.data.data;
       this.users = users;
     });
+  },
+  methods: {
+    editUser: async function() {
+      const { _id: id, role, banned } = this.$data.id;
+      const { user } = this.$props;
+      await axios
+        .put(`/api/users/${id}`, { data: { role, banned, user } })
+        .then(() => {
+          this.success = true;
+        })
+        .catch(err => {
+          this.error = err.message;
+        });
+    }
   }
 };
 </script>
