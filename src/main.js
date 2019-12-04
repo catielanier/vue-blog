@@ -10,7 +10,8 @@ import {
   faCog,
   faTrash,
   faEdit,
-  faUsers
+  faUsers,
+  faUserEdit
 } from "@fortawesome/free-solid-svg-icons";
 import { Datetime } from "vue-datetime";
 import wysiwyg from "vue-wysiwyg";
@@ -29,7 +30,8 @@ library.add(
   faCog,
   faTrash,
   faEdit,
-  faUsers
+  faUsers,
+  faUserEdit
 );
 
 Vue.use(wysiwyg, {
