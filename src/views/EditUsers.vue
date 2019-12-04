@@ -1,6 +1,6 @@
 <template>
   <section class="user-settings">
-    <h2>User Settings</h2>
+    <h1>User Settings</h1>
   </section>
 </template>
 
@@ -13,3 +13,22 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
+.user-settings {
+  text-align: left;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Bebas Neue";
+}
+</style>
