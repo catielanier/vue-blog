@@ -1,6 +1,7 @@
 <template>
   <section class="user-settings">
     <h1>User Settings</h1>
+    <p v-if="success">User successfully updated.</p>
     <vue-select label="username" :options="users" v-model="id"></vue-select>
     <div class="roles" v-if="id">
       <h2>Assign Role</h2>
@@ -46,6 +47,7 @@ export default {
     editUser: async function() {
       const { _id: id, role, banned } = this.$data.id;
       const { user } = this.$props;
+      this.success = false;
       const token = await getToken();
       await axios
         .put(`/api/users/${id}`, { data: { role, banned, user, token } })

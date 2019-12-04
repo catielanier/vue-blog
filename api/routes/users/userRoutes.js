@@ -48,7 +48,7 @@ router.route("/:id").get(async (req, res, next) => {
 
 router.route("/:id").put(async (req, res) => {
   const { id } = req.params;
-  const { role, banned, user: adminId, token } = req.body;
+  const { role, banned, user: adminId, token } = req.body.data;
   try {
     const loggedIn = await postService.loginCheck(token);
     if (loggedIn) {
