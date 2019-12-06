@@ -79,8 +79,21 @@
     }
   },
   "now": {
+    "version": 2,
     "alias": "corey-lanier-blog",
     "name": "blog",
+    "builds": [
+      {
+        "src": "/api/lambdas/posts.js",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/posts/(.*)",
+        "dest": "/api/lambdas/posts.js"
+      }
+    ],
     "env": {
       "PORT": "4000",
       "SECRET": "@secret",
