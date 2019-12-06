@@ -7,7 +7,8 @@
     "server": "nodemon api/server.js",
     "all": "concurrently --kill-others \"nodemon api/server.js\" \"vue-cli-service serve\"",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
@@ -75,6 +76,15 @@
           "changeOrigin": true
         }
       }
+    }
+  },
+  "now": {
+    "alias": "corey-lanier-blog",
+    "name": "blog",
+    "env": {
+      "PORT": "4000",
+      "SECRET": "@secret",
+      "MONGODB_URI": "@mongodb_uri"
     }
   }
 }
