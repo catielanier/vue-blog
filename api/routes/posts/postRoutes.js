@@ -3,6 +3,10 @@ const router = express.Router();
 const postServices = require("./postServices");
 const userServices = require("../users/userServices");
 const commentServices = require("../comments/commentServices");
+const middleWare = require("../../middleware");
+const { applyMiddleware } = require("../../utils");
+
+applyMiddleware(middleWare, router);
 
 router.route("/new").post(async (req, res) => {
   const { token, user: id, post } = req.body;
