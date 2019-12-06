@@ -24,7 +24,7 @@
     "http-proxy-middleware": "^0.20.0",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^1.19.3",
-    "mongoose": "^5.7.5",
+    "mongoose": "^5.7.1",
     "path": "^0.12.7",
     "vue": "^2.6.10",
     "vue-datetime": "^1.0.0-beta.10",
@@ -79,25 +79,22 @@
     }
   },
   "now": {
-    "version": 2,
     "alias": "corey-lanier-blog",
     "name": "blog",
-    "builds": [
-      {
-        "src": "/api/lambdas/posts.js",
-        "use": "@now/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/posts/(.*)",
-        "dest": "/api/lambdas/posts.js"
-      }
-    ],
     "env": {
       "PORT": "4000",
       "SECRET": "@secret",
       "MONGODB_URI": "@mongodb_uri"
-    }
+    },
+    "routes": [
+      {
+        "src": "/",
+        "dest": "index.html"
+      },
+      {
+        "src": "/api/posts/(.+)",
+        "dest": "/api/posts.js"
+      }
+    ]
   }
 }
