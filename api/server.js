@@ -5,7 +5,6 @@ const express = require("express");
 const router = express();
 
 // Middleware
-const { URL, PORT } = require("./utils/constants");
 const middleWare = require("./middleware");
 const { applyMiddleware } = require("./utils");
 
