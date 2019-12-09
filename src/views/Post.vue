@@ -163,6 +163,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   position: relative;
+  margin-bottom: 45px;
 }
 h1,
 h2,
@@ -233,6 +234,20 @@ h1 a:hover {
 }
 
 #edit {
-  margin-top: 35px;
+  margin-top: 15px;
+}
+
+@media (max-width: 414px) {
+  .post {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+  h1 {
+    margin-top: 10px;
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 </style>

@@ -71,6 +71,7 @@ export default {
   max-width: 1240px;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 45px;
 }
 h1,
 h2,
@@ -103,5 +104,18 @@ h1 a:hover {
 .comments-quantity {
   font-size: 0.85rem;
   font-weight: bold;
+}
+@media (max-width: 414px) {
+  .posts {
+    width: 95%;
+    margin-bottom: 20px;
+  }
+  h1 {
+    margin-top: 10px;
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 </style>

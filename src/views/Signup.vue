@@ -106,3 +106,15 @@ export default {
   }
 };
 </script>
+
+<style>
+@media (max-width: 414px) {
+  section {
+    width: 95%;
+    margin: 0 auto;
+  }
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+</style>
