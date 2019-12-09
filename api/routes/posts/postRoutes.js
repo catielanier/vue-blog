@@ -81,6 +81,9 @@ router.route("/:id").delete(async (req, res) => {
   // Delete post.
   if (deletedComments) {
     const deletedPost = await postServices.deletePost(postId);
+    res.status(201).json({
+      data: deletedPost
+    });
   }
 });
 
