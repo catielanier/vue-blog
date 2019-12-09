@@ -64,6 +64,66 @@
         >
           <font-awesome-icon :icon="['fas', 'bars']" />
         </a>
+        <div :class="showMenu ? 'show-menu' : 'hide-menu'">
+          <ul>
+            <router-link
+              to="/login"
+              v-if="!user"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
+              </li>
+            </router-link>
+            <router-link
+              to="/sign-up"
+              v-if="!user"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
+              </li>
+            </router-link>
+            <router-link
+              to="/new-post"
+              v-if="role === 'Author' || role === 'Admin'"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'plus']" /> New Post
+              </li>
+            </router-link>
+            <router-link
+              v-if="user"
+              to="/profile"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'user']" /> Profile
+              </li>
+            </router-link>
+            <router-link
+              v-if="role === 'Admin'"
+              to="/settings"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'cog']" /> Settings
+              </li>
+            </router-link>
+            <router-link
+              v-if="role === 'Admin'"
+              to="/users"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'users']" /> Edit Users
+              </li>
+            </router-link>
+            <button
+              v-if="user"
+              @click.prevent="signOut"
+            >
+              <li>
+                <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
+              </li>
+            </button>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
@@ -149,6 +209,21 @@ img {
 
 .mobile-menu {
   display: none;
+}
+
+ul {
+  list-style: none;
+  padding-left: 5px;
+  font-size: 1rem;
+  line-height: 10px;
+}
+
+ul button {
+  background: none;
+  border: 0;
+  text-align: left;
+  padding: 0;
+  color: #b3cde0;
 }
 
 @media (max-width: 414px) {
