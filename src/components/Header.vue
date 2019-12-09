@@ -57,6 +57,14 @@
           <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
         </button>
       </div>
+      <div class="mobile-menu">
+        <a
+          href="#"
+          @click.prevent="openMenu"
+        >
+          <font-awesome-icon :icon="['fas', 'bars']" />
+        </a>
+      </div>
     </div>
   </header>
 </template>
@@ -67,6 +75,18 @@ export default {
     user: String,
     signOut: Function,
     role: String
+  },
+  data() {
+    return {
+      showMenu: false
+    };
+  },
+  methods: {
+    openMenu: function() {
+      const showMenu = this.$data.showMenu;
+      this.showMenu = !showMenu;
+      console.log(this.$data.showMenu);
+    }
   }
 };
 </script>
@@ -125,5 +145,46 @@ a {
 
 img {
   width: 100%;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 414px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1.5fr 5fr 1fr;
+    grid-gap: 10px;
+    align-items: center;
+  }
+  .nav-buttons {
+    display: none;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+    margin: 0;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 2.5px;
+    font-size: 0.9rem;
+  }
+
+  .logo {
+    padding: 2.5%;
+  }
+
+  .mobile-menu {
+    display: block;
+    font-size: 1.9rem;
+  }
+
+  .mobile-menu a {
+    color: #b3cde0;
+    text-decoration: none;
+  }
 }
 </style>
