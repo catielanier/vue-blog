@@ -69,6 +69,7 @@
             <router-link
               to="/login"
               v-if="!user"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
@@ -77,6 +78,7 @@
             <router-link
               to="/sign-up"
               v-if="!user"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
@@ -85,6 +87,7 @@
             <router-link
               to="/new-post"
               v-if="role === 'Author' || role === 'Admin'"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'plus']" /> New Post
@@ -93,6 +96,7 @@
             <router-link
               v-if="user"
               to="/profile"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'user']" /> Profile
@@ -101,6 +105,7 @@
             <router-link
               v-if="role === 'Admin'"
               to="/settings"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'cog']" /> Settings
@@ -109,6 +114,7 @@
             <router-link
               v-if="role === 'Admin'"
               to="/users"
+              @click="closeMenu"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'users']" /> Edit Users
@@ -134,19 +140,10 @@ export default {
   props: {
     user: String,
     signOut: Function,
-    role: String
-  },
-  data() {
-    return {
-      showMenu: false
-    };
-  },
-  methods: {
-    openMenu: function() {
-      const showMenu = this.$data.showMenu;
-      this.showMenu = !showMenu;
-      console.log(this.$data.showMenu);
-    }
+    role: String,
+    showMenu: Boolean,
+    openMenu: Function,
+    closeMenu: Function
   }
 };
 </script>
@@ -216,14 +213,22 @@ ul {
   padding-left: 5px;
   font-size: 1rem;
   line-height: 10px;
+  background: #b3cde0;
+  margin: 0;
 }
 
-ul button {
+ul button,
+ul a {
   background: none;
   border: 0;
   text-align: left;
   padding: 0;
-  color: #b3cde0;
+  color: #011f4b !important;
+}
+
+ul li {
+  padding-top: 5px;
+  padding-right: 5px;
 }
 
 @media (max-width: 414px) {
@@ -232,6 +237,7 @@ ul button {
     grid-template-columns: 1.5fr 5fr 1fr;
     grid-gap: 10px;
     align-items: center;
+    position: relative;
   }
   .nav-buttons {
     display: none;
@@ -260,6 +266,18 @@ ul button {
   .mobile-menu a {
     color: #b3cde0;
     text-decoration: none;
+  }
+
+  .hide-menu {
+    display: none;
+  }
+
+  .show-menu {
+    display: inline-block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 5;
   }
 }
 </style>

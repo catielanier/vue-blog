@@ -4,6 +4,9 @@
       :user="this.user"
       :signOut="signOut"
       :role="this.role"
+      :showMenu="this.showMenu"
+      :openMenu="openMenu"
+      :closeMenu="closeMenu"
     />
     <main>
       <router-view
@@ -109,7 +112,8 @@ export default {
   data() {
     return {
       user: null,
-      role: null
+      role: null,
+      showMenu: false
     };
   },
   beforeMount() {
@@ -125,6 +129,7 @@ export default {
       localStorage.removeItem("vueBlogId");
       this.user = null;
       this.role = null;
+      this.closeMenu();
     },
     catchUser: function(id) {
       this.user = id;
@@ -139,6 +144,16 @@ export default {
         const { role } = userData.data.data;
         this.role = role;
       }
+    },
+    openMenu: function() {
+      if (this.$data.showMenu === false) {
+        this.showMenu = true;
+      } else {
+        this.closeMenu();
+      }
+    },
+    closeMenu: function() {
+      this.showMenu = false;
     }
   }
 };
