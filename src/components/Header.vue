@@ -224,6 +224,12 @@ ul a {
   text-align: left;
   padding: 0;
   color: #011f4b !important;
+  display: block;
+  padding-bottom: 7.5px;
+}
+
+ul button {
+  margin-top: -2.5px;
 }
 
 ul li {

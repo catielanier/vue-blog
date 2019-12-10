@@ -256,4 +256,18 @@ export default {
 #edit button:last-of-type:hover {
   background: #b3cde0;
 }
+
+@media (max-width: 414px) {
+  .comments {
+    width: 95%;
+  }
+  .new-comment form {
+    max-width: 414px !important;
+    width: 95%;
+  }
+
+  fieldset {
+    width: 95% !important;
+  }
+}
 </style>

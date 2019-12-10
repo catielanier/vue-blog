@@ -199,7 +199,7 @@ h1 a:hover {
 }
 .post > .delete {
   position: absolute;
-  top: 0;
+  top: 70px;
   right: 0;
 }
 

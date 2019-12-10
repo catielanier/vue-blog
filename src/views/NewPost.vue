@@ -112,4 +112,19 @@ form.new-post-form,
 .new-post-form button {
   margin-bottom: 40px;
 }
+
+@media (max-width: 414px) {
+  .new-post {
+    width: 95%;
+  }
+
+  .input-container {
+    grid-template-columns: 1fr;
+  }
+
+  .editr {
+    max-width: 414px !important;
+    width: 95% !important;
+  }
+}
 </style>
