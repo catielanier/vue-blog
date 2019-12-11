@@ -1,9 +1,15 @@
 <template>
   <section class="profile">
     <h1>Profile</h1>
-    <form @submit.prevent="updateProfile" :disabled="this.loading">
+    <form
+      @submit.prevent="updateProfile"
+      :disabled="this.loading"
+    >
       <fieldset :aria-busy="this.loading">
-        <p v-if="this.error !== null" class="error">
+        <p
+          v-if="this.error !== null"
+          class="error"
+        >
           <span>Error:</span> {{ this.error }}
         </p>
         <p v-if="success">Profile successfully updated.</p>
@@ -160,5 +166,11 @@ h4,
 h5,
 h6 {
   font-family: "Bebas Neue";
+}
+
+@media (max-width: 414px) {
+  .profile {
+    width: 95%;
+  }
 }
 </style>

@@ -114,10 +114,6 @@ form.new-post-form,
 }
 
 @media (max-width: 414px) {
-  .new-post {
-    width: 95%;
-  }
-
   .input-container {
     grid-template-columns: 1fr;
   }

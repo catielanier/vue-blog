@@ -2,17 +2,43 @@
   <section class="user-settings">
     <h1>User Settings</h1>
     <p v-if="success">User successfully updated.</p>
-    <vue-select label="username" :options="users" v-model="id"></vue-select>
-    <div class="roles" v-if="id">
+    <vue-select
+      label="username"
+      :options="users"
+      v-model="id"
+    ></vue-select>
+    <div
+      class="roles"
+      v-if="id"
+    >
       <h2>Assign Role</h2>
-      <input type="radio" v-model="id.role" value="Admin" id="admin" />
+      <input
+        type="radio"
+        v-model="id.role"
+        value="Admin"
+        id="admin"
+      />
       <label for="admin">Admin</label>
-      <input type="radio" v-model="id.role" value="Author" id="author" />
+      <input
+        type="radio"
+        v-model="id.role"
+        value="Author"
+        id="author"
+      />
       <label for="author">Author</label>
-      <input type="radio" v-model="id.role" value="User" id="user" />
+      <input
+        type="radio"
+        v-model="id.role"
+        value="User"
+        id="user"
+      />
       <label for="user">User</label>
       <h2>Ban User</h2>
-      <input type="checkbox" v-model="id.banned" id="banned" />
+      <input
+        type="checkbox"
+        v-model="id.banned"
+        id="banned"
+      />
       <label for="banned">Banned</label>
       <div>
         <button @click.prevent="editUser">Submit Changes</button>
@@ -89,5 +115,11 @@ input:first-of-type,
 }
 label {
   margin-right: 25px;
+}
+
+@media (max-width: 414px) {
+  .user-settings {
+    width: 95%;
+  }
 }
 </style>

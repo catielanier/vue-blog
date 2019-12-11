@@ -108,6 +108,23 @@ button[type="submit"]:hover {
   background: #fff;
   color: #011f4b;
 }
+
+@media (max-width: 414px) {
+  fieldset {
+    max-width: 414px;
+    width: 95%;
+    margin: 0 auto;
+  }
+  fieldset::before {
+    width: 95%;
+  }
+  input {
+    width: 95%;
+  }
+  button[type="submit"] {
+    width: 95%;
+  }
+}
 </style>
 
 <script>

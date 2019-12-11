@@ -108,7 +108,6 @@ h1 a:hover {
 @media (max-width: 414px) {
   .posts {
     width: 95%;
-    margin-bottom: 20px;
   }
   h1 {
     margin-top: 10px;
