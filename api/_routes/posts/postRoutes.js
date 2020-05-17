@@ -3,8 +3,8 @@ const router = express.Router();
 const postServices = require("./postServices");
 const userServices = require("../users/userServices");
 const commentServices = require("../comments/commentServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -18,7 +18,7 @@ router.route("/new").post(async (req, res) => {
     if (hasPermission) {
       const newPost = await postServices.createPost(post);
       res.status(201).json({
-        data: [newPost]
+        data: [newPost],
       });
     } else {
       res
@@ -34,7 +34,7 @@ router.route("/").get(async (_, res) => {
   try {
     const posts = await postServices.getAllPosts();
     res.status(200).json({
-      data: posts
+      data: posts,
     });
   } catch (e) {
     res.status(400).statusMessage(e);
@@ -46,7 +46,7 @@ router.route("/:id").get(async (req, res) => {
   try {
     const post = await postServices.getPostsById(id);
     res.status(200).json({
-      data: post
+      data: post,
     });
   } catch (e) {
     res.status(400).statusMessage(e);
@@ -82,7 +82,7 @@ router.route("/:id").delete(async (req, res) => {
   if (deletedComments) {
     const deletedPost = await postServices.deletePost(postId);
     res.status(201).json({
-      data: deletedPost
+      data: deletedPost,
     });
   }
 });
@@ -107,7 +107,7 @@ router.route("/:id").put(async (req, res) => {
   const updatedPost = await postServices.getPostsById(postId);
   if (result) {
     res.status(201).json({
-      data: updatedPost
+      data: updatedPost,
     });
   }
 });

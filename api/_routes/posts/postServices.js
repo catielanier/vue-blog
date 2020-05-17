@@ -1,7 +1,7 @@
-const tokenService = require("../../utils/tokenService");
+const tokenService = require("../../_utils/tokenService");
 const { model: Post } = require("./postModel");
 
-exports.loginCheck = async token => {
+exports.loginCheck = async (token) => {
   if (!token) {
     console.error(`Not logged in`);
     return false;
@@ -21,7 +21,7 @@ exports.loginCheck = async token => {
   }
 };
 
-exports.createPost = async newPost => {
+exports.createPost = async (newPost) => {
   try {
     const post = new Post(newPost);
     return await post.save();
@@ -36,7 +36,7 @@ exports.getAllPosts = async () => {
       .populate("user", "username _id")
       .populate({
         path: "comments",
-        populate: { path: "user", select: "username _id" }
+        populate: { path: "user", select: "username _id" },
       });
     if (posts) {
       return posts;
@@ -46,12 +46,12 @@ exports.getAllPosts = async () => {
   }
 };
 
-exports.getPostsById = async id => {
+exports.getPostsById = async (id) => {
   try {
     const post = await Post.findById(id)
       .populate({
         path: "comments",
-        populate: { path: "user", select: "username _id" }
+        populate: { path: "user", select: "username _id" },
       })
       .populate("user", "username _id");
     if (post) {
@@ -69,8 +69,8 @@ exports.editPost = async (id, title, body) => {
       {
         $set: {
           title,
-          body
-        }
+          body,
+        },
       }
     );
   } catch (e) {
@@ -78,10 +78,10 @@ exports.editPost = async (id, title, body) => {
   }
 };
 
-exports.deletePost = async id => {
+exports.deletePost = async (id) => {
   try {
     return await Post.findByIdAndDelete({
-      _id: id
+      _id: id,
     });
   } catch (e) {
     throw e;

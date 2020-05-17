@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const userService = require("./userServices");
 const postService = require("../posts/postServices");
-const tokenService = require("../../utils/tokenService");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const tokenService = require("../../_utils/tokenService");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -12,7 +12,7 @@ router.route("/signup").post(async (req, res, next) => {
   try {
     const user = await userService.createUser(req.body.data);
     res.status(201).json({
-      data: [user]
+      data: [user],
     });
   } catch (e) {
     next(e);
@@ -27,8 +27,8 @@ router.route("/login").post(async (req, res, next) => {
       res.status(200).json({
         data: {
           token,
-          id: user._id
-        }
+          id: user._id,
+        },
       });
     } else {
       next();
@@ -43,7 +43,7 @@ router.route("/:id").get(async (req, res, next) => {
   try {
     const user = await userService.getUserById(id);
     res.status(200).json({
-      data: user
+      data: user,
     });
   } catch (e) {
     next(e);
@@ -60,7 +60,7 @@ router.route("/:id").put(async (req, res) => {
       if (user.role === "Admin") {
         const updatedUser = await userService.updateUser(id, role, banned);
         res.status(201).json({
-          data: updatedUser
+          data: updatedUser,
         });
       }
     }
@@ -73,7 +73,7 @@ router.route("/").get(async (_, res) => {
   try {
     const users = await userService.getAllUsers();
     res.status(200).json({
-      data: users
+      data: users,
     });
   } catch (e) {
     res.status(400).statusMessage(e);
@@ -94,7 +94,7 @@ router.route("/:id/profile").put(async (req, res) => {
       }
       const user = await userService.updateProfile(id, email, username);
       res.status(201).json({
-        data: user
+        data: user,
       });
     }
   } catch (e) {
