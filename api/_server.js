@@ -5,18 +5,18 @@ const express = require("express");
 const router = express();
 const mongoose = require("mongoose");
 const http = require("http");
-const { PORT, MONGODB_URI } = require("./utils/constants");
+const { PORT, MONGODB_URI } = require("./_utils/constants");
 
 // Middleware
-const middleWare = require("./middleware");
-const { applyMiddleware } = require("./utils");
+const middleWare = require("./_middleware");
+const { applyMiddleware } = require("./_utils");
 
 applyMiddleware(middleWare, router);
 
 // Routes
-const { router: userRouter } = require("./routes/users/userRoutes");
-const { router: postRouter } = require("./routes/posts/postRoutes");
-const { router: commentRouter } = require("./routes/comments/commentRoutes");
+const { router: userRouter } = require("./_routes/users/userRoutes");
+const { router: postRouter } = require("./_routes/posts/postRoutes");
+const { router: commentRouter } = require("./_routes/comments/commentRoutes");
 
 router.use("/api/users", userRouter);
 router.use("/api/posts", postRouter);
@@ -41,6 +41,6 @@ mongoose
       console.log(`server running on port ${PORT}`);
     });
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });

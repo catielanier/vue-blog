@@ -3,8 +3,8 @@ const router = express.Router();
 const userServices = require("../users/userServices");
 const postServices = require("../posts/postServices");
 const commentServices = require("./commentServices");
-const middleWare = require("../../middleware");
-const { applyMiddleware } = require("../../utils");
+const middleWare = require("../../_middleware");
+const { applyMiddleware } = require("../../_utils");
 
 applyMiddleware(middleWare, router);
 
@@ -26,7 +26,7 @@ router.route("/new").post(async (req, res) => {
         const addedComment = await commentServices.getCommentById(commentId);
         if (relationship) {
           res.status(201).json({
-            data: addedComment
+            data: addedComment,
           });
         } else {
           res
@@ -71,7 +71,7 @@ router.route("/:id").delete(async (req, res) => {
   const deletedComment = await commentServices.deleteComment(commentId, postId);
   if (deletedComment) {
     res.status(201).json({
-      data: deletedComment
+      data: deletedComment,
     });
   }
 });
@@ -87,7 +87,7 @@ router.route("/:id").put(async (req, res) => {
   const commentToUpdate = await commentServices.getCommentById(id);
   if (editedComment) {
     res.status(201).json({
-      data: commentToUpdate
+      data: commentToUpdate,
     });
   }
 });
