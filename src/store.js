@@ -50,11 +50,11 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           commit("loginStop", "Invalid email or password");
-          commit("updateUser", null, null);
+          commit("updateUser", { id: null, role: null });
         });
     },
     doLogout: ({ commit }) => {
-      commit("updateUser", null, null);
+      commit("updateUser", { id: null, role: null });
       removeToken();
     },
     openMenu: ({ commit }) => {
