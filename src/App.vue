@@ -1,19 +1,8 @@
 <template>
   <div id="app">
-    <Header
-      :user="this.user"
-      :signOut="signOut"
-      :role="this.role"
-      :showMenu="this.showMenu"
-      :openMenu="openMenu"
-      :closeMenu="closeMenu"
-    />
+    <Header />
     <main>
-      <router-view
-        :catchUser="catchUser"
-        :user="this.user"
-        :role="this.role"
-      />
+      <router-view />
     </main>
   </div>
 </template>
@@ -128,59 +117,17 @@ button[type="submit"]:hover {
 </style>
 
 <script>
-import axios from "axios";
+import { mapActions } from "vuex";
 import Header from "@/components/Header.vue";
-import { removeToken } from "./services/tokenService";
 export default {
   components: {
-    Header
-  },
-  data() {
-    return {
-      user: null,
-      role: null,
-      showMenu: false
-    };
+    Header,
   },
   beforeMount() {
-    const user = localStorage.getItem("vueBlogId");
-    this.user = user;
-  },
-  mounted() {
-    this.checkPermission();
+    this.checkUser();
   },
   methods: {
-    signOut: function() {
-      removeToken();
-      localStorage.removeItem("vueBlogId");
-      this.user = null;
-      this.role = null;
-      this.closeMenu();
-    },
-    catchUser: function(id) {
-      this.user = id;
-      this.checkPermission();
-    },
-    checkPermission: async function() {
-      const { user } = this.$data;
-      if (!user) {
-        this.role = null;
-      } else {
-        const userData = await axios.get(`/api/users/${user}`);
-        const { role } = userData.data.data;
-        this.role = role;
-      }
-    },
-    openMenu: function() {
-      if (this.$data.showMenu === false) {
-        this.showMenu = true;
-      } else {
-        this.closeMenu();
-      }
-    },
-    closeMenu: function() {
-      this.showMenu = false;
-    }
-  }
+    ...mapActions(["checkUser"]),
+  },
 };
 </script>

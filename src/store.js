@@ -63,5 +63,11 @@ export default new Vuex.Store({
     closeMenu: ({ commit }) => {
       commit("updateMenu", false);
     },
+    checkUser: async ({ commit }) => {
+      const id = localStorage.getItem("vueBlogId");
+      const res = await axios.get(`/api/users/${id}`);
+      const { role } = res.data.data;
+      commit("updateUser", { id, role });
+    },
   },
 });
