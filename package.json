@@ -67,6 +67,7 @@
     "> 1%",
     "last 2 versions"
   ],
+  "proxy": "http://localhost:4000",
   "vue": {
     "devServer": {
       "proxy": {

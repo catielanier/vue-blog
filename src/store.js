@@ -22,9 +22,9 @@ export default new Vuex.Store({
       state.loggingIn = false;
       state.errorMessage = errorMessage;
     },
-    updateUser: (state, user, role) => {
-      state.user = user;
-      state.role = role;
+    updateUser: (state, user) => {
+      state.user = user.id;
+      state.role = user.role;
     },
     logout: (state) => {
       state.user = null;
@@ -38,19 +38,13 @@ export default new Vuex.Store({
     doLogin: ({ commit }, loginData) => {
       commit("loginStart");
       const { email, password } = loginData;
-      axios({
-        method: "POST",
-        url: "/api/users/login",
-        data: {
-          email,
-          password,
-        },
-      })
+      axios
+        .post("/api/users/login", { data: { email, password } })
         .then((res) => {
           const { token, id, role } = res.data.data;
           setToken(token);
           localStorage.setItem("vueBlogId", id);
-          commit("updateUser", user, role);
+          commit("updateUser", { id, role });
           commit("loginStop", null);
           router.push("/");
         })
@@ -59,14 +53,14 @@ export default new Vuex.Store({
           commit("updateUser", null, null);
         });
     },
-    doLogout: () => {
+    doLogout: ({ commit }) => {
       commit("updateUser", null, null);
       removeToken();
     },
-    openMenu: () => {
+    openMenu: ({ commit }) => {
       commit("updateMenu", true);
     },
-    closeMenu: () => {
+    closeMenu: ({ commit }) => {
       commit("updateMenu", false);
     },
   },
