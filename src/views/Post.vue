@@ -1,32 +1,15 @@
 <template>
   <section class="post">
-    <form
-      id="edit"
-      @submit.prevent="editPost"
-    >
+    <form id="edit" @submit.prevent="editPost">
       <div class="title">
-        <h1 v-if="!this.edit">{{post.title}}</h1>
-        <input
-          type="text"
-          v-model="title"
-          v-if="this.edit"
-        >
+        <h1 v-if="!this.edit">{{ post.title }}</h1>
+        <input type="text" v-model="title" v-if="this.edit" />
       </div>
-      <div
-        class="date"
-        v-if="!this.edit"
-      >
-        {{post.postDate}} by {{post.user.username}}:
+      <div class="date" v-if="!this.edit">
+        {{ post.postDate }} by {{ post.user.username }}:
       </div>
-      <div
-        class="body"
-        v-html="post.body"
-        v-if="!this.edit"
-      />
-      <div
-        class="body"
-        v-if="this.edit"
-      >
+      <div class="body" v-html="post.body" v-if="!this.edit" />
+      <div class="body" v-if="this.edit">
         <wysiwyg v-model="body" />
         <button type="submit">
           Edit Post
@@ -36,25 +19,21 @@
         </button>
       </div>
     </form>
-    <div
-      class="delete"
-      v-if="user === post.user._id || role === 'Admin'"
-    >
+    <div class="delete" v-if="user === post.user._id || role === 'Admin'">
       <button
         v-if="!this.edit"
         @click.prevent="showEditor(post.title, post.body)"
       >
         <font-awesome-icon :icon="['fas', 'edit']" />
       </button>
-      <button
-        v-if="!this.edit"
-        @click.prevent="deletePost"
-      >
+      <button v-if="!this.edit" @click.prevent="deletePost">
         <font-awesome-icon :icon="['fas', 'trash']" />
       </button>
     </div>
     <div class="comments-quantity">
-      {{post.comments.length}} comment<span v-if="post.comments.length !== 1">s</span>:
+      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1"
+        >s</span
+      >:
     </div>
     <Comments
       :user="user"
@@ -69,6 +48,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import axios from "axios";
 import Comments from "../components/Comments.vue";
 import dateFormatter from "../services/dateFormatter";
@@ -76,12 +56,13 @@ import { getToken } from "../services/tokenService";
 export default {
   name: "post",
   components: {
-    Comments
+    Comments,
   },
   props: {
-    user: String,
     id: String,
-    role: String
+  },
+  computed: {
+    ...mapState(["user", "role"]),
   },
   data() {
     return {
@@ -89,15 +70,15 @@ export default {
       edit: false,
       title: "",
       body: "",
-      deleted: false
+      deleted: false,
     };
   },
   async mounted() {
     const { id } = this.$props;
-    await axios.get(`/api/posts/${id}`).then(res => {
+    await axios.get(`/api/posts/${id}`).then((res) => {
       const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
-      post.comments.forEach(comment => {
+      post.comments.forEach((comment) => {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
       this.post = post;
@@ -116,7 +97,7 @@ export default {
     },
     changeCommentOnPost: function(id, comment) {
       const index = this.$data.post.comments.findIndex(
-        comment => comment._id === id
+        (comment) => comment._id === id
       );
       this.post.comments[index] = comment;
     },
@@ -141,8 +122,8 @@ export default {
           user,
           title,
           body,
-          token
-        }
+          token,
+        },
       });
       const { title: newTitle, body: newBody } = this.data.data;
       this.post.title = newTitle;
@@ -150,8 +131,8 @@ export default {
       this.edit = false;
       this.title = "";
       this.body = "";
-    }
-  }
+    },
+  },
 };
 </script>
 
