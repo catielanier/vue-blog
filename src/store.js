@@ -30,6 +30,9 @@ export default new Vuex.Store({
       state.user = null;
       state.role = null;
     },
+    updateMenu: (state, status) => {
+      state.showMenu = status;
+    },
   },
   actions: {
     doLogin: ({ commit }, loginData) => {
@@ -59,6 +62,12 @@ export default new Vuex.Store({
     doLogout: () => {
       commit("updateUser", null, null);
       removeToken();
+    },
+    openMenu: () => {
+      commit("updateMenu", true);
+    },
+    closeMenu: () => {
+      commit("updateMenu", false);
     },
   },
 });

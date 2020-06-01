@@ -42,9 +42,6 @@
 import { mapActions, mapState } from "vuex";
 export default {
   name: "login",
-  props: {
-    catchUser: Function
-  },
   computed: {
     ...mapState(["errorMessage", "loggingIn"])
   },

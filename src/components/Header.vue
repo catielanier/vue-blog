@@ -52,7 +52,7 @@
         </router-link>
         <button
           v-if="user"
-          @click.prevent="signOut"
+          @click.prevent="doLogout"
         >
           <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
         </button>
@@ -122,7 +122,7 @@
             </router-link>
             <button
               v-if="user"
-              @click.prevent="signOut"
+              @click.prevent="doLogout"
             >
               <li>
                 <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
@@ -136,14 +136,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
-  props: {
-    user: String,
-    signOut: Function,
-    role: String,
-    showMenu: Boolean,
-    openMenu: Function,
-    closeMenu: Function
+  computed: {
+    ...mapState(["user", "role", "menu"])
+  },
+  methods: {
+    ...mapActions(["doLogout", "openMenu", "closeMenu"])
   }
 };
 </script>
