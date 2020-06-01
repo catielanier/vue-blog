@@ -2,15 +2,15 @@
   <section>
     <h3>Login</h3>
     <form
-      @submit.prevent="doLogin"
-      v-bind:disabled="this.loading"
+      @submit.prevent="loginSubmit"
+      :disabled="this.loading"
     >
-      <fieldset v-bind:aria-busy="this.loading">
+      <fieldset :aria-busy="this.loading">
         <p
-          v-if="this.error !== null"
+          v-if="errorMessage !== null"
           class="error"
         >
-          <span>Error:</span> {{this.error}}
+          <span>Error:</span> {{errorMessage}}
         </p>
         <label for="email">
           Email Address:
@@ -39,44 +39,27 @@
 </template>
 
 <script>
-import axios from "axios";
-import { setToken } from "../services/tokenService";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "login",
   props: {
     catchUser: Function
   },
+  computed: {
+    ...mapState(["errorMessage", "loggingIn"])
+  },
   data() {
     return {
       email: "",
-      password: "",
-      loading: false,
-      success: false,
-      error: null
+      password: ""
     };
   },
   methods: {
-    doLogin: async function() {
-      this.loading = true;
+    ...mapActions(["doLogin"]),
+    loginSubmit: function() {
       const { email, password } = this.$data;
-      try {
-        const res = await axios.post("/api/users/login", {
-          data: {
-            email,
-            password
-          }
-        });
-        const { token, id } = res.data.data;
-        await setToken(token);
-        await this.$props.catchUser(id);
-        localStorage.setItem("vueBlogId", id);
-        this.loading = false;
-        this.success = true;
-        this.$router.push("/");
-      } catch (e) {
-        this.error = e;
-        this.loading = false;
-      }
+      const loginData = { email, password };
+      this.doLogin(loginData);
     }
   }
 };
