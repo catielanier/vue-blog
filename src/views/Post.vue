@@ -1,15 +1,38 @@
 <template>
   <section class="post">
-    <form id="edit" @submit.prevent="editPost">
+    <form
+      id="edit"
+      @submit.prevent="editPost"
+    >
       <div class="title">
         <h1 v-if="!this.edit">{{ post.title }}</h1>
-        <input type="text" v-model="title" v-if="this.edit" />
+        <input
+          type="text"
+          v-model="title"
+          v-if="this.edit"
+        />
       </div>
-      <div class="date" v-if="!this.edit">
-        {{ post.postDate }} by {{ post.user.username }}:
+      <div
+        class="date"
+        v-if="!this.edit"
+      >
+        {{ post.postDate }} by {{ post.user.username }}: ( <a
+          href="#"
+          @click.prevent="showEditor(post.title, post.body)"
+        ><span>Edit</span></a> | <a
+          href="#"
+          @click.prevent="deletePost"
+        ><span>Delete</span></a> )
       </div>
-      <div class="body" v-html="post.body" v-if="!this.edit" />
-      <div class="body" v-if="this.edit">
+      <div
+        class="body"
+        v-html="post.body"
+        v-if="!this.edit"
+      />
+      <div
+        class="body"
+        v-if="this.edit"
+      >
         <wysiwyg v-model="body" />
         <button type="submit">
           Edit Post
@@ -19,21 +42,8 @@
         </button>
       </div>
     </form>
-    <div class="delete" v-if="user === post.user._id || role === 'Admin'">
-      <button
-        v-if="!this.edit"
-        @click.prevent="showEditor(post.title, post.body)"
-      >
-        <font-awesome-icon :icon="['fas', 'edit']" />
-      </button>
-      <button v-if="!this.edit" @click.prevent="deletePost">
-        <font-awesome-icon :icon="['fas', 'trash']" />
-      </button>
-    </div>
     <div class="comments-quantity">
-      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1"
-        >s</span
-      >:
+      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1">s</span>:
     </div>
     <Comments
       :user="user"
@@ -56,13 +66,13 @@ import { getToken } from "../services/tokenService";
 export default {
   name: "post",
   components: {
-    Comments,
+    Comments
   },
   props: {
-    id: String,
+    id: String
   },
   computed: {
-    ...mapState(["user", "role"]),
+    ...mapState(["user", "role"])
   },
   data() {
     return {
@@ -70,15 +80,15 @@ export default {
       edit: false,
       title: "",
       body: "",
-      deleted: false,
+      deleted: false
     };
   },
   async mounted() {
     const { id } = this.$props;
-    await axios.get(`/api/posts/${id}`).then((res) => {
+    await axios.get(`/api/posts/${id}`).then(res => {
       const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
-      post.comments.forEach((comment) => {
+      post.comments.forEach(comment => {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
       this.post = post;
@@ -97,7 +107,7 @@ export default {
     },
     changeCommentOnPost: function(id, comment) {
       const index = this.$data.post.comments.findIndex(
-        (comment) => comment._id === id
+        comment => comment._id === id
       );
       this.post.comments[index] = comment;
     },
@@ -122,8 +132,8 @@ export default {
           user,
           title,
           body,
-          token,
-        },
+          token
+        }
       });
       const { title: newTitle, body: newBody } = res.data.data;
       this.post.title = newTitle;
@@ -131,8 +141,8 @@ export default {
       this.edit = false;
       this.title = "";
       this.body = "";
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -140,10 +150,9 @@ export default {
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
 .post {
   text-align: left;
-  max-width: 1240px;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
-  position: relative;
   margin-bottom: 45px;
 }
 h1,
@@ -152,48 +161,47 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bebas Neue";
+  font-family: "Comfortaa";
 }
 h1 {
   margin-bottom: 5px;
   padding-bottom: 0;
+  font-size: 1.9rem;
 }
-h1 a {
-  text-decoration: none;
-  color: #03396c;
+h1 a,
+.date a {
+  text-decoration: underline;
+  color: #0557a3;
+}
+
+h1 a span,
+.date a span {
+  color: #fff;
   transition: 0.3s all ease-in-out;
-  border: 0 #b3cde0;
 }
-h1 a:hover {
-  border-bottom: 3px solid #b3cde0;
+h1 a:hover span,
+.date a:hover span {
+  color: #0557a3;
+}
+p {
+  font-size: 1.4rem;
 }
 .date {
-  font-size: 0.7rem;
+  font-family: "Neuton", serif;
+  font-size: 0.95rem;
   margin-bottom: 20px;
 }
 .body {
   margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+.body h2 {
+  font-size: 1.3rem;
 }
 .comments-quantity {
-  font-size: 0.85rem;
+  font-family: "Neuton", serif;
+  font-size: 0.95rem;
   font-weight: bold;
-}
-.post > .delete {
-  position: absolute;
-  top: 70px;
-  right: 0;
-}
-
-.post > .delete button {
-  font-size: 0.85rem;
-  color: #b3cde0;
-  background: #325c7b;
-  border: 0;
-  padding: 5px 8px;
-}
-
-.post > .delete button:first-of-type {
-  margin-right: 5px;
 }
 
 #edit button[type="submit"] {
