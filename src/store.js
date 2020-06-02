@@ -56,6 +56,7 @@ export default new Vuex.Store({
     doLogout: ({ commit }) => {
       commit("updateUser", { id: null, role: null });
       removeToken();
+      localStorage.removeItem("vueBlogId");
     },
     openMenu: ({ commit }) => {
       commit("updateMenu", true);
