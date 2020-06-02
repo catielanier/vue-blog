@@ -90,16 +90,32 @@ export default {
 
 <style>
 @import "~vue-wysiwyg/dist/vueWysiwyg.css";
+.new-post {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: left;
+}
+
+h1 {
+  font-family: "Neuton", serif;
+}
 form.new-post-form,
 .new-post-form fieldset {
+  max-width: 1280px;
   width: 100%;
-  max-width: 960px;
   margin: 0 auto;
 }
 .input-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 2fr 1fr;
   grid-gap: 10px;
+}
+input {
+  background: none;
+}
+input::placeholder {
+  color: #ddd;
 }
 .editr {
   margin-bottom: 20px;
