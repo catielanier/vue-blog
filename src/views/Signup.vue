@@ -111,6 +111,9 @@ export default {
 </script>
 
 <style>
+section {
+  padding-bottom: 50px;
+}
 @media (max-width: 414px) {
   section {
     width: 95%;

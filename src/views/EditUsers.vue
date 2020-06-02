@@ -100,6 +100,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   position: relative;
+  padding-bottom: 50px;
 }
 h1,
 h2,

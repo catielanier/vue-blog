@@ -70,6 +70,7 @@ export default {
   section {
     width: 95%;
     margin: 0 auto;
+    padding-bottom: 50px;
   }
   h3 {
     font-size: 1.6rem;

@@ -58,8 +58,11 @@
             v-model="verifyNewPassword"
           />
         </label>
-        <button type="submit">
-          <font-awesome-icon :icon="['fas', 'user-edit']" /> Update Profile
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >
+          Update Profile
         </button>
       </fieldset>
     </form>
@@ -158,6 +161,7 @@ export default {
   width: 100%;
   margin: 0 auto;
   position: relative;
+  padding-bottom: 50px;
 }
 h1,
 h2,
