@@ -119,7 +119,10 @@ input::placeholder {
 }
 .editr {
   margin-bottom: 20px;
-  border: 1px solid #011f4b;
+  border: 0;
+  border-radius: 5px;
+  border-bottom: 2px solid #0557a3;
+  transition: all 0.3s ease-in-out;
 }
 
 .editr:focus-within {

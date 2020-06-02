@@ -15,7 +15,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #0b0f13;
   overflow-x: hidden;
   background: #252835;
   color: #fff;
@@ -78,8 +77,12 @@ input {
   width: 100%;
   font-size: 0.8rem;
   padding: 10px 5px;
-  border: 1px solid #011f4b;
+  border: 0;
+  border-bottom: 2px solid #0557a3;
+  border-radius: 5px;
   margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+  color: #fff;
 }
 
 input:focus {
