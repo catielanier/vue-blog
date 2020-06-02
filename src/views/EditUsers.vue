@@ -41,7 +41,11 @@
       />
       <label for="banned">Banned</label>
       <div>
-        <button @click.prevent="editUser">Submit Changes</button>
+        <button
+          type="submit"
+          class="hvr-rotate"
+          @click.prevent="editUser"
+        >Submit Changes</button>
       </div>
     </div>
   </section>

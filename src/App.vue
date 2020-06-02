@@ -90,17 +90,35 @@ input:focus {
 }
 
 button[type="submit"] {
-  width: 100%;
-  background: #011f4b;
-  border: 1px solid #011f4b;
-  padding: 10px 5px;
-  color: #b3cde0;
-  transition: all 0.3s ease-in-out;
+  font-family: "Comfortaa", serif;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 15px;
+  background: #b3cde0;
+  color: #252835;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 20px 20px 15px;
+  cursor: pointer;
 }
 
-button[type="submit"]:hover {
-  background: #fff;
-  color: #011f4b;
+.hvr-rotate {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-rotate:hover,
+.hvr-rotate:focus,
+.hvr-rotate:active {
+  -webkit-transform: rotate(4deg);
+  transform: rotate(4deg);
 }
 
 @media (max-width: 414px) {

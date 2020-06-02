@@ -13,7 +13,13 @@
           class="date"
           v-if="!edit"
         >
-          {{comment.commentDate}} by {{comment.user.username}}:
+          {{comment.commentDate}} by {{comment.user.username}}: <span v-if="role === 'Admin' || comment.user._id === user">( <a
+              href="#"
+              @click.prevent="showEditor(post.title, post.body)"
+            ><span>Edit</span></a> | <a
+              href="#"
+              @click.prevent="deletePost"
+            ><span>Delete</span></a> )</span>
         </div>
         <div
           class="body"
@@ -29,23 +35,13 @@
           <button
             v-if="edit && commentId === comment._id"
             @click.prevent="editComment"
+            class="hvr-rotate"
           >Edit Comment</button>
           <button
             v-if="edit && commentId === comment._id"
             @click.prevent="cancelEdit"
           >Cancel</button>
         </form>
-        <div
-          class="delete"
-          v-if="!edit && role === 'Admin' || comment.user._id === user"
-        >
-          <button @click.prevent="openEditor(comment._id, comment.body)">
-            <font-awesome-icon :icon="['fas', 'edit']" />
-          </button>
-          <button @click.prevent="deleteComment(comment._id)">
-            <font-awesome-icon :icon="['fas', 'trash']" />
-          </button>
-        </div>
       </div>
     </div>
     <div
@@ -64,7 +60,10 @@
             placeholder="Type your comment here."
             name="new-comment"
           />
-          <button type="submit">Post Comment</button>
+          <button
+            type="submit"
+            class="hvr-rotate"
+          >Post Comment</button>
         </fieldset>
       </form>
     </div>
@@ -158,7 +157,6 @@ export default {
       const { commentId: id, editBody: body } = this.$data;
       const { user } = this.$props;
       const token = await getToken();
-      console.log(body);
       const res = await axios({
         method: "PUT",
         url: `/api/comments/${id}`,
@@ -194,37 +192,35 @@ export default {
   position: relative;
 }
 
-.comment > .delete {
-  position: absolute;
-  top: 3px;
-  right: 0;
-}
-
-.comment > .delete button {
-  font-size: 0.85rem;
-  color: #b3cde0;
-  background: #325c7b;
-  border: 0;
-  padding: 5px 8px;
-}
-
-.comment > .delete button:first-of-type {
-  margin-right: 5px;
-}
-
 .comment .date {
-  font-size: 0.7rem;
+  font-family: "Neuton", serif;
+  font-size: 0.95rem;
   margin-bottom: 20px;
   margin-top: 5px;
 }
 
 .comment .body {
+  font-size: 1.2rem;
   margin-left: 20px;
 }
 
 .new-comment form {
   width: 40%;
   margin-bottom: 40px;
+}
+
+.date a {
+  text-decoration: underline;
+  color: #0557a3;
+}
+
+.date a span {
+  color: #fff;
+  transition: 0.3s all ease-in-out;
+}
+
+.date a:hover span {
+  color: #0557a3;
 }
 
 #edit button:first-of-type {

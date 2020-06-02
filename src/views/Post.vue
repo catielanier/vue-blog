@@ -16,13 +16,13 @@
         class="date"
         v-if="!this.edit"
       >
-        {{ post.postDate }} by {{ post.user.username }}: ( <a
-          href="#"
-          @click.prevent="showEditor(post.title, post.body)"
-        ><span>Edit</span></a> | <a
-          href="#"
-          @click.prevent="deletePost"
-        ><span>Delete</span></a> )
+        {{ post.postDate }} by {{ post.user.username }}: <span v-if="role === 'Admin' || post.user._id === user">( <a
+            href="#"
+            @click.prevent="showEditor(post.title, post.body)"
+          ><span>Edit</span></a> | <a
+            href="#"
+            @click.prevent="deletePost"
+          ><span>Delete</span></a> )</span>
       </div>
       <div
         class="body"

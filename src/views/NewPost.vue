@@ -29,7 +29,10 @@
           v-model="body"
           placeholder="Type your post here."
         />
-        <button type="submit">Create Post</button>
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Create Post</button>
       </fieldset>
     </form>
   </section>

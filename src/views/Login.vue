@@ -1,9 +1,15 @@
 <template>
   <section>
     <h3>Login</h3>
-    <form @submit.prevent="loginSubmit" :disabled="loggingIn">
+    <form
+      @submit.prevent="loginSubmit"
+      :disabled="loggingIn"
+    >
       <fieldset :aria-busy="loggingIn">
-        <p v-if="errorMessage !== null" class="error">
+        <p
+          v-if="errorMessage !== null"
+          class="error"
+        >
           <span>Error:</span> {{ errorMessage }}
         </p>
         <label for="email">
@@ -24,8 +30,11 @@
             v-model="password"
           />
         </label>
-        <button type="submit">
-          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >
+          Login
         </button>
       </fieldset>
     </form>
@@ -37,12 +46,12 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "login",
   computed: {
-    ...mapState(["errorMessage", "loggingIn"]),
+    ...mapState(["errorMessage", "loggingIn"])
   },
   data() {
     return {
       email: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -51,8 +60,8 @@ export default {
       const { email, password } = this.$data;
       const loginData = { email, password };
       this.doLogin(loginData);
-    },
-  },
+    }
+  }
 };
 </script>
 

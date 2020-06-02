@@ -48,8 +48,11 @@
             v-model="verifyPassword"
           />
         </label>
-        <button type="submit">
-          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign-up
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >
+          Sign-up
         </button>
       </fieldset>
     </form>
