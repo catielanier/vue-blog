@@ -1,136 +1,51 @@
 <template>
   <header>
-    <div class="grid-container">
-      <router-link to="/">
-        <div class="logo">
-          <img
-            src="../assets/ltian.png"
-            alt="l天"
-          >
-        </div>
-      </router-link>
-      <div>
-        <h1>博客 | Blog</h1>
-        <p>Corey Lanier</p>
-      </div>
-      <div class="nav-buttons">
+    <nav>
+      <ul>
+        <router-link to="/">
+          <li>Home</li>
+        </router-link>
         <router-link
           to="/login"
           v-if="!user"
         >
-          <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
-        </router-link>
-        <router-link
-          to="/new-post"
-          v-if="role === 'Author' || role === 'Admin'"
-        >
-          <font-awesome-icon :icon="['fas', 'plus']" /> New Post
+          <li>Login</li>
         </router-link>
         <router-link
           to="/sign-up"
           v-if="!user"
         >
-          <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
+          <li>Sign Up</li>
+        </router-link>
+        <router-link
+          to="/new-post"
+          v-if="role === 'Author' || role === 'Admin'"
+        >
+          <li>New Post</li>
         </router-link>
         <router-link
           v-if="user"
           to="/profile"
         >
-          <font-awesome-icon :icon="['fas', 'user']" /> Profile
-        </router-link>
-        <router-link
-          v-if="role === 'Admin'"
-          to="/settings"
-        >
-          <font-awesome-icon :icon="['fas', 'cog']" /> Settings
+          <li>Profile</li>
         </router-link>
         <router-link
           v-if="role === 'Admin'"
           to="/users"
         >
-          <font-awesome-icon :icon="['fas', 'users']" /> Edit Users
+          <li>Edit Users</li>
         </router-link>
-        <button
+        <a
           v-if="user"
+          href="#"
           @click.prevent="doLogout"
         >
-          <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
-        </button>
-      </div>
-      <div class="mobile-menu">
-        <a
-          href="#"
-          @click.prevent="openMenu"
-        >
-          <font-awesome-icon :icon="['fas', 'bars']" />
+          <li>Logout</li>
         </a>
-        <div :class="showMenu ? 'show-menu' : 'hide-menu'">
-          <ul>
-            <router-link
-              to="/login"
-              v-if="!user"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Login
-              </li>
-            </router-link>
-            <router-link
-              to="/sign-up"
-              v-if="!user"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'user-plus']" /> Sign Up
-              </li>
-            </router-link>
-            <router-link
-              to="/new-post"
-              v-if="role === 'Author' || role === 'Admin'"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'plus']" /> New Post
-              </li>
-            </router-link>
-            <router-link
-              v-if="user"
-              to="/profile"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'user']" /> Profile
-              </li>
-            </router-link>
-            <router-link
-              v-if="role === 'Admin'"
-              to="/settings"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'cog']" /> Settings
-              </li>
-            </router-link>
-            <router-link
-              v-if="role === 'Admin'"
-              to="/users"
-              @click="closeMenu"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'users']" /> Edit Users
-              </li>
-            </router-link>
-            <button
-              v-if="user"
-              @click.prevent="doLogout"
-            >
-              <li>
-                <font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout
-              </li>
-            </button>
-          </ul>
-        </div>
-      </div>
+      </ul>
+    </nav>
+    <div class="heading">
+      <h1>Corey Lanier - Blog</h1>
     </div>
   </header>
 </template>
@@ -153,87 +68,44 @@ header {
   max-width: 1280px;
   margin: 0 auto;
   text-align: left;
-  background: #011f4b;
-  color: #b3cde0;
 }
-.grid-container {
-  display: grid;
-  grid-template-columns: 1.3fr 3fr 4.5fr;
-  grid-gap: 25px;
-  align-items: center;
+nav {
+  position: fixed;
+  top: 20px;
+  max-width: 1280px;
+  width: 100%;
+  z-index: 5;
+}
+ul {
+  font-family: "Neuton", sans-serif;
+  font-weight: 700;
+  list-style: none;
+  font-size: 1.5rem;
+  display: flex;
+  background: #b3cde0;
+  justify-content: space-around;
+  margin: 0;
+  padding: 15px 0 20px;
+  border-radius: 5px;
+}
+li {
+  text-transform: capitalize;
+}
+a {
+  color: #252835;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+a:hover {
+  color: #fff;
+}
+.heading {
+  margin-top: 8rem;
 }
 
 h1 {
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.logo {
-  padding: 15px;
-  background: #b3cde0;
-}
-
-.nav-buttons {
-  text-align: right;
-  margin-right: 15px;
-}
-
-.nav-buttons a,
-.nav-buttons button {
-  display: inline-block;
-  padding: 10px 15px;
-  background: #b3cde0;
-  color: #011f4b;
-  text-decoration: none;
-  border: 1px solid #b3cde0;
-  transition: all 0.3s ease-in-out;
-}
-
-a:hover,
-button:hover {
-  background: #011f4b;
-  color: #b3cde0;
-}
-
-a {
-  margin-right: 10px;
-}
-
-img {
-  width: 100%;
-}
-
-.mobile-menu {
-  display: none;
-}
-
-ul {
-  list-style: none;
-  padding-left: 5px;
-  font-size: 1rem;
-  line-height: 10px;
-  background: #b3cde0;
-  margin: 0;
-}
-
-ul button,
-ul a {
-  background: none;
-  border: 0;
-  text-align: left;
-  padding: 0;
-  color: #011f4b !important;
-  display: block;
-  padding-bottom: 7.5px;
-}
-
-ul button {
-  margin-top: -2.5px;
-}
-
-ul li {
-  padding-top: 5px;
-  padding-right: 5px;
+  font-family: "Comfortaa", sans-serif;
+  font-size: 3rem;
 }
 
 @media (max-width: 414px) {

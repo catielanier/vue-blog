@@ -125,7 +125,7 @@ export default {
           token,
         },
       });
-      const { title: newTitle, body: newBody } = this.data.data;
+      const { title: newTitle, body: newBody } = res.data.data;
       this.post.title = newTitle;
       this.post.body = newBody;
       this.edit = false;

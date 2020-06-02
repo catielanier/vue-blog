@@ -18,7 +18,9 @@
               id: post._id
             }
           }">
-            {{post.title}}
+            <span>
+              {{post.title}}
+            </span>
           </router-link>
         </h1>
 
@@ -68,7 +70,7 @@ export default {
 <style scoped>
 .posts {
   text-align: left;
-  max-width: 1240px;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
   margin-bottom: 45px;
@@ -79,30 +81,43 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bebas Neue";
+  font-family: "Comfortaa";
 }
 h1 {
   margin-bottom: 5px;
   padding-bottom: 0;
+  font-size: 1.9rem;
 }
 h1 a {
-  text-decoration: none;
-  color: #03396c;
-  transition: 0.3s all ease-in-out;
-  border: 0 #b3cde0;
+  text-decoration: underline;
+  color: #0557a3;
 }
-h1 a:hover {
-  border-bottom: 3px solid #b3cde0;
+
+h1 a span {
+  color: #fff;
+  transition: 0.3s all ease-in-out;
+}
+h1 a:hover span {
+  color: #0557a3;
+}
+p {
+  font-size: 1.4rem;
 }
 .date {
-  font-size: 0.7rem;
+  font-family: "Neuton", serif;
+  font-size: 0.95rem;
   margin-bottom: 20px;
 }
 .body {
   margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+.body h2 {
+  font-size: 1.3rem;
 }
 .comments-quantity {
-  font-size: 0.85rem;
+  font-family: "Neuton", serif;
+  font-size: 0.95rem;
   font-weight: bold;
 }
 @media (max-width: 414px) {

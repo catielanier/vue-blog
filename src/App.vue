@@ -11,16 +11,18 @@
 @import "./assets/css/setup.css";
 @import "./assets/css/fonts.css";
 #app {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Arvo", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #0b0f13;
   overflow-x: hidden;
+  background: #252835;
+  color: #fff;
 }
 
 h1 {
-  font-family: "Bebas Neue";
+  font-family: "Comfortaa", sans-serif;
   font-size: 2.5rem;
 }
 
@@ -29,7 +31,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Bebas Neue";
+  font-family: "Neuton", serif;
 }
 
 @keyframes loading {
@@ -121,13 +123,13 @@ import { mapActions } from "vuex";
 import Header from "@/components/Header.vue";
 export default {
   components: {
-    Header,
+    Header
   },
   beforeMount() {
     this.checkUser();
   },
   methods: {
-    ...mapActions(["checkUser"]),
-  },
+    ...mapActions(["checkUser"])
+  }
 };
 </script>
