@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import router from "./router";
-import { setToken, getToken, removeToken } from "./services/tokenService";
+import { setToken, removeToken } from "./services/tokenService";
 
 Vue.use(Vuex);
 

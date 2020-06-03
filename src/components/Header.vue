@@ -47,6 +47,17 @@
     <div class="heading">
       <h1>Corey Lanier - Blog</h1>
     </div>
+    <div class="menu">
+      <a
+        href="#"
+        @click.prevent="closeMenu"
+      >
+        <img
+          src="../assets/menu.png"
+          alt="Menu"
+        >
+      </a>
+    </div>
   </header>
 </template>
 
@@ -108,18 +119,35 @@ h1 {
   font-size: 3rem;
 }
 
+.menu {
+  display: none;
+  width: 45px;
+  height: 45px;
+  z-index: 5;
+  background: #252835;
+  border-radius: 5px;
+}
+.menu img {
+  width: 100%;
+}
+
 @media (max-width: 414px) {
-  .grid-container {
-    display: grid;
-    grid-template-columns: 1.5fr 5fr 1fr;
-    grid-gap: 10px;
-    align-items: center;
-    position: relative;
+  header {
+    width: 95%;
   }
-  .nav-buttons {
+  .heading {
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+  nav {
     display: none;
   }
-
+  .menu {
+    display: block;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+  }
   h1 {
     font-size: 1.9rem;
     margin: 0;
