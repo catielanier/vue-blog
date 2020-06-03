@@ -30,8 +30,8 @@ export default new Vuex.Store({
       state.user = null;
       state.role = null;
     },
-    updateMenu: (state, status) => {
-      state.showMenu = status;
+    updateMenu: (state, bool) => {
+      state.showMenu = bool;
     },
   },
   actions: {

@@ -50,13 +50,55 @@
     <div class="menu">
       <a
         href="#"
-        @click.prevent="closeMenu"
+        @click.prevent="openMenu"
       >
         <img
           src="../assets/menu.png"
           alt="Menu"
         >
       </a>
+    </div>
+    <div
+      class="mobile-menu"
+      v-if="showMenu"
+    >
+      <div class="close-menu">
+        <a
+          href="#"
+          @click.prevent="closeMenu"
+        >
+          <img
+            src="../assets/x.png"
+            alt="Close Menu"
+          />
+        </a>
+      </div>
+      <div class="flex-container">
+        <div>
+          <router-link to="/"><span @click="closeMenu">Home</span></router-link>
+        </div>
+        <div v-if="!user">
+          <router-link to="/login"><span @click="closeMenu">Login</span></router-link>
+        </div>
+        <div v-if="!user">
+          <router-link to="/sign-up"><span @click="closeMenu">Sign Up</span></router-link>
+        </div>
+        <div v-if="role === 'Author' || role === 'Admin'">
+          <router-link to="/new-post"><span @click="closeMenu">New Post</span></router-link>
+        </div>
+        <div v-if="user">
+          <router-link to="/profile"><span @click="closeMenu">Profile</span></router-link>
+        </div>
+        <div v-if="role === 'Admin'">
+          <router-link to="/users"><span @click="closeMenu">Edit Users</span></router-link>
+        </div>
+        <div v-if="user">
+          <a
+            href="#"
+            @click.prevent="() => {doLogout(); closeMenu();}"
+          >Logout</a>
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -65,7 +107,7 @@
 import { mapState, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapState(["user", "role", "menu"])
+    ...mapState(["user", "role", "showMenu"])
   },
   methods: {
     ...mapActions(["doLogout", "openMenu", "closeMenu"])
@@ -129,6 +171,46 @@ h1 {
 }
 .menu img {
   width: 100%;
+}
+
+.mobile-menu {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  transition: all 0.5s ease-in-out;
+  z-index: 10;
+  background: #b3cde0;
+  display: block;
+  top: 0;
+  right: 0;
+}
+
+.mobile-menu a {
+  color: #252835 !important;
+}
+
+.close-menu {
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: 15px;
+  left: 15px;
+}
+.close-menu img {
+  width: 100%;
+}
+.flex-container {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  font-family: "Neuton", serif;
+  text-transform: capitalize;
+  font-size: 1.4rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @media (max-width: 414px) {
