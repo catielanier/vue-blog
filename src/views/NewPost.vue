@@ -134,15 +134,22 @@ input::placeholder {
 .new-post-form button {
   margin-bottom: 40px;
 }
-
 @media (max-width: 414px) {
-  .input-container {
-    grid-template-columns: 1fr;
+  .new-post {
+    width: 95%;
   }
-
-  .editr {
-    max-width: 414px !important;
-    width: 95% !important;
+  orm.new-post-form,
+  .new-post-form fieldset {
+    width: 95%;
+  }
+  .input-container {
+    width: 95%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    margin-bottom: 15px;
+  }
+  input {
+    width: 90% !important;
   }
 }
 </style>

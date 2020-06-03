@@ -129,12 +129,11 @@ button[type="submit"] {
   }
   fieldset::before {
     width: 95%;
+    margin: 0 auto;
   }
   input {
-    width: 95%;
-  }
-  button[type="submit"] {
-    width: 95%;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 </style>
