@@ -81,7 +81,10 @@
     "env": {
       "PORT": "4000",
       "SECRET": "@secret",
-      "MONGODB_URI": "@mongodb_uri"
+      "MONGODB_URI": "@mongodb_uri",
+      "CLOUDINARY_KEY": "@cloudinary_key",
+      "CLOUDINARY_SECRET": "@cloudinary_secret",
+      "CLOUDINARY_URL": "@cloudinary_url"
     },
     "routes": [
       {
