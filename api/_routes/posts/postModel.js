@@ -8,26 +8,29 @@ const { model: Comment } = require("../comments/commentModel");
 const postSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   body: {
     type: String,
-    required: true
+    required: true,
   },
   postDate: {
     type: Date,
-    default: Date.now()
+    default: Date.now(),
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: User
+    ref: User,
+  },
+  headerImage: {
+    type: String,
   },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: Comment
-    }
-  ]
+      ref: Comment,
+    },
+  ],
 });
 
 exports.model = mongoose.model("Post", postSchema);

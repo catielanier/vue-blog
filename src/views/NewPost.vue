@@ -8,7 +8,7 @@
     >
       <fieldset :aria-busy="this.loading">
         <p v-if="success">Successfully posted.</p>
-        <p v-if="error"><span>Error:</span> {{error}}</p>
+        <p v-if="error"><span>Error:</span> {{ error }}</p>
         <div class="input-container">
           <div>
             <input
@@ -24,15 +24,20 @@
             placeholder="Post Date (Leave empty if right now)"
             type="datetime"
           />
+          <div>
+            <input
+              type="text"
+              name="headerImage"
+              placeholder="Header Image URL"
+              v-model="headerImage"
+            />
+          </div>
+          <div class="header-image-preview">
+            <img :src="headerImage" alt="Preview" v-if="headerImage !== ''" />
+          </div>
         </div>
-        <wysiwyg
-          v-model="body"
-          placeholder="Type your post here."
-        />
-        <button
-          type="submit"
-          class="hvr-rotate"
-        >Create Post</button>
+        <wysiwyg v-model="body" placeholder="Type your post here." />
+        <button type="submit" class="hvr-rotate">Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -45,7 +50,7 @@ import "vue-datetime/dist/vue-datetime.css";
 export default {
   name: "new-post",
   props: {
-    user: String
+    user: String,
   },
   data() {
     return {
@@ -54,12 +59,13 @@ export default {
       body: "",
       postDate: null,
       error: null,
-      success: false
+      success: false,
+      headerImage: "",
     };
   },
   methods: {
     postBlog: async function() {
-      const { title, body } = this.$data;
+      const { title, body, headerImage } = this.$data;
       const { user } = this.$props;
       const token = await getToken();
       const postDate = this.$data.postDate || Date.now();
@@ -70,7 +76,8 @@ export default {
         title,
         body,
         postDate,
-        user
+        user,
+        headerImage,
       };
 
       const res = await axios({
@@ -79,15 +86,15 @@ export default {
         data: {
           user,
           post,
-          token
-        }
+          token,
+        },
       });
       this.loading = false;
       if (res) {
         this.success = true;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
