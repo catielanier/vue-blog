@@ -14,6 +14,7 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
+  bodyPreview: String,
   postDate: {
     type: Date,
     default: Date.now(),

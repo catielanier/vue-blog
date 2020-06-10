@@ -33,11 +33,21 @@
             />
           </div>
           <div class="header-image-preview">
-            <img :src="headerImage" alt="Preview" v-if="headerImage !== ''" />
+            <img
+              :src="headerImage"
+              alt="Preview"
+              v-if="headerImage !== ''"
+            />
           </div>
         </div>
-        <wysiwyg v-model="body" placeholder="Type your post here." />
-        <button type="submit" class="hvr-rotate">Create Post</button>
+        <wysiwyg
+          v-model="body"
+          placeholder="Type your post here."
+        />
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -50,7 +60,7 @@ import "vue-datetime/dist/vue-datetime.css";
 export default {
   name: "new-post",
   props: {
-    user: String,
+    user: String
   },
   data() {
     return {
@@ -60,7 +70,7 @@ export default {
       postDate: null,
       error: null,
       success: false,
-      headerImage: "",
+      headerImage: ""
     };
   },
   methods: {
@@ -72,12 +82,17 @@ export default {
 
       this.loading = true;
 
+      const arr = body.split("<div><h2>");
+
+      const bodyPreview = arr[0];
+
       const post = {
         title,
         body,
         postDate,
         user,
         headerImage,
+        bodyPreview
       };
 
       const res = await axios({
@@ -86,15 +101,15 @@ export default {
         data: {
           user,
           post,
-          token,
-        },
+          token
+        }
       });
       this.loading = false;
       if (res) {
         this.success = true;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
