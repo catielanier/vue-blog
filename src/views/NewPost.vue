@@ -141,6 +141,9 @@ input::placeholder {
 .new-post-form button {
   margin-bottom: 40px;
 }
+.header-image-preview img {
+  width: 100%;
+}
 @media (max-width: 414px) {
   .new-post {
     width: 95%;
