@@ -112,4 +112,17 @@ router.route("/:id").put(async (req, res) => {
   }
 });
 
+router.route("/counter/:id").put(async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await postServices.getPostsById(id);
+    const updatedPost = await postServices.addToCounter(id, post.reads);
+    res.status(201).json({
+      data: updatedPost,
+    });
+  } catch (e) {
+    res.status(401).send("Could not add to counter.");
+  }
+});
+
 exports.router = router;

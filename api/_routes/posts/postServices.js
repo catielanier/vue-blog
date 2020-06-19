@@ -87,3 +87,20 @@ exports.deletePost = async (id) => {
     throw e;
   }
 };
+
+exports.addToCounter = async (id, reads) => {
+  try {
+    return await Post.findByIdAndUpdate(
+      {
+        _id: id,
+      },
+      {
+        $set: {
+          reads,
+        },
+      }
+    );
+  } catch (e) {
+    throw e;
+  }
+};
