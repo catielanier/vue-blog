@@ -1,5 +1,9 @@
 <template>
   <section class="post">
+    <vue-headful
+      :title="`${post.title} - Blog [Corey Lanier]`"
+      :description="post.bodyPreview"
+    />
     <form
       id="edit"
       @submit.prevent="editPost"
