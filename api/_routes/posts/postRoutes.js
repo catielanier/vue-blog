@@ -116,6 +116,7 @@ router.route("/counter/:id").put(async (req, res) => {
   const { id } = req.params;
   try {
     const post = await postServices.getPostsById(id);
+    post.reads += 1;
     const updatedPost = await postServices.addToCounter(id, post.reads);
     res.status(201).json({
       data: updatedPost,
