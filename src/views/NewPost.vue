@@ -47,7 +47,7 @@
         <input
           type="text"
           v-model="tags"
-          placeholder="Post Metatags"
+          placeholder="Post Metatags (Separate by commas)"
         >
         <button
           type="submit"

@@ -3,6 +3,7 @@
     <vue-headful
       :title="`${post.title} - Blog [Corey Lanier]`"
       :description="post.bodyPreview"
+      :keywords="post.tags"
     />
     <form
       id="edit"
