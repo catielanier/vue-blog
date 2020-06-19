@@ -44,6 +44,11 @@
           v-model="body"
           placeholder="Type your post here."
         />
+        <input
+          type="text"
+          v-model="tags"
+          placeholder="Post Metatags"
+        >
         <button
           type="submit"
           class="hvr-rotate"
@@ -70,12 +75,13 @@ export default {
       postDate: null,
       error: null,
       success: false,
-      headerImage: ""
+      headerImage: "",
+      tags: ""
     };
   },
   methods: {
     postBlog: async function() {
-      const { title, body, headerImage } = this.$data;
+      const { title, body, headerImage, tags } = this.$data;
       const { user } = this.$props;
       const token = await getToken();
       const postDate = this.$data.postDate || Date.now();
@@ -92,7 +98,8 @@ export default {
         postDate,
         user,
         headerImage,
-        bodyPreview
+        bodyPreview,
+        tags
       };
 
       const res = await axios({
