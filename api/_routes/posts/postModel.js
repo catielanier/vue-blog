@@ -31,6 +31,7 @@ const postSchema = new Schema({
     default: 0,
     required: true,
   },
+  tags: String,
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
