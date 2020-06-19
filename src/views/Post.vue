@@ -1,27 +1,49 @@
 <template>
   <section class="post">
-    <form id="edit" @submit.prevent="editPost">
+    <form
+      id="edit"
+      @submit.prevent="editPost"
+    >
       <div class="title">
         <h1 v-if="!this.edit">{{ post.title }}</h1>
-        <input type="text" v-model="title" v-if="this.edit" />
+        <input
+          type="text"
+          v-model="title"
+          v-if="this.edit"
+        />
       </div>
-      <div class="date" v-if="!this.edit">
-        {{ post.postDate }} by {{ post.user.username }}:
-        <span v-if="role === 'Admin' || post.user._id === user"
-          >(
-          <a href="#" @click.prevent="showEditor(post.title, post.body)"
-            ><span>Edit</span></a
-          >
+      <div
+        class="date"
+        v-if="!this.edit"
+      >
+        {{ post.postDate }} by {{ post.user.username }}<span v-if="role === 'Admin' || post.user._id === user"> ({{post.reads}} view<span v-if="post.reads > 1 || post.reads === 0">s</span>)</span>:
+        <span v-if="role === 'Admin' || post.user._id === user">(
+          <a
+            href="#"
+            @click.prevent="showEditor(post.title, post.body)"
+          ><span>Edit</span></a>
           |
-          <a href="#" @click.prevent="deletePost"><span>Delete</span></a>
-          )</span
-        >
+          <a
+            href="#"
+            @click.prevent="deletePost"
+          ><span>Delete</span></a>
+          )</span>
       </div>
       <div class="header-image">
-        <img :src="post.headerImage" alt="Header" />
+        <img
+          :src="post.headerImage"
+          alt="Header"
+        />
       </div>
-      <div class="body" v-html="post.body" v-if="!this.edit" />
-      <div class="body" v-if="this.edit">
+      <div
+        class="body"
+        v-html="post.body"
+        v-if="!this.edit"
+      />
+      <div
+        class="body"
+        v-if="this.edit"
+      >
         <wysiwyg v-model="body" />
         <button type="submit">
           Edit Post
@@ -32,9 +54,7 @@
       </div>
     </form>
     <div class="comments-quantity">
-      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1"
-        >s</span
-      >:
+      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1">s</span>:
     </div>
     <Comments
       :user="user"
@@ -57,13 +77,13 @@ import { getToken } from "../services/tokenService";
 export default {
   name: "post",
   components: {
-    Comments,
+    Comments
   },
   props: {
-    id: String,
+    id: String
   },
   computed: {
-    ...mapState(["user", "role"]),
+    ...mapState(["user", "role"])
   },
   data() {
     return {
@@ -71,15 +91,16 @@ export default {
       edit: false,
       title: "",
       body: "",
-      deleted: false,
+      deleted: false
     };
   },
   async mounted() {
     const { id } = this.$props;
-    await axios.get(`/api/posts/${id}`).then((res) => {
+    await axios.put(`/api/posts/counter/${id}`);
+    await axios.get(`/api/posts/${id}`).then(res => {
       const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
-      post.comments.forEach((comment) => {
+      post.comments.forEach(comment => {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
       this.post = post;
@@ -98,7 +119,7 @@ export default {
     },
     changeCommentOnPost: function(id, comment) {
       const index = this.$data.post.comments.findIndex(
-        (comment) => comment._id === id
+        comment => comment._id === id
       );
       this.post.comments[index] = comment;
     },
@@ -123,8 +144,8 @@ export default {
           user,
           title,
           body,
-          token,
-        },
+          token
+        }
       });
       const { title: newTitle, body: newBody } = res.data.data;
       this.post.title = newTitle;
@@ -132,8 +153,8 @@ export default {
       this.edit = false;
       this.title = "";
       this.body = "";
-    },
-  },
+    }
+  }
 };
 </script>
 
