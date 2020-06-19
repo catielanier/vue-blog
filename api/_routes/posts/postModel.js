@@ -26,6 +26,11 @@ const postSchema = new Schema({
   headerImage: {
     type: String,
   },
+  reads: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
