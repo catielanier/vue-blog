@@ -5,6 +5,8 @@ import vSelect from "vue-select";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import vueHeadful from "vue-headful";
+
 import "vue-select/dist/vue-select.css";
 
 Vue.use(wysiwyg, {
@@ -13,6 +15,7 @@ Vue.use(wysiwyg, {
     dropzoneOptions: {},
   },
 });
+Vue.component("vue-headful", vueHeadful);
 
 Vue.component("datetime", Datetime);
 
