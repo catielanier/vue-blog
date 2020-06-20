@@ -4,6 +4,7 @@
       :title="`${post.title} - Blog [Corey Lanier]`"
       :description="post.bodyPreview"
       :keywords="post.tags"
+      :image="post.headerImage"
     />
     <form
       id="edit"
@@ -99,7 +100,7 @@ export default {
       deleted: false
     };
   },
-  async mounted() {
+  async beforeMount() {
     const { id } = this.$props;
     await axios.put(`/api/posts/counter/${id}`);
     await axios.get(`/api/posts/${id}`).then(res => {
