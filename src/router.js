@@ -7,8 +7,10 @@ import NewPost from "./views/NewPost.vue";
 import Post from "./views/Post.vue";
 import EditUsers from "./views/EditUsers.vue";
 import Profile from "./views/Profile.vue";
+import Meta from "vue-meta";
 
 Vue.use(Router);
+Vue.use(Meta);
 
 export default new Router({
   mode: "history",
@@ -17,38 +19,38 @@ export default new Router({
     {
       path: "/sign-up",
       name: "signup",
-      component: Signup
+      component: Signup,
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
     },
     {
       path: "/",
       name: "posts",
-      component: Posts
+      component: Posts,
     },
     {
       path: "/new-post",
       name: "new-post",
-      component: NewPost
+      component: NewPost,
     },
     {
       path: "/post/:id",
       name: "post",
       component: Post,
-      props: true
+      props: true,
     },
     {
       path: "/users",
       name: "edit-users",
-      component: EditUsers
+      component: EditUsers,
     },
     {
       path: "/profile",
       name: "profile",
-      component: Profile
-    }
-  ]
+      component: Profile,
+    },
+  ],
 });

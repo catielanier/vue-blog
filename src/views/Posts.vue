@@ -4,14 +4,11 @@
       Sorry, but this blog is barren.
     </p>
     <p v-if="this.loading">Loading, please wait.</p>
-    <div
-      class="blog-post"
-      v-for="post in posts"
-      :key="post._id"
-    >
+    <div class="blog-post" v-for="post in posts" :key="post._id">
       <div class="title">
         <h1>
-          <router-link :to="{
+          <router-link
+            :to="{
               name: 'post',
               props: {
                 id: post._id,
@@ -19,7 +16,8 @@
               params: {
                 id: post._id,
               },
-            }">
+            }"
+          >
             <span>
               {{ post.title }}
             </span>
@@ -28,29 +26,31 @@
       </div>
       <div class="date">{{ post.postDate }} by {{ post.user.username }}</div>
       <div class="header-image">
-        <img
-          :src="post.headerImage"
-          alt="Header"
-        />
+        <img :src="post.headerImage" alt="Header" />
       </div>
-      <div
-        class="body"
-        v-html="post.bodyPreview"
-      />
+      <div class="body" v-html="post.bodyPreview" />
       <div class="read-more">
-        <router-link :to="{
+        <router-link
+          :to="{
             name: 'post',
             props: {
               id: post._id,
+              postTitle: post.title,
+              image: post.headerImage,
+              description: post.bodyPreview,
             },
             params: {
               id: post._id,
             },
-          }"><span>Continue Reading</span>
+          }"
+          ><span>Continue Reading</span>
         </router-link>
       </div>
       <div class="comments-quantity">
-        {{ post.comments.length }} comment<span v-if="post.comments.length !== 1">s</span>
+        {{ post.comments.length }} comment<span
+          v-if="post.comments.length !== 1"
+          >s</span
+        >
       </div>
     </div>
   </section>
@@ -64,23 +64,23 @@ export default {
   data() {
     return {
       posts: [],
-      loading: false
+      loading: false,
     };
   },
   async mounted() {
     this.loading = true;
-    await axios.get("/api/posts").then(res => {
+    await axios.get("/api/posts").then((res) => {
       const posts = res.data.data;
       posts.sort(function(x, y) {
         return y.postDate.localeCompare(x.postDate);
       });
-      posts.forEach(post => {
+      posts.forEach((post) => {
         post.postDate = dateFormatter(post.postDate);
       });
       this.posts = posts;
       this.loading = false;
     });
-  }
+  },
 };
 </script>
 

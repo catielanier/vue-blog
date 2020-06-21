@@ -1,49 +1,32 @@
 <template>
   <section class="post">
-    <form
-      id="edit"
-      @submit.prevent="editPost"
-    >
+    <form id="edit" @submit.prevent="editPost">
       <div class="title">
         <h1 v-if="!this.edit">{{ post.title }}</h1>
-        <input
-          type="text"
-          v-model="title"
-          v-if="this.edit"
-        />
+        <input type="text" v-model="title" v-if="this.edit" />
       </div>
-      <div
-        class="date"
-        v-if="!this.edit"
-      >
-        {{ post.postDate }} by {{ post.user.username }}<span v-if="role === 'Admin' || post.user._id === user"> ({{post.reads}} view<span v-if="post.reads > 1 || post.reads === 0">s</span>)</span>:
-        <span v-if="role === 'Admin' || post.user._id === user">(
-          <a
-            href="#"
-            @click.prevent="showEditor(post.title, post.body)"
-          ><span>Edit</span></a>
+      <div class="date" v-if="!this.edit">
+        {{ post.postDate }} by {{ post.user.username
+        }}<span v-if="role === 'Admin' || post.user._id === user">
+          ({{ post.reads }} view<span v-if="post.reads > 1 || post.reads === 0"
+            >s</span
+          >)</span
+        >:
+        <span v-if="role === 'Admin' || post.user._id === user"
+          >(
+          <a href="#" @click.prevent="showEditor(post.title, post.body)"
+            ><span>Edit</span></a
+          >
           |
-          <a
-            href="#"
-            @click.prevent="deletePost"
-          ><span>Delete</span></a>
-          )</span>
+          <a href="#" @click.prevent="deletePost"><span>Delete</span></a>
+          )</span
+        >
       </div>
       <div class="header-image">
-        <img
-          :src="post.headerImage"
-          alt="Header"
-        />
+        <img :src="post.headerImage" alt="Header" />
       </div>
-      <div
-        class="body"
-        v-html="post.body"
-        v-if="!this.edit"
-      />
-      <div
-        class="body"
-        v-if="this.edit"
-      >
+      <div class="body" v-html="post.body" v-if="!this.edit" />
+      <div class="body" v-if="this.edit">
         <wysiwyg v-model="body" />
         <button type="submit">
           Edit Post
@@ -54,7 +37,9 @@
       </div>
     </form>
     <div class="comments-quantity">
-      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1">s</span>:
+      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1"
+        >s</span
+      >:
     </div>
     <Comments
       :user="user"
@@ -74,16 +59,20 @@ import axios from "axios";
 import Comments from "../components/Comments.vue";
 import dateFormatter from "../services/dateFormatter";
 import { getToken } from "../services/tokenService";
+import router from "../router";
 export default {
   name: "post",
   components: {
-    Comments
+    Comments,
   },
   props: {
-    id: String
+    id: String,
+    description: String,
+    postTitle: String,
+    image: String,
   },
   computed: {
-    ...mapState(["user", "role"])
+    ...mapState(["user", "role"]),
   },
   data() {
     return {
@@ -91,16 +80,17 @@ export default {
       edit: false,
       title: "",
       body: "",
-      deleted: false
+      deleted: false,
+      loading: false,
     };
   },
   async beforeMount() {
     const { id } = this.$props;
     await axios.put(`/api/posts/counter/${id}`);
-    await axios.get(`/api/posts/${id}`).then(res => {
+    await axios.get(`/api/posts/${id}`).then((res) => {
       const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
-      post.comments.forEach(comment => {
+      post.comments.forEach((comment) => {
         comment.commentDate = dateFormatter(comment.commentDate);
       });
       this.post = post;
@@ -111,77 +101,88 @@ export default {
       title: this.post.title,
       meta: [
         {
-          lang: "en"
+          lang: "en",
         },
         {
           property: "og:title",
-          content: this.post.title,
-          template: chunk => `${chunk} | Blog [Corey Lanier]`,
-          vmid: "og:title"
+          content: this.title,
+          template: (chunk) => `${chunk} | Blog [Corey Lanier]`,
+          vmid: "og:title",
         },
         {
           property: "twitter:title",
-          content: this.post.title,
-          template: chunk => `${chunk} | Blog [Corey Lanier]`,
-          vmid: "twitter:title"
+          content: this.title,
+          template: (chunk) => `${chunk} | Blog [Corey Lanier]`,
+          vmid: "twitter:title",
         },
         {
           property: "image",
-          content: this.post.previewImage,
-          vmid: "image"
+          content: this.image,
+          vmid: "image",
         },
         {
           property: "og:image",
-          content: this.post.previewImage,
-          vmid: "og:image"
+          content: this.image,
+          vmid: "og:image",
         },
         {
           property: "twitter:image",
-          content: this.post.previewImage,
-          vmid: "twitter:image"
+          content: this.image,
+          vmid: "twitter:image",
         },
         {
           property: "description",
-          content: this.post.bodyPreview,
-          vmid: "description"
+          content: this.description,
+          vmid: "description",
         },
         {
           property: "og:description",
-          content: this.post.bodyPreview,
-          vmid: "og:description"
+          content: this.description,
+          vmid: "og:description",
         },
         {
           property: "twitter:description",
-          content: this.post.bodyPreview,
-          vmid: "twitter:description"
+          content: this.description,
+          vmid: "twitter:description",
         },
         {
           property: "og:url",
-          content: `https://blog.coreylanier.com/${this.post._id}`,
-          vmid: "og:url"
+          content: `https://blog.coreylanier.com/${this.id}`,
+          vmid: "og:url",
         },
         {
           property: "twitter:url",
-          content: `https://blog.coreylanier.com/${this.post._id}`,
-          vmid: "twitter:url"
+          content: `https://blog.coreylanier.com/${this.id}`,
+          vmid: "twitter:url",
         },
         {
           property: "twitter:card",
           content: "summary_large_image",
-          vmid: "twitter:card"
+          vmid: "twitter:card",
         },
         {
           property: "twitter:site",
           content: "@JTMMissingPersn",
-          vmid: "twitter:site"
-        }
-      ]
+          vmid: "twitter:site",
+        },
+      ],
     };
   },
   methods: {
     deletePost: async function() {
       // TODO: Implement post deletion and reroute to '/'
-      console.log("Deleting post.");
+      const { id } = this.$props;
+      const { user } = this.$data;
+      const res = await axios({
+        method: "DELETE",
+        url: `/api/posts/${id}`,
+        data: {
+          user,
+        },
+      });
+      if (res) {
+        router.push("/");
+      }
     },
     removeCommentFromBlog: function(index) {
       this.post.comments.splice(index, 1);
@@ -192,7 +193,7 @@ export default {
     },
     changeCommentOnPost: function(id, comment) {
       const index = this.$data.post.comments.findIndex(
-        comment => comment._id === id
+        (comment) => comment._id === id
       );
       this.post.comments[index] = comment;
     },
@@ -207,18 +208,18 @@ export default {
       this.body = "";
     },
     editPost: async function() {
-      const { title, body } = this.$data;
-      const { user, id } = this.$props;
+      const { title, body, user } = this.$data;
+      const { id } = this.$props;
       const token = await getToken();
       const res = await axios({
-        method: "POST",
+        method: "PUT",
         url: `/api/posts/${id}`,
         data: {
           user,
           title,
           body,
-          token
-        }
+          token,
+        },
       });
       const { title: newTitle, body: newBody } = res.data.data;
       this.post.title = newTitle;
@@ -226,8 +227,8 @@ export default {
       this.edit = false;
       this.title = "";
       this.body = "";
-    }
-  }
+    },
+  },
 };
 </script>
 
