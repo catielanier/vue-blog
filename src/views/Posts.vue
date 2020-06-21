@@ -1,9 +1,5 @@
 <template>
   <section class="posts">
-    <vue-headful
-      title="Blog [Corey Lanier]"
-      description="The official blog of Corey Lanier, a web developer from Toronto, Ontario."
-    />
     <p v-if="posts.length === 0 && !this.loading">
       Sorry, but this blog is barren.
     </p>

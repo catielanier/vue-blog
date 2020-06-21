@@ -150,6 +150,10 @@ export default {
   },
   methods: {
     ...mapActions(["checkUser"])
+  },
+  metaInfo: {
+    title: "Blog [Corey Lanier]",
+    titleTemplate: "%s | Blog [Corey Lanier]"
   }
 };
 </script>

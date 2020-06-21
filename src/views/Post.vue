@@ -1,11 +1,5 @@
 <template>
   <section class="post">
-    <vue-headful
-      :title="`${post.title} - Blog [Corey Lanier]`"
-      :description="post.bodyPreview"
-      :keywords="post.tags"
-      :image="post.headerImage"
-    />
     <form
       id="edit"
       @submit.prevent="editPost"
@@ -112,8 +106,81 @@ export default {
       this.post = post;
     });
   },
+  metaInfo() {
+    return {
+      title: this.post.title,
+      meta: [
+        {
+          lang: "en"
+        },
+        {
+          property: "og:title",
+          content: this.post.title,
+          template: chunk => `${chunk} | Blog [Corey Lanier]`,
+          vmid: "og:title"
+        },
+        {
+          property: "twitter:title",
+          content: this.post.title,
+          template: chunk => `${chunk} | Blog [Corey Lanier]`,
+          vmid: "twitter:title"
+        },
+        {
+          property: "image",
+          content: this.post.previewImage,
+          vmid: "image"
+        },
+        {
+          property: "og:image",
+          content: this.post.previewImage,
+          vmid: "og:image"
+        },
+        {
+          property: "twitter:image",
+          content: this.post.previewImage,
+          vmid: "twitter:image"
+        },
+        {
+          property: "description",
+          content: this.post.bodyPreview,
+          vmid: "description"
+        },
+        {
+          property: "og:description",
+          content: this.post.bodyPreview,
+          vmid: "og:description"
+        },
+        {
+          property: "twitter:description",
+          content: this.post.bodyPreview,
+          vmid: "twitter:description"
+        },
+        {
+          property: "og:url",
+          content: `https://blog.coreylanier.com/${this.post._id}`,
+          vmid: "og:url"
+        },
+        {
+          property: "twitter:url",
+          content: `https://blog.coreylanier.com/${this.post._id}`,
+          vmid: "twitter:url"
+        },
+        {
+          property: "twitter:card",
+          content: "summary_large_image",
+          vmid: "twitter:card"
+        },
+        {
+          property: "twitter:site",
+          content: "@JTMMissingPersn",
+          vmid: "twitter:site"
+        }
+      ]
+    };
+  },
   methods: {
     deletePost: async function() {
+      // TODO: Implement post deletion and reroute to '/'
       console.log("Deleting post.");
     },
     removeCommentFromBlog: function(index) {

@@ -2,10 +2,10 @@ import Vue from "vue";
 import { Datetime } from "vue-datetime";
 import wysiwyg from "vue-wysiwyg";
 import vSelect from "vue-select";
+import VueMeta from "vue-meta";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import vueHeadful from "vue-headful";
 
 import "vue-select/dist/vue-select.css";
 
@@ -15,7 +15,8 @@ Vue.use(wysiwyg, {
     dropzoneOptions: {},
   },
 });
-Vue.component("vue-headful", vueHeadful);
+
+Vue.use(VueMeta);
 
 Vue.component("datetime", Datetime);
 
