@@ -86,7 +86,7 @@ export default {
   },
   async beforeMount() {
     const { id } = this.$props;
-    await axios.put(`/api/posts/counter/${id}`);
+    // await axios.put(`/api/posts/counter/${id}`);
     await axios.get(`/api/posts/${id}`).then((res) => {
       const post = res.data.data;
       post.postDate = dateFormatter(post.postDate);
@@ -96,7 +96,7 @@ export default {
       this.post = post;
     });
   },
-  metaInfo() {
+  metaInfo(props) {
     return {
       title: this.post.title,
       meta: [
@@ -105,13 +105,13 @@ export default {
         },
         {
           property: "og:title",
-          content: this.title,
+          content: this.postTitle,
           template: (chunk) => `${chunk} | Blog [Corey Lanier]`,
           vmid: "og:title",
         },
         {
           property: "twitter:title",
-          content: this.title,
+          content: this.postTitle,
           template: (chunk) => `${chunk} | Blog [Corey Lanier]`,
           vmid: "twitter:title",
         },

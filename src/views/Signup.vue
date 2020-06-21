@@ -1,16 +1,10 @@
 <template>
   <section>
     <h3>Sign-up</h3>
-    <form
-      @submit.prevent="doSignup"
-      v-bind:disabled="this.loading"
-    >
+    <form @submit.prevent="doSignup" v-bind:disabled="this.loading">
       <fieldset v-bind:aria-busy="this.loading">
-        <p
-          v-if="this.error !== null"
-          class="error"
-        >
-          <span>Error:</span> {{this.error}}
+        <p v-if="this.error !== null" class="error">
+          <span>Error:</span> {{ this.error }}
         </p>
         <label for="username">
           Username:
@@ -48,10 +42,7 @@
             v-model="verifyPassword"
           />
         </label>
-        <button
-          type="submit"
-          class="hvr-rotate"
-        >
+        <button type="submit" class="hvr-rotate">
           Sign-up
         </button>
       </fieldset>
@@ -65,7 +56,10 @@ import { setToken } from "../services/tokenService";
 export default {
   name: "signup",
   props: {
-    catchUser: Function
+    catchUser: Function,
+  },
+  metaInfo: {
+    title: "Sign Up",
   },
   data() {
     return {
@@ -75,7 +69,7 @@ export default {
       verifyPassword: "",
       loading: false,
       success: false,
-      error: null
+      error: null,
     };
   },
   methods: {
@@ -92,8 +86,8 @@ export default {
           data: {
             username,
             email,
-            password
-          }
+            password,
+          },
         });
         const { token } = res.data.data;
         await setToken(token);
@@ -105,8 +99,8 @@ export default {
         this.error = e;
         this.loading = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
