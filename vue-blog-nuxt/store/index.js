@@ -48,21 +48,21 @@ export const actions = {
         commit("updateUser", { id: null, role: null });
       });
   },
-  doLogout({commit}) {
-    commit('updateUser', {id: null, role: null});
+  doLogout({ commit }) {
+    commit("updateUser", { id: null, role: null });
     removeToken();
-    localStorage.removeItem('vueBlogId');
+    localStorage.removeItem("vueBlogId");
   },
-  openMenu({commit}) {
-    commit('updateMenu', true)
+  openMenu({ commit }) {
+    commit("updateMenu", true);
   },
-  closeMenu({commit}) {
-    commit('updateMenu', false)
+  closeMenu({ commit }) {
+    commit("updateMenu", false);
   },
-  checkUser({commit}) {
-    const id = localStorage.getItem('vueBlogId');
+  async checkUser({ commit }) {
+    const id = localStorage.getItem("vueBlogId");
     const res = await axios.get(`/api/users/${id}`);
     const { role } = res.data.data;
-    commit('updateUser', {id, role})
+    commit("updateUser", { id, role });
   }
 };
