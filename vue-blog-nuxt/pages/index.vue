@@ -1,45 +1,19 @@
 <template>
-  <div class="posts">
+  <div class="posts" v-if="posts.length > 0">
     <div class="blog-post" v-for="post in posts" :key="post._id">
-      <div class="title">
-        <h1>
-          <router-link
-            :to="{
-              name: 'post',
-              props: {
-                id: post._id,
-              },
-              params: {
-                id: post._id,
-              },
-            }"
-          >
-            <span>{{ post.title }}</span>
-          </router-link>
-        </h1>
-      </div>
-      <div class="date">{{ post.postDate }} by {{ post.user.username }}</div>
-      <div class="header-image">
-        <img :src="post.headerImage" alt="Header" />
-      </div>
-      <div class="body" v-html="post.bodyPreview" />
+      <Post
+        :id="post._id"
+        :body="post.bodyPreview"
+        :title="post.title"
+        :username="post.user.username"
+        :postDate="post.postDate"
+        :singlePost="false"
+        :headerImage="post.headerImage"
+      />
       <div class="read-more">
-        <router-link
-          :to="{
-            name: 'post',
-            props: {
-              id: post._id,
-              postTitle: post.title,
-              image: post.headerImage,
-              description: post.bodyPreview,
-            },
-            params: {
-              id: post._id,
-            },
-          }"
-        >
+        <nuxt-link :to="'/post/' + post._id">
           <span>Continue Reading</span>
-        </router-link>
+        </nuxt-link>
       </div>
       <div class="comments-quantity">
         {{ post.comments.length }} comment
@@ -51,8 +25,10 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import Post from "../components/Post";
 export default {
   name: "Posts",
+  components: { Post },
   computed: {
     ...mapState(["posts"])
   },
@@ -68,7 +44,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .posts {
   text-align: left;
   max-width: 1280px;

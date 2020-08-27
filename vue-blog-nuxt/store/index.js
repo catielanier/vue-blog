@@ -7,7 +7,8 @@ export const state = () => ({
   user: null,
   role: null,
   showMenu: false,
-  posts: []
+  posts: [],
+  post: null
 });
 
 export const mutations = {
@@ -40,6 +41,14 @@ export const mutations = {
     });
     const updatedPosts = [...currentPosts, ...posts];
     state.posts = updatedPosts;
+  },
+  setSinglePost(state, post) {
+    const datePosted = new Date(post.postDate);
+    post.postDate = datePosted.toLocaleString("en-us", {
+      dateStyle: "long",
+      timeStyle: "short"
+    });
+    state.post = post;
   }
 };
 
@@ -79,9 +88,11 @@ export const actions = {
     commit("updateUser", { id, role });
   },
   async getPosts({ commit }) {
-    console.log(`we're running mufucka`);
     const res = await axios.get("/api/posts");
-    console.log(res.data.data);
     commit("setAllPosts", res.data.data);
+  },
+  async getPost({ commit }, id) {
+    const res = await axios.get(`/api/posts/${id}`);
+    commit("setSinglePost", res.data.data);
   }
 };
