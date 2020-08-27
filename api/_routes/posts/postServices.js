@@ -37,7 +37,8 @@ exports.getAllPosts = async () => {
       .populate({
         path: "comments",
         populate: { path: "user", select: "username _id" },
-      });
+      })
+      .sort({ postDate: "desc" });
     if (posts) {
       return posts;
     }

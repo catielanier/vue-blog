@@ -140,6 +140,10 @@ import Header from "../components/Header";
 export default {
   components: {
     Header
+  },
+  metaInfo: {
+    title: "Blog [Corey Lanier]",
+    titleTemplate: "%s | Blog [Corey Lanier]"
   }
 };
 </script>

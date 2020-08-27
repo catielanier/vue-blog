@@ -6,7 +6,8 @@ export const state = () => ({
   errorMessage: null,
   user: null,
   role: null,
-  showMenu: false
+  showMenu: false,
+  posts: []
 });
 
 export const mutations = {
@@ -27,6 +28,18 @@ export const mutations = {
   },
   updateMenu(state, bool) {
     state.showMenu = bool;
+  },
+  setAllPosts(state, posts) {
+    const { posts: currentPosts } = state;
+    posts.forEach(post => {
+      const datePosted = new Date(post.postDate);
+      post.postDate = datePosted.toLocaleString("en-us", {
+        dateStyle: "long",
+        timeStyle: "short"
+      });
+    });
+    const updatedPosts = [...currentPosts, ...posts];
+    state.posts = updatedPosts;
   }
 };
 
@@ -64,5 +77,11 @@ export const actions = {
     const res = await axios.get(`/api/users/${id}`);
     const { role } = res.data.data;
     commit("updateUser", { id, role });
+  },
+  async getPosts({ commit }) {
+    console.log(`we're running mufucka`);
+    const res = await axios.get("/api/posts");
+    console.log(res.data.data);
+    commit("setAllPosts", res.data.data);
   }
 };
