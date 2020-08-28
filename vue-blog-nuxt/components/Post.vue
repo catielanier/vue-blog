@@ -33,4 +33,4 @@ export default {
     singlePost: Boolean
   }
 };
-</script>>
+</script>

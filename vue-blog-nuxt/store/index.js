@@ -48,6 +48,13 @@ export const mutations = {
       dateStyle: "long",
       timeStyle: "short"
     });
+    post.comments.forEach(comment => {
+      const dateCommented = new Date(comment.commentDate);
+      comment.commentDate = dateCommented.toLocaleString("en-us", {
+        dateStyle: "long",
+        timeStyle: "short"
+      });
+    });
     state.post = post;
   }
 };

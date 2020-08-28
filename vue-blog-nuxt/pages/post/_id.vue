@@ -9,6 +9,11 @@
       :username="post.user.username"
       :singlePost="true"
     />
+    <div class="comments-quantity">
+      {{ post.comments.length }} comment
+      <span v-if="post.comments.length !== 1">s</span>
+    </div>
+    <Comments :comments="post.comments" />
   </div>
 </template>
 
