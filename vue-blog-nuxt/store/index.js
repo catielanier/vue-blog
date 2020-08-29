@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setToken, removeToken } from "../services/tokenService";
+import { setToken, removeToken, getToken } from "../services/tokenService";
 
 export const state = () => ({
   loggingIn: false,
@@ -8,7 +8,8 @@ export const state = () => ({
   role: null,
   showMenu: false,
   posts: [],
-  post: null
+  post: null,
+  redirect: null
 });
 
 export const mutations = {
@@ -56,6 +57,12 @@ export const mutations = {
       });
     });
     state.post = post;
+  },
+  setRedirectId(state, id) {
+    state.redirect = id;
+  },
+  clearPosts(state) {
+    state.posts = [];
   }
 };
 
@@ -101,5 +108,15 @@ export const actions = {
   async getPost({ commit }, id) {
     const res = await axios.get(`/api/posts/${id}`);
     commit("setSinglePost", res.data.data);
+  },
+  async createPost({ commit }, data) {
+    const { post, user } = data;
+    const token = getToken();
+    const res = await axios.post(`/api/posts/new`, {
+      data: { user, post, token }
+    });
+    commit("clearPosts");
+    this.getPosts();
+    commit("setRedirectId", res.data.data._id);
   }
 };

@@ -21,7 +21,7 @@
     "mavon-editor": "^2.9.0",
     "mongoose": "^5.9.27",
     "nuxt": "^2.14.0",
-    "vue-datetime": "^1.0.0-beta.13",
+    "vue-datetime": "^1.0.0-beta.14",
     "vue-meta": "^2.4.0",
     "vue-select": "^3.10.7",
     "weekstart": "^1.0.1"

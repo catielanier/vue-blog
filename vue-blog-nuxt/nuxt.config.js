@@ -34,7 +34,10 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [{ src: "@/plugins/vue-mavon-editor", ssr: false }],
+  plugins: [
+    { src: "@/plugins/vue-mavon-editor", ssr: false },
+    { src: "@/plugins/vue-datetime", ssr: false }
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
