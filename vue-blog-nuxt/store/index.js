@@ -63,6 +63,10 @@ export const mutations = {
   },
   clearPosts(state) {
     state.posts = [];
+  },
+  unsetLoginErrors(state) {
+    state.loggingIn = false;
+    state.errorMessage = null;
   }
 };
 
@@ -118,5 +122,8 @@ export const actions = {
     commit("clearPosts");
     this.getPosts();
     commit("setRedirectId", res.data.data._id);
+  },
+  resetLogin({ commit }) {
+    commit("unsetLoginErrors");
   }
 };

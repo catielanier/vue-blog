@@ -24,6 +24,7 @@
     "vue-datetime": "^1.0.0-beta.14",
     "vue-meta": "^2.4.0",
     "vue-select": "^3.10.7",
+    "vue-simple-markdown": "^1.1.4",
     "weekstart": "^1.0.1"
   },
   "devDependencies": {}

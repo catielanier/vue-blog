@@ -31,7 +31,7 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "login",
   computed: {
-    ...mapState(["errorMessage", "loggingIn"])
+    ...mapState(["errorMessage", "loggingIn", "user"])
   },
   data() {
     return {
@@ -40,12 +40,20 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["doLogin"]),
-    loginSubmit: function() {
+    ...mapActions(["doLogin", "resetLogin"]),
+    loginSubmit: async function() {
       const { email, password } = this.$data;
       const loginData = { email, password };
-      this.doLogin(loginData);
+      await this.doLogin(loginData);
     }
+  },
+  updated() {
+    if (this.user) {
+      this.$router.push("/");
+    }
+  },
+  destroyed() {
+    this.resetLogin();
   },
   metaInfo: {
     title: "Login"

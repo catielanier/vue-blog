@@ -36,7 +36,8 @@ export default {
    */
   plugins: [
     { src: "@/plugins/vue-mavon-editor", ssr: false },
-    { src: "@/plugins/vue-datetime", ssr: false }
+    { src: "@/plugins/vue-datetime", ssr: false },
+    { src: "@/plugins/vue-simple-markdown" }
   ],
   /*
    ** Auto import components
