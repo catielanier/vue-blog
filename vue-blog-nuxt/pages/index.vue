@@ -1,6 +1,13 @@
 <template>
-  <div class="posts" v-if="posts.length > 0">
-    <div class="blog-post" v-for="post in posts" :key="post._id">
+  <div
+    class="posts"
+    v-if="posts.length > 0"
+  >
+    <div
+      class="blog-post"
+      v-for="post in posts"
+      :key="post._id"
+    >
       <Post
         :id="post._id"
         :body="post.bodyPreview"
@@ -30,17 +37,17 @@ export default {
   name: "Posts",
   components: { Post },
   computed: {
-    ...mapState(["posts"])
+    ...mapState(["posts"]),
   },
   methods: {
-    ...mapActions(["getPosts"])
+    ...mapActions(["getPosts"]),
   },
   beforeMount() {
     //preparing for pagination
     if (this.posts.length === 0) {
       this.getPosts();
     }
-  }
+  },
 };
 </script>
 
