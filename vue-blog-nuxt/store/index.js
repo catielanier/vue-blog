@@ -67,6 +67,15 @@ export const mutations = {
   unsetLoginErrors(state) {
     state.loggingIn = false;
     state.errorMessage = null;
+  },
+  addCommentToPost(state, commentData) {
+    const { comment, postId } = commentData;
+    const { posts, post } = state;
+    const index = posts.findIndex(x => x._id === postId);
+    post.comments.push(comment);
+    posts[index].comments.push(comment);
+    state.post = post;
+    state.posts = posts;
   }
 };
 
@@ -125,5 +134,27 @@ export const actions = {
   },
   resetLogin({ commit }) {
     commit("unsetLoginErrors");
+  },
+  async postComment({ commit }, data) {
+    const { body, user, postId, token } = data;
+    const comment = {
+      user,
+      body,
+      commentDate: Date.now()
+    };
+    const res = await axios({
+      method: "POST",
+      url: "/api/comments/new",
+      data: {
+        user,
+        comment,
+        token,
+        postId
+      }
+    });
+    if (res) {
+      const newComment = res.data.data;
+      commit("addCommentToPost", { postId, comment: newComment });
+    }
   }
 };

@@ -4,7 +4,12 @@
       <fieldset>
         <div class="input-container">
           <div>
-            <input type="text" v-model="title" name="title" placeholder="title" />
+            <input
+              type="text"
+              v-model="title"
+              name="title"
+              placeholder="title"
+            />
           </div>
           <div>
             <datetime
@@ -23,14 +28,29 @@
             />
           </div>
           <div class="header-image-preview">
-            <img :src="headerImage" v-if="headerImage !== ''" alt="Preview" />
+            <img
+              :src="headerImage"
+              v-if="headerImage !== ''"
+              alt="Preview"
+            />
           </div>
         </div>
         <no-ssr>
-          <mavon-editor v-model="body" language="en" placeholder="Post body..." />
+          <mavon-editor
+            v-model="body"
+            language="en"
+            placeholder="Post body..."
+          />
         </no-ssr>
-        <input type="text" v-model="tags" placeholder="Post Metatags (Separate by commas)" />
-        <button type="submit" class="hvr-rotate">Create Post</button>
+        <input
+          type="text"
+          v-model="tags"
+          placeholder="Post Metatags (Separate by commas)"
+        />
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -41,7 +61,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "NewPost",
   computed: {
-    ...mapState(["redirect", "user"])
+    ...mapState(["redirect", "user"]),
   },
   data() {
     return {
@@ -49,18 +69,18 @@ export default {
       body: "",
       postDate: "",
       headerImage: "",
-      tags: ""
+      tags: "",
     };
   },
   methods: {
     ...mapActions(["createPost"]),
-    submitBody: function() {
+    submitBody: function () {
       const { title, body, postDate, headerImage, tags } = this.$data;
       const arr = body.split("\n# ");
       const bodyPreview = arr[0];
       createPost({ user, post: { title, body, postDate, headerImage, tags } });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -114,7 +134,7 @@ input::placeholder {
   .new-post {
     width: 95%;
   }
-  orm.new-post-form,
+  form.new-post-form,
   .new-post-form fieldset {
     width: 95%;
   }

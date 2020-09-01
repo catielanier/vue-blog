@@ -40,13 +40,14 @@ export default {
     ...mapState(["posts"]),
   },
   methods: {
-    ...mapActions(["getPosts"]),
+    ...mapActions(["getPosts", "checkUser"]),
   },
   beforeMount() {
     //preparing for pagination
     if (this.posts.length === 0) {
       this.getPosts();
     }
+    this.checkUser();
   },
 };
 </script>
