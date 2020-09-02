@@ -1,7 +1,10 @@
 <template>
   <Fragment>
     <div class="date">{{commentDate}} by {{username}}</div>
-    <div class="body" v-html="body" />
+    <div
+      class="body"
+      v-html="body"
+    />
   </Fragment>
 </template>
 
@@ -13,7 +16,15 @@ export default {
   props: {
     commentDate: String,
     username: String,
-    body: String
-  }
+    body: String,
+  },
+  data() {
+    return {
+      commentId: null,
+      editBody: "",
+      editMode: false,
+      deleteMode: false,
+    };
+  },
 };
 </script>

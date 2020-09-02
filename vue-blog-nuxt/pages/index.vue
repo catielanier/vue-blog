@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="posts"
-    v-if="posts.length > 0"
-  >
-    <div
-      class="blog-post"
-      v-for="post in posts"
-      :key="post._id"
-    >
+  <div class="posts" v-if="posts.length > 0">
+    <div class="blog-post" v-for="post in posts" :key="post._id">
       <Post
         :id="post._id"
         :body="post.bodyPreview"
@@ -16,6 +9,7 @@
         :postDate="post.postDate"
         :singlePost="false"
         :headerImage="post.headerImage"
+        :userId="post.user._id"
       />
       <div class="read-more">
         <nuxt-link :to="'/post/' + post._id">
@@ -37,10 +31,10 @@ export default {
   name: "Posts",
   components: { Post },
   computed: {
-    ...mapState(["posts"]),
+    ...mapState(["posts"])
   },
   methods: {
-    ...mapActions(["getPosts", "checkUser"]),
+    ...mapActions(["getPosts", "checkUser"])
   },
   beforeMount() {
     //preparing for pagination
@@ -48,7 +42,7 @@ export default {
       this.getPosts();
     }
     this.checkUser();
-  },
+  }
 };
 </script>
 

@@ -9,6 +9,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/proxy": "^2.0.1",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -21,7 +22,9 @@
     "mavon-editor": "^2.9.0",
     "mongoose": "^5.9.27",
     "nuxt": "^2.14.0",
+    "path": "^0.12.7",
     "vue-datetime": "^1.0.0-beta.14",
+    "vue-fragment": "^1.5.1",
     "vue-meta": "^2.4.0",
     "vue-select": "^3.10.7",
     "vue-simple-markdown": "^1.1.4",

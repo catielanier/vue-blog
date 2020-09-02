@@ -8,6 +8,7 @@
       :postDate="post.postDate"
       :username="post.user.username"
       :singlePost="true"
+      :userId="post.user._id"
     />
     <div class="comments-quantity">
       {{ post.comments.length }} comment
@@ -26,12 +27,16 @@ export default {
   computed: {
     ...mapState(["post"])
   },
+  data() {
+    return {
+      deleteMode: false
+    };
+  },
   methods: {
     ...mapActions(["getPost"])
   },
   beforeMount() {
     const { id } = this.$route.params;
-    console.log(id);
     this.getPost(id);
   }
 };

@@ -1,7 +1,14 @@
 <template>
   <div class="comments">
-    <div class="comment-wrapper" v-if="comments.length > 0">
-      <div class="comment" v-for="comment in comments" :key="comment._id">
+    <div
+      class="comment-wrapper"
+      v-if="comments.length > 0"
+    >
+      <div
+        class="comment"
+        v-for="comment in comments"
+        :key="comment._id"
+      >
         <Comment
           :commentDate="comment.commentDate"
           :username="comment.user.username"
@@ -9,7 +16,10 @@
         />
       </div>
     </div>
-    <div class="new-comment" v-if="user">
+    <div
+      class="new-comment"
+      v-if="user"
+    >
       <NewComment />
     </div>
   </div>
@@ -23,11 +33,11 @@ export default {
   name: "Comments",
   components: { Comment, NewComment },
   props: {
-    comments: Array
+    comments: Array,
   },
   computed: {
-    ...mapState(["user"])
-  }
+    ...mapState(["user"]),
+  },
 };
 </script>
 

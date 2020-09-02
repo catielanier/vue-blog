@@ -8,7 +8,16 @@
       </h1>
       <h1 v-if="singlePost">{{ title }}</h1>
     </div>
-    <div class="date">{{ postDate }} by {{ username }}</div>
+    <div class="date">
+      {{ postDate }} by {{ username }}
+      <span v-if="singlePost && (role === 'Admin' || userId === user)"
+        >(
+        <nuxt-link :to="`/post/${id}/edit`"><span>Edit</span></nuxt-link>
+        |
+        <a href="#" @click.prevent="deletePost"><span>Delete</span></a>
+        )</span
+      >
+    </div>
     <div class="header-image">
       <img :src="headerImage" alt="Header" />
     </div>
@@ -18,6 +27,7 @@
 
 <script>
 import { Fragment } from "vue-fragment";
+import { mapState } from "vuex";
 export default {
   name: "Post",
   components: {
@@ -30,7 +40,22 @@ export default {
     body: String,
     title: String,
     username: String,
-    singlePost: Boolean
+    singlePost: Boolean,
+    userId: String
+  },
+  computed: {
+    ...mapState(["user"])
+  },
+  data() {
+    return {
+      deleteMode: false
+    };
+  },
+  methods: {
+    openDelete: function() {
+      const deleteMode = !this.$data.deleteMode;
+      this.deleteMode = this.deleteMode;
+    }
   }
 };
 </script>
