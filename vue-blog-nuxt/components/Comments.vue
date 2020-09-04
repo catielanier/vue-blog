@@ -13,6 +13,7 @@
           :commentDate="comment.commentDate"
           :username="comment.user.username"
           :body="comment.body"
+          :userId="comment.user._id"
         />
       </div>
     </div>

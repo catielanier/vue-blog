@@ -44,7 +44,7 @@ export default {
     userId: String
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user", "role"])
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
   methods: {
     openDelete: function() {
       const deleteMode = !this.$data.deleteMode;
-      this.deleteMode = this.deleteMode;
+      this.deleteMode = deleteMode;
     }
   }
 };
