@@ -108,6 +108,7 @@ form.new-post-form,
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 25px;
+  margin-bottom: 40px;
 }
 input {
   background: none;

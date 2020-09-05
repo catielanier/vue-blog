@@ -88,7 +88,7 @@ router.route("/:id").delete(async (req, res) => {
 });
 
 router.route("/:id").put(async (req, res) => {
-  const { token, user, title, body } = req.body;
+  const { token, user, title, body, headerImage, postDate } = req.body;
   const { id: postId } = req.params;
   const loggedIn = await postServices.loginCheck(token);
   if (!loggedIn) {
@@ -103,7 +103,13 @@ router.route("/:id").put(async (req, res) => {
         .statusMessage("You do not have permission to edit this post.");
     }
   }
-  const result = await postServices.editPost(postId, title, body);
+  const result = await postServices.editPost(
+    postId,
+    title,
+    body,
+    headerImage,
+    postDate
+  );
   const updatedPost = await postServices.getPostsById(postId);
   if (result) {
     res.status(201).json({
