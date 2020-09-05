@@ -61,7 +61,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "NewPost",
   computed: {
-    ...mapState(["redirect", "user"]),
+    ...mapState(["redirect"]),
   },
   data() {
     return {
@@ -76,9 +76,13 @@ export default {
     ...mapActions(["createPost"]),
     submitBody: function () {
       const { title, body, postDate, headerImage, tags } = this.$data;
+      const { user } = this.$store.state;
       const arr = body.split("\n# ");
       const bodyPreview = arr[0];
-      createPost({ user, post: { title, body, postDate, headerImage, tags } });
+      this.createPost({
+        user,
+        post: { title, body, postDate, headerImage, tags, bodyPreview },
+      });
     },
   },
 };
