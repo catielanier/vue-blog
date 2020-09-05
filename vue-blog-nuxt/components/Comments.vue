@@ -19,7 +19,7 @@
     </div>
     <div
       class="new-comment"
-      v-if="user"
+      v-if="user && role !== 'Banned'"
     >
       <NewComment />
     </div>

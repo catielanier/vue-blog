@@ -1,5 +1,8 @@
 <template>
-  <section class="new-post">
+  <section
+    class="new-post"
+    v-if="body !== null"
+  >
     <form class="new-post-form">
       <fieldset>
         <div class="input-container">
@@ -28,7 +31,11 @@
             />
           </div>
           <div class="header-image-preview">
-            <img :src="headerImage" v-if="headerImage !== ''" alt="Preview" />
+            <img
+              :src="headerImage"
+              v-if="headerImage !== ''"
+              alt="Preview"
+            />
           </div>
         </div>
         <no-ssr>
@@ -43,7 +50,10 @@
           v-model="tags"
           placeholder="Post Metatags (Separate by commas)"
         />
-        <button type="submit" class="hvr-rotate">Create Post</button>
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -58,18 +68,85 @@ export default {
       postDate: null,
       title: null,
       body: null,
-      tags: null
+      tags: null,
+      headerImage: null,
     };
   },
   async beforeMount() {
     const { id } = this.$route.params;
-    console.log("running");
     const res = await axios.get(`/api/posts/${id}`);
-    const { postDate, title, body, tags } = res.data.data;
+    const { postDate, title, body, tags, headerImage } = res.data.data;
     this.postDate = postDate;
     this.title = title;
     this.body = body;
     this.tags = tags;
-  }
+    this.headerImage = headerImage;
+  },
 };
 </script>
+
+<style>
+.new-post {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: left;
+}
+h1 {
+  font-family: "Neuton", serif;
+}
+form.new-post-form,
+.new-post-form fieldset {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+}
+.input-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 25px;
+}
+input {
+  background: none;
+}
+input::placeholder {
+  color: #ddd;
+}
+.v-note-wrapper {
+  margin-bottom: 20px;
+  z-index: 2 !important;
+}
+.editr:focus-within {
+  border-color: #b3cde0;
+}
+.new-post-form button {
+  margin-bottom: 40px;
+}
+.vdatetime-overlay {
+  z-index: 2499;
+}
+.vdatetime-popup {
+  z-index: 2500;
+}
+.header-image-preview img {
+  width: 100%;
+}
+@media (max-width: 414px) {
+  .new-post {
+    width: 95%;
+  }
+  form.new-post-form,
+  .new-post-form fieldset {
+    width: 95%;
+  }
+  .input-container {
+    width: 95%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    margin-bottom: 15px;
+  }
+  input {
+    width: 90% !important;
+  }
+}
+</style>
