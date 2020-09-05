@@ -76,6 +76,16 @@ export const mutations = {
     posts[index].comments.push(comment);
     state.post = post;
     state.posts = posts;
+  },
+  changePost(state, data) {
+    const { postDate, title, body, headerImage, _id: postId } = data;
+    const { post, posts } = state;
+    const index = posts.findIndex(x => x._id === postId);
+    post.postDate = postDate;
+    post.title = title;
+    post.body = body;
+    post.headerImage = headerImage;
+    posts[index] = data;
   }
 };
 
@@ -156,5 +166,23 @@ export const actions = {
       const newComment = res.data.data;
       commit("addCommentToPost", { postId, comment: newComment });
     }
+  },
+  async updatePost({ commit }, data) {
+    const { body, postId, user, headerImage, title, postDate } = data;
+    const token = getToken();
+    const res = await axios({
+      method: "PUT",
+      url: `/api/posts/${postId}`,
+      data: {
+        user,
+        title,
+        body,
+        postDate,
+        headerImage,
+        token
+      }
+    });
+    commit("changePost", res.data.data);
+    commit("setRedirectId", res.data.data._id);
   }
 };
