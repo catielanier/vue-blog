@@ -18,7 +18,7 @@ router.route("/new").post(async (req, res) => {
     if (hasPermission) {
       const newPost = await postServices.createPost(post);
       res.status(201).json({
-        data: [newPost],
+        data: [newPost]
       });
     } else {
       res
@@ -34,7 +34,7 @@ router.route("/").get(async (_, res) => {
   try {
     const posts = await postServices.getAllPosts();
     res.status(200).json({
-      data: posts,
+      data: posts
     });
   } catch (e) {
     res.status(400).statusMessage(e);
@@ -46,7 +46,7 @@ router.route("/:id").get(async (req, res) => {
   try {
     const post = await postServices.getPostsById(id);
     res.status(200).json({
-      data: post,
+      data: post
     });
   } catch (e) {
     res.status(400).statusMessage(e);
@@ -82,13 +82,13 @@ router.route("/:id").delete(async (req, res) => {
   if (deletedComments) {
     const deletedPost = await postServices.deletePost(postId);
     res.status(201).json({
-      data: deletedPost,
+      data: deletedPost
     });
   }
 });
 
 router.route("/:id").put(async (req, res) => {
-  const { token, user, title, body, headerImage, postDate } = req.body;
+  const { token, user, title, body, headerImage, postDate, tags } = req.body;
   const { id: postId } = req.params;
   const loggedIn = await postServices.loginCheck(token);
   if (!loggedIn) {
@@ -108,12 +108,13 @@ router.route("/:id").put(async (req, res) => {
     title,
     body,
     headerImage,
-    postDate
+    postDate,
+    tags
   );
   const updatedPost = await postServices.getPostsById(postId);
   if (result) {
     res.status(201).json({
-      data: updatedPost,
+      data: updatedPost
     });
   }
 });
@@ -125,7 +126,7 @@ router.route("/counter/:id").put(async (req, res) => {
     post.reads += 1;
     const updatedPost = await postServices.addToCounter(id, post.reads);
     res.status(201).json({
-      data: updatedPost,
+      data: updatedPost
     });
   } catch (e) {
     res.status(401).send("Could not add to counter.");

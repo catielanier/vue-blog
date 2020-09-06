@@ -63,7 +63,7 @@ exports.getPostsById = async (id) => {
   }
 };
 
-exports.editPost = async (id, title, body, headerImage, postDate) => {
+exports.editPost = async (id, title, body, headerImage, postDate, tags) => {
   try {
     return await Post.findByIdAndUpdate(
       { _id: id },
@@ -73,6 +73,7 @@ exports.editPost = async (id, title, body, headerImage, postDate) => {
           body,
           headerImage,
           postDate,
+          tags,
         },
       }
     );
