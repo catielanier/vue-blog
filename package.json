@@ -1,86 +1,37 @@
 {
   "name": "vue-blog",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "client": "vue-cli-service serve",
+    "client": "nuxt",
     "server": "nodemon api/_server.js",
-    "all": "concurrently --kill-others \"nodemon api/_server.js\" \"vue-cli-service serve\"",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "node index.js"
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@nuxtjs/proxy": "^2.0.1",
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
-    "cloudinary": "^1.22.0",
-    "core-js": "^2.6.5",
+    "core-js": "^3.6.5",
     "express": "^4.17.1",
-    "http": "0.0.0",
-    "http-proxy-middleware": "^0.20.0",
+    "http": "^0.0.1-security",
+    "http-proxy-middleware": "^1.0.5",
     "jsonwebtoken": "^8.5.1",
-    "luxon": "^1.19.3",
-    "mongoose": "^5.7.1",
-    "multer": "^1.4.2",
-    "multer-storage-cloudinary": "^4.0.0",
+    "luxon": "^1.24.1",
+    "mavon-editor": "^2.9.0",
+    "mongoose": "^5.9.27",
+    "nuxt": "^2.14.0",
     "path": "^0.12.7",
-    "vue": "^2.6.10",
-    "vue-datetime": "^1.0.0-beta.10",
+    "vue-datetime": "^1.0.0-beta.14",
     "vue-fragment": "^1.5.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.0.3",
-    "vue-select": "^3.4.0",
-    "vue-wysiwyg": "^1.7.2",
-    "vuex": "^3.0.1",
-    "weekstart": "^1.0.0"
+    "vue-select": "^3.10.7",
+    "vue-simple-markdown": "^1.1.4",
+    "weekstart": "^1.0.1"
   },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-eslint": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
-    "babel-eslint": "^10.0.1",
-    "concurrently": "^4.1.2",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ],
-  "proxy": "http://localhost:4000",
-  "vue": {
-    "devServer": {
-      "proxy": {
-        "^/api": {
-          "target": "http://localhost:4000",
-          "ws": true,
-          "changeOrigin": true
-        }
-      }
-    }
-  },
+  "devDependencies": {},
   "now": {
     "alias": "corey-lanier-blog",
     "name": "blog",
@@ -105,10 +56,6 @@
       {
         "src": "/api/comments/(.+)",
         "dest": "/api/comments.js"
-      },
-      {
-        "src": "/api/image/(.+)",
-        "dest": "/api/image.js"
       }
     ]
   }

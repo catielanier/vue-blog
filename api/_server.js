@@ -17,12 +17,10 @@ applyMiddleware(middleWare, router);
 const { router: userRouter } = require("./_routes/users/userRoutes");
 const { router: postRouter } = require("./_routes/posts/postRoutes");
 const { router: commentRouter } = require("./_routes/comments/commentRoutes");
-const { router: imageRouter } = require("./_routes/image/imageRoute");
 
 router.use("/api/users", userRouter);
 router.use("/api/posts", postRouter);
 router.use("/api/comments", commentRouter);
-router.use("/api/image", imageRouter);
 
 router.use((err, req, res, next) => {
   if (err.name === "UnauthorizedError") {
@@ -43,6 +41,6 @@ mongoose
       console.log(`server running on port ${PORT}`);
     });
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
   });
