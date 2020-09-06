@@ -3,7 +3,6 @@ const { model: Post } = require("./postModel");
 
 exports.loginCheck = async (token) => {
   if (!token) {
-    console.error(`Not logged in`);
     return false;
   } else {
     try {
@@ -11,11 +10,9 @@ exports.loginCheck = async (token) => {
       if (decoded) {
         return true;
       } else {
-        console.error(`Not logged in`);
         return false;
       }
     } catch (e) {
-      console.error(e);
       return false;
     }
   }
