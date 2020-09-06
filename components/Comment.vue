@@ -1,20 +1,21 @@
 <template>
   <Fragment>
-    <div class="date">{{commentDate}} by {{username}}
-      <span v-if="role === 'Admin' || userId === user">(
-        <nuxt-link :to="`/post/${id}/edit`"><span>Edit</span></nuxt-link>
+    <div class="date">
+      {{ commentDate }} by {{ username }}
+      <span v-if="role === 'Admin' || userId === user"
+        >(
+        <a href="#" @click.prevent="openEdit"><span>Edit</span></a>
         |
-        <a
-          href="#"
-          @click.prevent="deleteComment"
-        ><span>Delete</span></a>
+        <a href="#" @click.prevent="openDelete"><span>Delete</span></a>
         )
       </span>
     </div>
-    <div
-      class="body"
-      v-html="body"
-    />
+    <div class="body" v-html="body" />
+    <div class="delete-modal" v-if="deleteMode">
+      <h3>Do you wish to delete this comment?</h3>
+      <button @click.prevent="deleteComment">Yes</button>
+      <button @click.prevent="openDelete">No</button>
+    </div>
   </Fragment>
 </template>
 
@@ -28,18 +29,29 @@ export default {
     commentDate: String,
     username: String,
     body: String,
-    userId: String,
+    userId: String
   },
   computed: {
-    ...mapState(["user", "role"]),
+    ...mapState(["user", "role"])
   },
   data() {
     return {
       commentId: null,
       editBody: "",
       editMode: false,
-      deleteMode: false,
+      deleteMode: false
     };
   },
+  methods: {
+    openDelete: function() {
+      const deleteMode = !this.$data.deleteMode;
+      this.deleteMode = deleteMode;
+    },
+    deleteComment: function() {},
+    openEdit: function() {
+      const editMode = !this.$data.editMode;
+      this.editMode = editMode;
+    }
+  }
 };
 </script>

@@ -64,6 +64,7 @@ export default {
     };
   },
   async beforeMount() {
+    this.checkUser();
     const { id } = this.$route.params;
     const res = await axios.get(`/api/posts/${id}`);
     const { postDate, title, body, tags, headerImage } = res.data.data;
@@ -74,7 +75,7 @@ export default {
     this.headerImage = headerImage;
   },
   methods: {
-    ...mapActions(["updatePost"]),
+    ...mapActions(["updatePost", "checkUser"]),
     submitPost: function() {
       const { postDate, title, body, tags, headerImage } = this.$data;
       const { user } = this.$store.state;

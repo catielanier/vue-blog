@@ -66,10 +66,15 @@ export default {
       const { id, userId: user } = this.$props;
       axios({ method: "DELETE", url: `/api/posts/${id}`, data: { user } }).then(
         () => {
-          this.removePost(id);
           router.push("/");
         }
       );
+    }
+  },
+  destroyed() {
+    if (this.$props.singlePost) {
+      const { id } = this.$props;
+      this.removePost(id);
     }
   }
 };

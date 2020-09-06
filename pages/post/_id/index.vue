@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="post"
-    v-if="post"
-  >
+  <div class="post" v-if="post">
     <Post
       :id="post._id"
       :title="post.title"
@@ -28,20 +25,21 @@ export default {
   name: "SinglePost",
   components: { Post },
   computed: {
-    ...mapState(["post"]),
+    ...mapState(["post"])
   },
   data() {
     return {
-      deleteMode: false,
+      deleteMode: false
     };
   },
   methods: {
-    ...mapActions(["getPost"]),
+    ...mapActions(["getPost", "checkUser"])
   },
   beforeMount() {
     const { id } = this.$route.params;
     this.getPost(id);
-  },
+    this.checkUser();
+  }
 };
 </script>
 

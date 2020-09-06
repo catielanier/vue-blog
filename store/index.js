@@ -86,6 +86,13 @@ export const mutations = {
     post.body = body;
     post.headerImage = headerImage;
     posts[index] = data;
+  },
+  deletePost(state, id) {
+    const { posts } = state;
+    const index = posts.findIndex(x => x._id === id);
+    posts.splice(index, 1);
+    state.posts = posts;
+    state.post = null;
   }
 };
 
@@ -184,5 +191,8 @@ export const actions = {
     });
     commit("changePost", res.data.data);
     commit("setRedirectId", res.data.data._id);
+  },
+  removePost({ commit }, id) {
+    commit("deletePost", id);
   }
 };
