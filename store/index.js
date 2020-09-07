@@ -93,6 +93,15 @@ export const mutations = {
     posts.splice(index, 1);
     state.posts = posts;
     state.post = null;
+  },
+  removeFromPost(state, { postId, commentId }) {
+    const { posts, post } = state;
+    const postIndex = posts.findIndex(x => x._id === postId);
+    const commentIndex = post.comments.findIndex(x => x._id === commentId);
+    post.comments.splice(commentIndex, 1);
+    posts[postIndex].comments.splice(commentIndex, 1);
+    state.post = post;
+    state.posts = posts;
   }
 };
 
@@ -194,5 +203,8 @@ export const actions = {
   },
   removePost({ commit }, id) {
     commit("deletePost", id);
+  },
+  removeComment({ commit }, { postId, commentId }) {
+    commit("removeFromPost", { postId, commentId });
   }
 };
