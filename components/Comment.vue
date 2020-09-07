@@ -27,6 +27,19 @@
       <button @click.prevent="deleteComment">Yes</button>
       <button @click.prevent="openDelete">No</button>
     </div>
+    <div
+      class="delete-modal"
+      v-if="editMode"
+    >
+      <no-ssr>
+        <mavon-editor
+          v-model=editBody
+          language="en"
+        />
+      </no-ssr>
+      <button @click.prevent="editComment">Edit Comment</button>
+      <button @click.prevent="cancelEdit">Cancel</button>
+    </div>
   </Fragment>
 </template>
 
@@ -42,13 +55,13 @@ export default {
     username: String,
     body: String,
     userId: String,
+    commentId: String,
   },
   computed: {
     ...mapState(["user", "role"]),
   },
   data() {
     return {
-      commentId: null,
       editBody: "",
       editMode: false,
       deleteMode: false,
@@ -61,7 +74,7 @@ export default {
     },
     deleteComment: function () {
       const postId = this.$store.state.post._id;
-      const { commentId } = this.$data;
+      const { commentId } = this.$props;
       const { user } = this.$store.state;
       axios({
         method: "DELETE",
@@ -78,6 +91,12 @@ export default {
     openEdit: function () {
       const editMode = !this.$data.editMode;
       this.editMode = editMode;
+      const { body } = this.$props;
+      this.editBody = body;
+    },
+    cancelEdit: function () {
+      this.editBody = null;
+      this.editMode = false;
     },
   },
 };

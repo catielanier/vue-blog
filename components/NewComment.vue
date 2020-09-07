@@ -10,7 +10,10 @@
             placeholder="Your comment goes here..."
           />
         </no-ssr>
-        <button type="submit" class="hvr-rotate">Post Comment</button>
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Post Comment</button>
       </fieldset>
     </form>
   </div>
@@ -18,24 +21,24 @@
 
 <script>
 import { mapActions } from "vuex";
-import { getToken } from "../src/services/tokenService";
+import { getToken } from "../services/tokenService";
 export default {
   name: "NewComment",
   data() {
     return {
-      body: ""
+      body: "",
     };
   },
   methods: {
     ...mapActions(["postComment"]),
-    submitBody: function() {
+    submitBody: function () {
       const { _id: postId } = this.$store.state.post;
       const { user } = this.$store.state;
       const { body } = this.$data;
       const token = getToken();
       this.postComment(postId, user, body, token);
-    }
-  }
+    },
+  },
 };
 </script>
 

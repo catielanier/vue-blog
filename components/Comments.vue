@@ -1,16 +1,27 @@
 <template>
   <div class="comments">
-    <div class="comment-wrapper" v-if="comments.length > 0">
-      <div class="comment" v-for="comment in comments" :key="comment._id">
+    <div
+      class="comment-wrapper"
+      v-if="comments.length > 0"
+    >
+      <div
+        class="comment"
+        v-for="comment in comments"
+        :key="comment._id"
+      >
         <Comment
           :commentDate="comment.commentDate"
           :username="comment.user.username"
           :body="comment.body"
           :userId="comment.user._id"
+          :commentId="comment._id"
         />
       </div>
     </div>
-    <div class="new-comment" v-if="user && role !== 'Banned'">
+    <div
+      class="new-comment"
+      v-if="user && role !== 'Banned'"
+    >
       <NewComment />
     </div>
   </div>
@@ -24,11 +35,11 @@ export default {
   name: "Comments",
   components: { Comment, NewComment },
   props: {
-    comments: Array
+    comments: Array,
   },
   computed: {
-    ...mapState(["user", "role"])
-  }
+    ...mapState(["user", "role"]),
+  },
 };
 </script>
 
