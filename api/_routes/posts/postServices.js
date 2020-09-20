@@ -3,7 +3,6 @@ const { model: Post } = require("./postModel");
 
 exports.loginCheck = async (token) => {
   if (!token) {
-    console.error(`Not logged in`);
     return false;
   } else {
     try {
@@ -11,11 +10,9 @@ exports.loginCheck = async (token) => {
       if (decoded) {
         return true;
       } else {
-        console.error(`Not logged in`);
         return false;
       }
     } catch (e) {
-      console.error(e);
       return false;
     }
   }
@@ -63,7 +60,7 @@ exports.getPostsById = async (id) => {
   }
 };
 
-exports.editPost = async (id, title, body, headerImage, postDate) => {
+exports.editPost = async (id, title, body, headerImage, postDate, tags) => {
   try {
     return await Post.findByIdAndUpdate(
       { _id: id },
@@ -73,6 +70,7 @@ exports.editPost = async (id, title, body, headerImage, postDate) => {
           body,
           headerImage,
           postDate,
+          tags,
         },
       }
     );
