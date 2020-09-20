@@ -1,6 +1,9 @@
 <template>
   <section class="new-post">
-    <form class="new-post-form" @submit.prevent="submitBody">
+    <form
+      class="new-post-form"
+      @submit.prevent="submitBody"
+    >
       <fieldset>
         <div class="input-container">
           <div>
@@ -28,7 +31,11 @@
             />
           </div>
           <div class="header-image-preview">
-            <img :src="headerImage" v-if="headerImage !== ''" alt="Preview" />
+            <img
+              :src="headerImage"
+              v-if="headerImage !== ''"
+              alt="Preview"
+            />
           </div>
         </div>
         <no-ssr>
@@ -43,7 +50,10 @@
           v-model="tags"
           placeholder="Post Metatags (Separate by commas)"
         />
-        <button type="submit" class="hvr-rotate">Create Post</button>
+        <button
+          type="submit"
+          class="hvr-rotate"
+        >Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -54,7 +64,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "NewPost",
   computed: {
-    ...mapState(["redirect"])
+    ...mapState(["redirect"]),
   },
   data() {
     return {
@@ -62,22 +72,25 @@ export default {
       body: "",
       postDate: "",
       headerImage: "",
-      tags: ""
+      tags: "",
     };
   },
   methods: {
-    ...mapActions(["createPost"]),
-    submitBody: function() {
+    ...mapActions(["createPost", "checkUser"]),
+    submitBody: function () {
       const { title, body, postDate, headerImage, tags } = this.$data;
       const { user } = this.$store.state;
       const arr = body.split("\n# ");
       const bodyPreview = arr[0];
       this.createPost({
         user,
-        post: { title, body, postDate, headerImage, tags, bodyPreview }
+        post: { title, body, postDate, headerImage, tags, bodyPreview },
       });
-    }
-  }
+    },
+  },
+  beforeMount() {
+    this.checkUser();
+  },
 };
 </script>
 
