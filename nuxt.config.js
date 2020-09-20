@@ -24,7 +24,14 @@ export default {
         content: process.env.npm_package_description || ""
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        href:
+          "https://fonts.googleapis.com/css2?family=Arvo&family=Comfortaa&family=Neuton:wght@400;700&display=swap"
+      }
+    ]
   },
   /*
    ** Global CSS
