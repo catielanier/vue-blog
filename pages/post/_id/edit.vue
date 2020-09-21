@@ -1,12 +1,6 @@
 <template>
-  <section
-    class="new-post"
-    v-if="body !== null"
-  >
-    <form
-      class="new-post-form"
-      @submit.prevent="submitPost"
-    >
+  <section class="new-post" v-if="body !== null">
+    <form class="new-post-form" @submit.prevent="submitPost">
       <fieldset>
         <div class="input-container">
           <div>
@@ -34,11 +28,7 @@
             />
           </div>
           <div class="header-image-preview">
-            <img
-              :src="headerImage"
-              v-if="headerImage !== ''"
-              alt="Preview"
-            />
+            <img :src="headerImage" v-if="headerImage !== ''" alt="Preview" />
           </div>
         </div>
         <no-ssr>
@@ -53,10 +43,7 @@
           v-model="tags"
           placeholder="Post Metatags (Separate by commas)"
         />
-        <button
-          type="submit"
-          class="hvr-rotate"
-        >Create Post</button>
+        <button type="submit" class="hvr-rotate">Create Post</button>
       </fieldset>
     </form>
   </section>
@@ -73,7 +60,7 @@ export default {
       title: null,
       body: null,
       tags: null,
-      headerImage: null,
+      headerImage: null
     };
   },
   async beforeMount() {
@@ -87,20 +74,25 @@ export default {
     this.tags = tags;
     this.headerImage = headerImage;
   },
+  head() {
+    return {
+      title: "Edit Post | Blog [Corey Lanier]"
+    };
+  },
   methods: {
     ...mapActions(["updatePost", "checkUser"]),
-    submitPost: function () {
+    submitPost: function() {
       const { postDate, title, body, tags, headerImage } = this.$data;
       const { user } = this.$store.state;
       this.updatePost({ postDate, title, body, tags, headerImage, user });
     },
-    submitRedirect: function () {
+    submitRedirect: function() {
       const { redirect } = this.$store.state;
       if (redirect) {
         router.push(`/post/${redirect}`);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
