@@ -206,5 +206,16 @@ export const actions = {
   },
   removeComment({ commit }, { postId, commentId }) {
     commit("removeFromPost", { postId, commentId });
+  },
+  async getNextPage({ commit }, page) {
+    const res = await axios({
+      method: "GET",
+      url: `/api/posts`,
+      params: {
+        page
+      }
+    });
+    const posts = res.data.data;
+    commit("setAllPosts", posts);
   }
 };
