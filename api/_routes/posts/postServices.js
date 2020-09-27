@@ -1,7 +1,7 @@
 const tokenService = require("../../_utils/tokenService");
 const { model: Post } = require("./postModel");
 
-exports.loginCheck = async (token) => {
+exports.loginCheck = async token => {
   if (!token) {
     return false;
   } else {
@@ -18,7 +18,7 @@ exports.loginCheck = async (token) => {
   }
 };
 
-exports.createPost = async (newPost) => {
+exports.createPost = async newPost => {
   try {
     const post = new Post(newPost);
     return await post.save();
@@ -27,15 +27,18 @@ exports.createPost = async (newPost) => {
   }
 };
 
-exports.getAllPosts = async () => {
+exports.getAllPosts = async page => {
+  const perPage = 5;
   try {
     const posts = await Post.find({})
+      .sort({ postDate: "desc" })
+      .limit(perPage)
+      .skip((page - 1) * perPage)
       .populate("user", "username _id")
       .populate({
         path: "comments",
-        populate: { path: "user", select: "username _id" },
-      })
-      .sort({ postDate: "desc" });
+        populate: { path: "user", select: "username _id" }
+      });
     if (posts) {
       return posts;
     }
@@ -44,12 +47,12 @@ exports.getAllPosts = async () => {
   }
 };
 
-exports.getPostsById = async (id) => {
+exports.getPostsById = async id => {
   try {
     const post = await Post.findById(id)
       .populate({
         path: "comments",
-        populate: { path: "user", select: "username _id" },
+        populate: { path: "user", select: "username _id" }
       })
       .populate("user", "username _id");
     if (post) {
@@ -70,8 +73,8 @@ exports.editPost = async (id, title, body, headerImage, postDate, tags) => {
           body,
           headerImage,
           postDate,
-          tags,
-        },
+          tags
+        }
       }
     );
   } catch (e) {
@@ -79,10 +82,10 @@ exports.editPost = async (id, title, body, headerImage, postDate, tags) => {
   }
 };
 
-exports.deletePost = async (id) => {
+exports.deletePost = async id => {
   try {
     return await Post.findByIdAndDelete({
-      _id: id,
+      _id: id
     });
   } catch (e) {
     throw e;
@@ -93,12 +96,12 @@ exports.addToCounter = async (id, reads) => {
   try {
     return await Post.findByIdAndUpdate(
       {
-        _id: id,
+        _id: id
       },
       {
         $set: {
-          reads,
-        },
+          reads
+        }
       }
     );
   } catch (e) {

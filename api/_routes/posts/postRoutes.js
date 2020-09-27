@@ -33,7 +33,9 @@ router.route("/new").post(async (req, res) => {
 router.route("/").get(async (req, res) => {
   const page = req.query.page || 1;
   try {
-    const posts = await postServices.getAllPosts();
+    const posts = await postServices.getAllPosts({
+      page
+    });
     res.status(200).json({
       data: posts
     });
