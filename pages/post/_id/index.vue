@@ -37,9 +37,9 @@ export default {
   methods: {
     ...mapActions(["getPost", "checkUser"])
   },
-  beforeMount() {
+  async beforeMount() {
     const { id } = this.$route.params;
-    this.getPost(id);
+    await this.getPost(id);
     this.checkUser();
   }
 };
