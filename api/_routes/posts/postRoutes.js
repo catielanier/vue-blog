@@ -9,13 +9,14 @@ const { applyMiddleware } = require("../../_utils");
 applyMiddleware(middleWare, router);
 
 router.route("/new").post(async (req, res) => {
-  const { token, user: id, post } = req.body;
+  const { token, user: id, post } = req.body.data;
   const loggedIn = await postServices.loginCheck(token);
   if (loggedIn) {
     const user = await userServices.getUserById(id);
     const hasPermission =
       (await user.role) === "Admin" || user.role === "Author";
     if (hasPermission) {
+      post.user = id;
       const newPost = await postServices.createPost(post);
       res.status(201).json({
         data: [newPost]

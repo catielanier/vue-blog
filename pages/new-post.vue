@@ -31,13 +31,13 @@
             <img :src="headerImage" v-if="headerImage !== ''" alt="Preview" />
           </div>
         </div>
-        <no-ssr>
+        <client-only>
           <mavon-editor
             v-model="body"
             language="en"
             placeholder="Post body..."
           />
-        </no-ssr>
+        </client-only>
         <input
           type="text"
           v-model="tags"
@@ -73,9 +73,10 @@ export default {
   methods: {
     ...mapActions(["createPost", "checkUser"]),
     submitBody: function() {
-      const { title, body, postDate, headerImage, tags } = this.$data;
+      const { title, body, headerImage, tags } = this.$data;
+      const postDate = this.$data.postDate || Date.now();
       const { user } = this.$store.state;
-      const arr = body.split("\n# ");
+      const arr = body.split("##");
       const bodyPreview = arr[0];
       this.createPost({
         user,

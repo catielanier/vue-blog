@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="post"
-    v-if="post"
-  >
+  <div class="post" v-if="post">
     <Post
       :id="post._id"
       :title="post.title"
@@ -14,8 +11,9 @@
       :userId="post.user._id"
     />
     <div class="comments-quantity">
-      {{ post.comments.length }} comment
-      <span v-if="post.comments.length !== 1">s</span>
+      {{ post.comments.length }} comment<span v-if="post.comments.length !== 1"
+        >s</span
+      >
     </div>
     <Comments :comments="post.comments" />
   </div>
@@ -28,21 +26,21 @@ export default {
   name: "SinglePost",
   components: { Post },
   computed: {
-    ...mapState(["post"]),
+    ...mapState(["post"])
   },
   data() {
     return {
-      deleteMode: false,
+      deleteMode: false
     };
   },
   methods: {
-    ...mapActions(["getPost", "checkUser"]),
+    ...mapActions(["getPost", "checkUser"])
   },
   beforeMount() {
     const { id } = this.$route.params;
     this.getPost(id);
     this.checkUser();
-  },
+  }
 };
 </script>
 

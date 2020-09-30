@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="posts"
-    v-if="posts.length > 0"
-  >
-    <div
-      class="blog-post"
-      v-for="post in posts"
-      :key="post._id"
-    >
+  <div class="posts" v-if="posts.length > 0">
+    <div class="blog-post" v-for="post in posts" :key="post._id">
       <Post
         :id="post._id"
         :body="post.bodyPreview"
@@ -24,14 +17,13 @@
         </nuxt-link>
       </div>
       <div class="comments-quantity">
-        {{ post.comments.length }} comment
-        <span v-if="post.comments.length !== 1">s</span>
+        {{ post.comments.length }} comment<span
+          v-if="post.comments.length !== 1"
+          >s</span
+        >
       </div>
     </div>
-    <div
-      class="pagination-button"
-      v-if="posts % 5 === 0"
-    >
+    <div class="pagination-button" v-if="posts % 5 === 0">
       <button>View More Posts</button>
     </div>
   </div>
@@ -44,14 +36,13 @@ export default {
   name: "Posts",
   components: { Post },
   computed: {
-    ...mapState(["posts"]),
+    ...mapState(["posts"])
   },
   methods: {
     ...mapActions(["getPosts", "checkUser"]),
-    loadMorePosts: function () {
+    loadMorePosts: function() {
       const page = this.posts.length / 5 + 1;
-      console.log(page);
-    },
+    }
   },
   beforeMount() {
     //preparing for pagination
@@ -59,7 +50,7 @@ export default {
       this.getPosts();
     }
     this.checkUser();
-  },
+  }
 };
 </script>
 
