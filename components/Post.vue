@@ -10,30 +10,19 @@
     </div>
     <div class="date">
       {{ postDate }} by {{ username }}
-      <span v-if="singlePost && (role === 'Admin' || userId === user)">(
+      <span v-if="singlePost && (role === 'Admin' || userId === user)"
+        >(
         <nuxt-link :to="`/post/${id}/edit`"><span>Edit</span></nuxt-link>
         |
-        <a
-          href="#"
-          @click.prevent="openDelete"
-        ><span>Delete</span></a>
+        <a href="#" @click.prevent="openDelete"><span>Delete</span></a>
         )
       </span>
     </div>
     <div class="header-image">
-      <img
-        :src="headerImage"
-        alt="Header"
-      />
+      <img :src="headerImage" alt="Header" />
     </div>
-    <vue-simple-markdown
-      class="body"
-      :source="body"
-    />
-    <div
-      class="delete-modal"
-      v-if="deleteMode"
-    >
+    <vue-simple-markdown class="body" :source="body" />
+    <div class="delete-modal" v-if="deleteMode">
       <h3>Do you wish to delete this post?</h3>
       <button @click.prevent="deletePost">Yes</button>
       <button @click.prevent="openDelete">No</button>
@@ -47,7 +36,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "Post",
   components: {
-    Fragment,
+    Fragment
   },
   props: {
     id: String,
@@ -57,14 +46,14 @@ export default {
     title: String,
     username: String,
     singlePost: Boolean,
-    userId: String,
+    userId: String
   },
   computed: {
-    ...mapState(["user", "role"]),
+    ...mapState(["user", "role"])
   },
   data() {
     return {
-      deleteMode: false,
+      deleteMode: false
     };
   },
   head() {
@@ -77,68 +66,68 @@ export default {
             {
               hid: "twitter:card",
               name: "twitter:card",
-              content: "summary",
+              content: "summary"
             },
             {
               hid: "twitter:site",
               name: "twitter:site",
-              content: "@cwlanier",
+              content: "@cwlanier"
             },
             {
               hid: "twitter:creator",
               name: "twitter:creator",
-              content: "@cwlanier",
+              content: "@cwlanier"
             },
             {
               hid: "twitter:url",
               name: "twitter:url",
-              content: `https://blog.coreylanier.com/post/${this.$props.id}`,
+              content: `https://blog.coreylanier.com/post/${this.$props.id}`
             },
             {
               hid: "twitter:image",
               name: "twitter:image",
-              content: this.$props.headerImage,
+              content: this.$props.headerImage
             },
             {
               hid: "twitter:title",
               name: "twitter:title",
-              content: this.$props.title,
+              content: this.$props.title
             },
             {
               hid: "og:title",
               name: "og:title",
-              content: this.$props.title,
+              content: this.$props.title
             },
             {
               hid: "og:image",
               name: "og:image",
-              content: this.$props.headerImage,
-            },
+              content: this.$props.headerImage
+            }
           ]
-        : null,
+        : null
     };
   },
   methods: {
     ...mapActions(["removePost"]),
-    openDelete: function () {
+    openDelete: function() {
       const deleteMode = !this.$data.deleteMode;
       this.deleteMode = deleteMode;
     },
-    deletePost: function () {
+    deletePost: function() {
       const { id, userId: user } = this.$props;
       axios({ method: "DELETE", url: `/api/posts/${id}`, data: { user } }).then(
         () => {
           router.push("/");
         }
       );
-    },
+    }
   },
   destroyed() {
     if (this.$props.singlePost) {
       const { id } = this.$props;
       this.removePost(id);
     }
-  },
+  }
 };
 </script>
 
@@ -167,5 +156,22 @@ export default {
   font-weight: bold;
   padding: 20px 20px 15px;
   cursor: pointer;
+}
+
+.markdown-body {
+  color: #fff !important;
+  font-family: "Arvo", serif !important;
+}
+
+.markdown-body h2 {
+  font-family: "Neuton", serif;
+  font-size: 1.5em !important;
+  border-bottom: 0 !important;
+}
+
+.markdown-body pre {
+  width: 95% !important;
+  margin: 0 auto;
+  border: 1px dashed #0757a3;
 }
 </style>
