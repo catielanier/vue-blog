@@ -46,7 +46,8 @@ export default {
     title: String,
     username: String,
     singlePost: Boolean,
-    userId: String
+    userId: String,
+    tags: String | undefined
   },
   computed: {
     ...mapState(["user", "role"])
@@ -102,6 +103,11 @@ export default {
               hid: "og:image",
               name: "og:image",
               content: this.$props.headerImage
+            },
+            {
+              hid: "keywords",
+              name: "keywords",
+              content: this.$props.tags
             }
           ]
         : null
@@ -157,10 +163,15 @@ export default {
   padding: 20px 20px 15px;
   cursor: pointer;
 }
+h1 {
+  font-family: "Comfortaa", sans-serif;
+  font-size: 1.9rem;
+}
 
 .markdown-body {
   color: #fff !important;
   font-family: "Arvo", serif !important;
+  font-size: 1.2rem !important;
 }
 
 .markdown-body h2 {
