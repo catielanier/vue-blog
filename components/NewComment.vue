@@ -3,17 +3,14 @@
     <h3>Write a comment:</h3>
     <form>
       <fieldset>
-        <no-ssr>
+        <client-only>
           <mavon-editor
             v-model="body"
             language="en"
             placeholder="Your comment goes here..."
           />
-        </no-ssr>
-        <button
-          type="submit"
-          class="hvr-rotate"
-        >Post Comment</button>
+        </client-only>
+        <button type="submit" class="hvr-rotate">Post Comment</button>
       </fieldset>
     </form>
   </div>
@@ -26,19 +23,19 @@ export default {
   name: "NewComment",
   data() {
     return {
-      body: "",
+      body: ""
     };
   },
   methods: {
     ...mapActions(["postComment"]),
-    submitBody: function () {
+    submitBody: function() {
       const { _id: postId } = this.$store.state.post;
       const { user } = this.$store.state;
       const { body } = this.$data;
       const token = getToken();
       this.postComment(postId, user, body, token);
-    },
-  },
+    }
+  }
 };
 </script>
 
