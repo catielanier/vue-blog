@@ -10,7 +10,9 @@
             placeholder="Your comment goes here..."
           />
         </client-only>
-        <button type="submit" class="hvr-rotate">Post Comment</button>
+        <button type="submit" class="hvr-rotate" @click.prevent="submitBody">
+          Post Comment
+        </button>
       </fieldset>
     </form>
   </div>
@@ -33,7 +35,7 @@ export default {
       const { user } = this.$store.state;
       const { body } = this.$data;
       const token = getToken();
-      this.postComment(postId, user, body, token);
+      this.postComment({ postId, user, body, token });
     }
   }
 };
