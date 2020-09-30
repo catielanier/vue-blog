@@ -100,12 +100,8 @@ router.route("/:id").put(async (req, res) => {
   }
   const post = await postServices.getPostsById(postId);
   const editingUser = await userServices.getUserById(user);
-  if (editingUser !== "Admin") {
-    if (post.user._id !== user) {
-      res
-        .status(401)
-        .statusMessage("You do not have permission to edit this post.");
-    }
+  if (editingUser.role !== "Admin" && post.user._id.toString() !== user) {
+    res.status(401).send("You do not have permission to edit this post.");
   }
   const result = await postServices.editPost(
     postId,

@@ -167,6 +167,9 @@ export default {
   font-family: "Neuton", serif;
   font-size: 1.5em !important;
   border-bottom: 0 !important;
+  margin: 0 !important;
+  margin-bottom: -20px !important;
+  padding: 0 !important;
 }
 
 .markdown-body pre {

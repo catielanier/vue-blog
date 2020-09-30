@@ -84,7 +84,16 @@ export default {
     submitPost: function() {
       const { postDate, title, body, tags, headerImage } = this.$data;
       const { user } = this.$store.state;
-      this.updatePost({ postDate, title, body, tags, headerImage, user });
+      const { id: postId } = this.$route.params;
+      this.updatePost({
+        postDate,
+        title,
+        body,
+        tags,
+        headerImage,
+        user,
+        postId
+      });
     },
     submitRedirect: function() {
       const { redirect } = this.$store.state;
