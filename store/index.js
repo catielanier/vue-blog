@@ -136,9 +136,11 @@ export const actions = {
   },
   async checkUser({ commit }) {
     const id = localStorage.getItem("vueBlogId");
-    const res = await axios.get(`/api/users/${id}`);
-    const { role } = res.data.data;
-    commit("updateUser", { id, role });
+    if (id) {
+      const res = await axios.get(`/api/users/${id}`);
+      const { role } = res.data.data;
+      commit("updateUser", { id, role });
+    }
   },
   async getPosts({ commit }) {
     const res = await axios.get("/api/posts");
