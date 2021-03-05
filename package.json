@@ -44,15 +44,11 @@
     "builds": [
       {
         "src": "nuxt.config.js",
-        "use": "@nuxtjs/now-builder",
+        "use": "@nuxtjs/vercel-builder",
         "config": {}
       }
     ],
     "routes": [
-      {
-        "src": "/",
-        "dest": "index.html"
-      },
       {
         "src": "/api/posts/(.+)",
         "dest": "/api/posts.js"
@@ -64,6 +60,10 @@
       {
         "src": "/api/comments/(.+)",
         "dest": "/api/comments.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/"
       }
     ]
   }

@@ -10,11 +10,16 @@
     </div>
     <div class="date">
       {{ postDate }} by {{ username }}
-      <span v-if="singlePost && (role === 'Admin' || userId === user)"
-        >(
-        <nuxt-link :to="`/post/${id}/edit`"><span>Edit</span></nuxt-link>
-        |
-        <a href="#" @click.prevent="openDelete"><span>Delete</span></a>
+      <span
+        v-if="singlePost && (role === 'Admin' || userId === user)"
+      >
+        (
+        <nuxt-link :to="`/post/${id}/edit`">
+          <span>Edit</span>
+        </nuxt-link>|
+        <a href="#" @click.prevent="openDelete">
+          <span>Delete</span>
+        </a>
         )
       </span>
     </div>
@@ -36,7 +41,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "Post",
   components: {
-    Fragment
+    Fragment,
   },
   props: {
     id: String,
@@ -47,14 +52,14 @@ export default {
     username: String,
     singlePost: Boolean,
     userId: String,
-    tags: String | undefined
+    tags: String | undefined,
   },
   computed: {
-    ...mapState(["user", "role"])
+    ...mapState(["user", "role"]),
   },
   data() {
     return {
-      deleteMode: false
+      deleteMode: false,
     };
   },
   head() {
@@ -67,73 +72,73 @@ export default {
             {
               hid: "twitter:card",
               name: "twitter:card",
-              content: "summary"
+              content: "summary",
             },
             {
               hid: "twitter:site",
               name: "twitter:site",
-              content: "@cwlanier"
+              content: "@cwlanier",
             },
             {
               hid: "twitter:creator",
               name: "twitter:creator",
-              content: "@cwlanier"
+              content: "@cwlanier",
             },
             {
               hid: "twitter:url",
               name: "twitter:url",
-              content: `https://blog.coreylanier.com/post/${this.$props.id}`
+              content: `https://blog.coreylanier.com/post/${this.$props.id}`,
             },
             {
               hid: "twitter:image",
               name: "twitter:image",
-              content: this.$props.headerImage
+              content: this.$props.headerImage,
             },
             {
               hid: "twitter:title",
               name: "twitter:title",
-              content: this.$props.title
+              content: this.$props.title,
             },
             {
               hid: "og:title",
               name: "og:title",
-              content: this.$props.title
+              content: this.$props.title,
             },
             {
               hid: "og:image",
               name: "og:image",
-              content: this.$props.headerImage
+              content: this.$props.headerImage,
             },
             {
               hid: "keywords",
               name: "keywords",
-              content: this.$props.tags
-            }
+              content: this.$props.tags,
+            },
           ]
-        : null
+        : null,
     };
   },
   methods: {
     ...mapActions(["removePost"]),
-    openDelete: function() {
+    openDelete: function () {
       const deleteMode = !this.$data.deleteMode;
       this.deleteMode = deleteMode;
     },
-    deletePost: function() {
+    deletePost: function () {
       const { id, userId: user } = this.$props;
       axios({ method: "DELETE", url: `/api/posts/${id}`, data: { user } }).then(
         () => {
           router.push("/");
         }
       );
-    }
+    },
   },
   destroyed() {
     if (this.$props.singlePost) {
       const { id } = this.$props;
       this.removePost(id);
     }
-  }
+  },
 };
 </script>
 
@@ -187,5 +192,6 @@ h1 {
   width: 95% !important;
   margin: 0 auto;
   border: 1px dashed #0757a3;
+  color: #252835;
 }
 </style>
