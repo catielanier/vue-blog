@@ -9,7 +9,8 @@ export const state = () => ({
   showMenu: false,
   posts: [],
   post: null,
-  redirect: null
+  redirect: null,
+  totalPages: null
 });
 
 export const mutations = {
@@ -31,7 +32,7 @@ export const mutations = {
   updateMenu(state, bool) {
     state.showMenu = bool;
   },
-  setAllPosts(state, posts) {
+  setAllPosts(state, { posts, pages }) {
     const { posts: currentPosts } = state;
     posts.forEach(post => {
       const datePosted = new Date(post.postDate);
@@ -42,6 +43,7 @@ export const mutations = {
     });
     const updatedPosts = [...currentPosts, ...posts];
     state.posts = updatedPosts;
+    state.totalPages = pages;
   },
   setSinglePost(state, post) {
     const datePosted = new Date(post.postDate);
@@ -110,7 +112,9 @@ export const actions = {
     commit("loginStart");
     const { email, password } = loginData;
     axios
-      .post("/api/users/login", { data: { email, password } })
+      .post("https://protected-atoll-04619.herokuapp.com/api/users/login", {
+        data: { email, password }
+      })
       .then(res => {
         const { token, id, role } = res.data.data;
         setToken(token);
@@ -137,25 +141,34 @@ export const actions = {
   async checkUser({ commit }) {
     const id = localStorage.getItem("vueBlogId");
     if (id) {
-      const res = await axios.get(`/api/users/${id}`);
+      const res = await axios.get(
+        `https://protected-atoll-04619.herokuapp.com/api/users/${id}`
+      );
       const { role } = res.data.data;
       commit("updateUser", { id, role });
     }
   },
   async getPosts({ commit }) {
-    const res = await axios.get("/api/posts");
-    commit("setAllPosts", res.data.data);
+    const res = await axios.get(
+      "https://protected-atoll-04619.herokuapp.com/api/posts"
+    );
+    commit("setAllPosts", { posts: res.data.data, pages: res.data.pages });
   },
   async getPost({ commit }, id) {
-    const res = await axios.get(`/api/posts/${id}`);
+    const res = await axios.get(
+      `https://protected-atoll-04619.herokuapp.com/api/posts/${id}`
+    );
     commit("setSinglePost", res.data.data);
   },
   async createPost({ commit }, data) {
     const { post, user } = data;
     const token = getToken();
-    const res = await axios.post(`/api/posts/new`, {
-      data: { user, post, token }
-    });
+    const res = await axios.post(
+      `https://protected-atoll-04619.herokuapp.com/api/posts/new`,
+      {
+        data: { user, post, token }
+      }
+    );
     commit("clearPosts");
     this.getPosts();
     commit("setRedirectId", res.data.data._id);
@@ -172,7 +185,7 @@ export const actions = {
     };
     const res = await axios({
       method: "POST",
-      url: "/api/comments/new",
+      url: "https://protected-atoll-04619.herokuapp.com/api/comments/new",
       data: {
         user,
         comment,
@@ -190,7 +203,7 @@ export const actions = {
     const token = getToken();
     const res = await axios({
       method: "PUT",
-      url: `/api/posts/${postId}`,
+      url: `https://protected-atoll-04619.herokuapp.com/api/posts/${postId}`,
       data: {
         user,
         title,
@@ -212,12 +225,12 @@ export const actions = {
   async getNextPage({ commit }, page) {
     const res = await axios({
       method: "GET",
-      url: `/api/posts`,
+      url: `https://protected-atoll-04619.herokuapp.com/api/posts`,
       params: {
         page
       }
     });
     const posts = res.data.data;
-    commit("setAllPosts", posts);
+    commit("setAllPosts", { posts, pages: res.data.pages });
   }
 };

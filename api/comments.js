@@ -8,10 +8,6 @@ mongoose.Promise = global.Promise;
 
 const app = express(); // no need to route only /book requests; that's done in now.json
 
-exports.handler = function(event, context, callback) {
-  app.use("/api/comments", commentRouter); // just export the app instead of starting up the server
-};
-
 app.use("/api/comments", commentRouter); // just export the app instead of starting up the server
 
 module.exports = app;

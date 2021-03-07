@@ -36,13 +36,21 @@ export default {
   name: "Posts",
   components: { Post },
   computed: {
-    ...mapState(["posts"])
+    ...mapState(["posts", "totalPages"]),
+  },
+  data() {
+    return {
+      page: 1,
+    };
   },
   methods: {
-    ...mapActions(["getPosts", "checkUser"]),
-    loadMorePosts: function() {
-      const page = this.posts.length / 5 + 1;
-    }
+    ...mapActions(["getPosts", "checkUser", "getNextPage"]),
+    loadMorePosts: function () {
+      const page = Math.ceil(this.posts.length / 5);
+      if (page < this.totalPages) {
+        getNextPage(page + 1);
+      }
+    },
   },
   beforeMount() {
     //preparing for pagination
@@ -50,7 +58,7 @@ export default {
       this.getPosts();
     }
     this.checkUser();
-  }
+  },
 };
 </script>
 
