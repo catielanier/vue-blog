@@ -149,8 +149,8 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 5px;
-  border: 4px solid #b3cde0;
-  background-color: #252835;
+  border: 4px solid #c28485;
+  background-color: #fcccd3;
   z-index: 5000;
   padding: 10px 15px 25px;
   box-shadow: 0 0 0 1920px rgba(0, 0, 0, 0.5);
@@ -160,8 +160,8 @@ export default {
   border: 0;
   border-radius: 5px;
   margin-top: 15px;
-  background: #b3cde0;
-  color: #252835;
+  background: #c28485;
+  color: #fcccd3;
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: bold;
@@ -174,7 +174,7 @@ h1 {
 }
 
 .markdown-body {
-  color: #fff !important;
+  color: #303030 !important;
   font-family: "Arvo", serif !important;
   font-size: 1.2rem !important;
 }
@@ -192,6 +192,6 @@ h1 {
   width: 95% !important;
   margin: 0 auto;
   border: 1px dashed #0757a3;
-  color: #252835;
+  color: #fcccd3;
 }
 </style>

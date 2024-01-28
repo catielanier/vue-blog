@@ -12,8 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   overflow-x: hidden;
-  background: #252835;
-  color: #fff;
+  background: #fcccd3;
+  color: #303030;
 }
 
 h1 {
@@ -57,7 +57,7 @@ fieldset::before {
     #011f4b 0%,
     #325c7b 15%,
     #03396c 30%,
-    #b3cde0 50%,
+    #c28485 50%,
     #03396c 70%,
     #325c7b 85%,
     #011f4b 100%
@@ -74,16 +74,16 @@ input {
   font-size: 0.8rem;
   padding: 10px 5px;
   border: 0;
-  border-bottom: 2px solid #0557a3;
+  border-bottom: 2px solid #f7a3b4;
   border-radius: 5px;
   margin-bottom: 20px;
   transition: all 0.3s ease-in-out;
-  color: #fff;
+  color: #303030;
   background: none;
 }
 
 input:focus {
-  border-color: #b3cde0;
+  border-color: #c28485;
 }
 
 button[type="submit"] {
@@ -91,8 +91,8 @@ button[type="submit"] {
   border: 0;
   border-radius: 5px;
   margin-top: 15px;
-  background: #b3cde0;
-  color: #252835;
+  background: #c28485;
+  color: #fcccd3;
   font-size: 1rem;
   text-transform: uppercase;
   font-weight: bold;

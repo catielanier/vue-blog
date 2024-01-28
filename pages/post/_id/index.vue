@@ -69,17 +69,17 @@ h1 {
 h1 a,
 .date a {
   text-decoration: underline;
-  color: #0557a3;
+  color: #f7a3b4;
 }
 
 h1 a span,
 .date a span {
-  color: #fff;
+  color: #303030;
   transition: 0.3s all ease-in-out;
 }
 h1 a:hover span,
 .date a:hover span {
-  color: #0557a3;
+  color: #f7a3b4;
 }
 p {
   font-size: 1.4rem;
@@ -109,7 +109,7 @@ p {
 }
 
 #edit button:last-of-type {
-  background: #fff;
+  background: #303030;
   border: 1px solid #011f4b;
   padding: 10px 15px;
   color: #011f4b;
@@ -117,7 +117,7 @@ p {
 }
 
 #edit button:last-of-type:hover {
-  background: #b3cde0;
+  background: #c28485;
 }
 
 #edit {

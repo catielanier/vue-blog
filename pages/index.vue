@@ -85,17 +85,17 @@ h1 {
 }
 h1 a {
   text-decoration: underline;
-  color: #0557a3;
+  color: #f7a3b4;
 }
 
 h1 a span,
 .read-more a span {
-  color: #fff;
+  color: #303030;
   transition: 0.3s all ease-in-out;
 }
 h1 a:hover span,
 .read-more a:hover span {
-  color: #0557a3;
+  color: #f7a3b4;
 }
 p {
   font-size: 1.4rem;
@@ -125,7 +125,7 @@ p {
 .read-more a {
   font-family: "Neuton", serif;
   font-size: 1.5rem;
-  color: #0557a3;
+  color: #f7a3b4;
 }
 
 @media (max-width: 414px) {

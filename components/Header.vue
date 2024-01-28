@@ -110,7 +110,7 @@ ul {
   list-style: none;
   font-size: 1.5rem;
   display: flex;
-  background: #b3cde0;
+  background: #c28485;
   justify-content: space-around;
   margin: 0;
   padding: 15px 0 20px;
@@ -120,12 +120,12 @@ li {
   text-transform: capitalize;
 }
 a {
-  color: #252835;
+  color: #fcccd3;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
 a:hover {
-  color: #fff;
+  color: #303030;
 }
 .heading {
   margin-top: 8rem;
@@ -141,7 +141,7 @@ h1 {
   width: 45px;
   height: 45px;
   z-index: 5;
-  background: #252835;
+  background: #fcccd3;
   border-radius: 5px;
 }
 .menu img {
@@ -156,14 +156,14 @@ h1 {
   right: -100%;
   transition: all 0.5s ease-in-out;
   z-index: 10;
-  background: #b3cde0;
+  background: #c28485;
   display: block;
   top: 0;
   right: 0;
 }
 
 .mobile-menu a {
-  color: #252835 !important;
+  color: #fcccd3 !important;
 }
 
 .close-menu {
@@ -226,7 +226,7 @@ h1 {
   }
 
   .mobile-menu a {
-    color: #b3cde0;
+    color: #c28485;
     text-decoration: none;
   }
 

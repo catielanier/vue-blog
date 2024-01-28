@@ -50,8 +50,8 @@ export default {
   margin: 30px auto;
 }
 .comment {
-  border-top: 1px dashed #b3cde0;
-  border-bottom: 1px dashed #b3cde0;
+  border-top: 1px dashed #c28485;
+  border-bottom: 1px dashed #c28485;
   padding: 0 0 20px;
   position: relative;
 }
@@ -71,20 +71,20 @@ export default {
 }
 .date a {
   text-decoration: underline;
-  color: #0557a3;
+  color: #f7a3b4;
 }
 .date a span {
-  color: #fff;
+  color: #303030;
   transition: 0.3s all ease-in-out;
 }
 .date a:hover span {
-  color: #0557a3;
+  color: #f7a3b4;
 }
 #edit button:first-of-type {
   background: #011f4b;
   border: 1px solid #011f4b;
   padding: 10px 15px;
-  color: #b3cde0;
+  color: #c28485;
   margin-right: 10px;
   transition: all 0.3s ease-in-out;
 }
@@ -92,18 +92,18 @@ export default {
   margin-top: 20px;
 }
 #edit button:first-of-type:hover {
-  background: #fff;
+  background: #303030;
   color: #011f4b;
 }
 #edit button:last-of-type {
-  background: #fff;
+  background: #303030;
   border: 1px solid #011f4b;
   padding: 10px 15px;
   color: #011f4b;
   transition: all 0.3s ease-in-out;
 }
 #edit button:last-of-type:hover {
-  background: #b3cde0;
+  background: #c28485;
 }
 @media (max-width: 414px) {
   .comments {

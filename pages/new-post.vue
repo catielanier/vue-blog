@@ -123,7 +123,7 @@ input::placeholder {
   z-index: 2 !important;
 }
 .editr:focus-within {
-  border-color: #b3cde0;
+  border-color: #c28485;
 }
 .new-post-form button {
   margin-bottom: 40px;
