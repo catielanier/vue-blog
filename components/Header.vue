@@ -26,7 +26,7 @@
       </ul>
     </nav>
     <div class="heading">
-      <h1>Corey Lanier - Blog</h1>
+      <h1>Catie Lanier - Blog</h1>
     </div>
     <div class="menu">
       <a href="#" @click.prevent="openMenu">

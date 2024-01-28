@@ -142,8 +142,8 @@ export default {
     Header
   },
   metaInfo: {
-    title: "Blog [Corey Lanier]",
-    titleTemplate: "%s | Blog [Corey Lanier]"
+    title: "Blog [Catie Lanier]",
+    titleTemplate: "%s | Blog [Catie Lanier]"
   }
 };
 </script>
