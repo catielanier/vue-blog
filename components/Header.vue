@@ -120,7 +120,7 @@ li {
   text-transform: capitalize;
 }
 a {
-  color: #fcccd3;
+  color: #fff;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
