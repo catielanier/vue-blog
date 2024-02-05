@@ -65,7 +65,7 @@ export default {
   head() {
     return {
       title: this.$props.singlePost
-        ? `${this.$props.title} | Blog [Corey Lanier]`
+        ? `${this.$props.title} | Blog [Catie Lanier]`
         : null,
       meta: this.$props.singlePost
         ? [
@@ -77,12 +77,12 @@ export default {
             {
               hid: "twitter:site",
               name: "twitter:site",
-              content: "@cwlanier",
+              content: "@clDOTjs",
             },
             {
               hid: "twitter:creator",
               name: "twitter:creator",
-              content: "@cwlanier",
+              content: "@clDOTjs",
             },
             {
               hid: "twitter:url",
