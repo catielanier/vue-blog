@@ -1,6 +1,6 @@
 <template>
   <div class="posts" v-if="posts.length > 0">
-    <div class="blog-post" v-for="post in posts" :key="post._id">
+    <div class="blog-post" v-for="(post, index) in posts" :key="post._id">
       <Post
         :id="post._id"
         :body="post.bodyPreview"
@@ -21,6 +21,10 @@
           v-if="post.comments.length !== 1"
           >s</span
         >
+      </div>
+      <div v-if="index !== posts.length -1" class="divider">
+        <div class="div-transparent" />
+        <img src="../assets/monogram.png" alt="monogram">
       </div>
     </div>
     <div class="pagination-button" v-if="posts % 5 === 0">
@@ -126,6 +130,38 @@ p {
   font-family: "Neuton", serif;
   font-size: 1.5rem;
   color: #f7a3b4;
+}
+
+.divider {
+		margin: 6rem 0;
+		position: relative;
+		height: 3.5rem;
+	}
+
+.div-transparent {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 2px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    rgb(194, 132, 133),
+    transparent,
+    rgb(194, 132, 133),
+    transparent
+  );
+}
+.divider img {
+  height: 3.5rem;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media (max-width: 414px) {
